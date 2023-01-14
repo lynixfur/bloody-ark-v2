@@ -1,0 +1,1420 @@
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["fullTextSearch", "fullTextIndex"]
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model active_requests {
+  tribeid_request_to Int    @default(0)
+  steamid_requester  BigInt @unique(map: "Index 1") @default(0) @db.UnsignedBigInt
+}
+
+model advanced_dino_colors_player_dinos {
+  SteamID   BigInt
+  DinoID1   BigInt
+  DinoID2   BigInt
+  TimeStamp BigInt
+
+  @@id([SteamID, DinoID1, DinoID2])
+}
+
+model advanced_dino_colors_player_saved_colors {
+  SteamID   BigInt
+  DinoName  String @db.VarChar(150)
+  ColorName String @db.VarChar(80)
+  region0   Int
+  region1   Int
+  region2   Int
+  region3   Int
+  region4   Int
+  region5   Int
+
+  @@id([SteamID, DinoName, ColorName])
+}
+
+model advanced_dino_colors_player_tokens {
+  SteamID  BigInt
+  Token_ID Int
+  Tokens   Int?   @default(0)
+
+  @@id([SteamID, Token_ID])
+}
+
+model advanced_dino_colors_tempneutered_dinos {
+  DinoID1   BigInt
+  DinoID2   BigInt
+  TimeStamp BigInt
+
+  @@id([DinoID1, DinoID2])
+}
+
+model advancedachievements_daily_playerdata {
+  SteamID            BigInt  @id @unique(map: "SteamID_UNIQUE")
+  PlayerName         String? @db.VarChar(50)
+  SteamName          String? @db.VarChar(60)
+  TribeName          String? @db.VarChar(70)
+  TribeID            Int?    @default(0)
+  PlayTime           BigInt? @default(0)
+  PlayerKills        BigInt? @default(0)
+  DinoKills          BigInt? @default(0)
+  WildDinoKills      BigInt? @default(0)
+  DinosTamed         BigInt? @default(0)
+  DeathByPlayer      BigInt? @default(0)
+  DeathByDino        BigInt? @default(0)
+  DeathByWildDino    BigInt? @default(0)
+  achievements       Bytes?  @db.Blob
+  OncePerCharCommand Bytes?  @db.Blob
+}
+
+model advancedachievements_daily_playerdata_custom {
+  steam_id BigInt
+  keyword  String @db.VarChar(50)
+  value    BigInt
+
+  @@id([steam_id, keyword])
+  @@unique([steam_id, keyword], map: "Unique")
+}
+
+model advancedachievements_int64_db {
+  ID    BigInt  @id @unique(map: "ID_UNIQUE")
+  Value BigInt? @default(0)
+}
+
+model advancedachievements_playerdata {
+  SteamID            BigInt  @id @unique(map: "SteamID_UNIQUE")
+  PlayerName         String? @db.VarChar(50)
+  SteamName          String? @db.VarChar(60)
+  TribeName          String? @db.VarChar(70)
+  TribeID            Int?    @default(0)
+  PlayTime           BigInt? @default(0)
+  PlayerKills        BigInt? @default(0)
+  DinoKills          BigInt? @default(0)
+  WildDinoKills      BigInt? @default(0)
+  DinosTamed         BigInt? @default(0)
+  DeathByPlayer      BigInt? @default(0)
+  DeathByDino        BigInt? @default(0)
+  DeathByWildDino    BigInt? @default(0)
+  achievements       Bytes?  @db.Blob
+  OncePerCharCommand Bytes?  @db.Blob
+  @@fulltext([PlayerName])
+}
+
+model advancedachievements_playerdata_custom {
+  steam_id BigInt
+  keyword  String @db.VarChar(50)
+  value    BigInt
+
+  @@id([steam_id, keyword])
+  @@unique([steam_id, keyword], map: "Unique")
+}
+
+model advancedachievements_tribedata {
+  TribeID     Int     @id @unique(map: "SteamID_UNIQUE") @default(0)
+  TribeName   String? @db.VarChar(80)
+  DamageScore BigInt? @default(0)
+}
+
+model aic_timestamps {
+  ItemHash  BigInt
+  SteamID   BigInt
+  TimeStamp BigInt?
+
+  @@id([ItemHash, SteamID])
+}
+
+model arkshopplayers {
+  Id         Int    @id @default(autoincrement())
+  SteamId    BigInt @unique(map: "SteamId_UNIQUE") @default(0)
+  Kits       String @default("{}") @db.VarChar(1024)
+  Points     Int?   @default(0)
+  TotalSpent Int?   @default(0)
+}
+
+model arktribeids {
+  Id             Int       @id @default(autoincrement())
+  ServerId       BigInt    @default(0)
+  TribeId        BigInt    @default(0)
+  TribeSize      BigInt    @default(1)
+  TribeAllyLimit BigInt    @default(1)
+  TribeRank      String    @default("") @db.VarChar(256)
+  DateTime       DateTime? @default(now()) @db.DateTime(0)
+}
+
+model arktribeplayers {
+  Id             Int       @id @default(autoincrement())
+  ServerId       BigInt    @default(0)
+  SteamId        BigInt    @default(0)
+  TribeId        BigInt    @default(0)
+  PlayerRank     String    @default("") @db.VarChar(256)
+  JoinedDateTime DateTime? @default(now()) @db.DateTime(0)
+}
+
+model discord_integration_crosschat_global {
+  id          BigInt @unique(map: "id") @default(autoincrement())
+  steam_id    BigInt
+  server_name String @db.VarChar(50)
+  server_id   Int
+  tribe_id    Int
+  tribe_name  String @db.VarChar(60)
+  player_name String @db.VarChar(60)
+  message     String @db.Text
+}
+
+model discord_integration_mutes {
+  steamid  BigInt  @id @unique(map: "steamid_UNIQUE")
+  mutetime BigInt? @default(0)
+}
+
+model discord_integration_players {
+  steamid         BigInt  @id @unique(map: "steamid_UNIQUE")
+  DiscordID       BigInt?
+  UserName        String  @db.VarChar(100)
+  RaidWarning     Int?    @default(0) @db.TinyInt
+  TargetingTeamID String  @db.TinyText
+  json            String? @db.Text
+  authkey         String? @map("_authkey") @db.VarChar(255)
+}
+
+model discord_integration_raidwarning_settings {
+  id          Int    @unique(map: "id") @default(autoincrement())
+  raidwarning Int
+  teamid      Int
+  server_name String @db.VarChar(50)
+  steam_id    BigInt
+}
+
+model discord_integration_server_settings {
+  id          Int     @unique(map: "id") @default(autoincrement())
+  server_name String  @db.VarChar(50)
+  json        String? @db.Text
+}
+
+model discord_integration_tribe_crosschat {
+  Owner_Steam_ID BigInt
+  Server_ID      Int     @db.UnsignedInt
+  Tribe_Name     String? @db.VarChar(100)
+  Tribe_ID       Int?
+
+  @@id([Owner_Steam_ID, Server_ID])
+  @@unique([Owner_Steam_ID, Server_ID], map: "Unique")
+}
+
+model hwidbans {
+  Id          Int     @id @default(autoincrement())
+  SteamId     BigInt  @unique(map: "SteamId_UNIQUE") @default(0)
+  HWID        String  @default("0") @db.VarChar(768)
+  IsBanned    Boolean @default(false)
+  BannedUntil BigInt  @default(0)
+}
+
+model hwidbansactiveplayers {
+  SteamId        BigInt @id @unique(map: "SteamId_UNIQUE") @default(0)
+  ServerIpAddr   String @default("0") @db.VarChar(100)
+  ServerGamePort BigInt @default(0)
+  DataValidUntil BigInt @default(0)
+}
+
+model hwidbansipdata {
+  Id          Int     @id @default(autoincrement())
+  IsBanned    Boolean @default(false)
+  BannedUntil BigInt  @default(0)
+  IpAddr      String  @unique(map: "IpAddr_UNIQUE") @default("0") @db.VarChar(100)
+  CountryName String  @default("0") @db.VarChar(100)
+  CountryCode String  @default("0") @db.VarChar(100)
+  ASN         BigInt  @default(0)
+  ISP         String  @default("0") @db.VarChar(100)
+  Block       Boolean @default(false)
+  LastChecked BigInt  @default(0)
+}
+
+model hwidbansplayerevents {
+  Id               Int    @id @unique(map: "Id_UNIQUE") @default(autoincrement())
+  ServerName       String @db.Text
+  EventName        String @db.Text
+  PlayerIngameName String @db.Text
+  PlayerSteamName  String @db.Text
+  PlayerId         String @db.Text
+  SteamId          BigInt @default(0)
+  HWID             String @default("0") @db.VarChar(768)
+  IpAddr           String @default("0") @db.VarChar(100)
+  CountryName      String @default("0") @db.VarChar(100)
+  TribeName        String @db.Text
+  TribeId          BigInt @default(0)
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model hwidbanssocketencryption {
+  PrivateKey String @default("") @db.VarChar(768)
+  IVS        String @default("") @db.VarChar(768)
+
+  @@ignore
+}
+
+model hwidbanssocketservers {
+  ServerIpAddr     String @default("0") @db.VarChar(100)
+  ServerSocketPort BigInt @default(0)
+
+  @@id([ServerIpAddr, ServerSocketPort])
+}
+
+model hwidbanswhitelist {
+  Id               Int     @id @default(autoincrement())
+  SteamId          BigInt  @unique(map: "SteamId_UNIQUE") @default(0)
+  IsAltWhitelisted Boolean @default(false)
+  IsIpWhitelisted  Boolean @default(false)
+}
+
+model itemspluslog {
+  id         BigInt   @id @default(autoincrement())
+  serverid   BigInt?
+  servername String?  @db.VarChar(50)
+  slotid     BigInt?
+  steamid    BigInt?
+  qty        Int?
+  bp         String?  @db.VarChar(50)
+  upload     Boolean? @db.Bit(1)
+  download   Int?     @db.TinyInt
+  failed     Boolean? @db.Bit(1)
+  timestamp  DateTime @default(now()) @db.DateTime(0)
+}
+
+model itemsplusoverrides {
+  blueprint String @id @db.VarChar(250)
+}
+
+model itemsplussettings {
+  serverid      BigInt @id
+  worldsavetime BigInt
+
+  @@index([worldsavetime, serverid], map: "worldsavetime")
+}
+
+model itemsplusuploadsv2 {
+  id         BigInt @id @default(autoincrement())
+  steamid    BigInt
+  itemdata   String @db.MediumText
+  inserttime BigInt
+  serverid   BigInt
+  downloaded Int    @default(0) @db.TinyInt
+
+  @@index([steamid, serverid, downloaded], map: "index1")
+  @@index([serverid, inserttime], map: "index2")
+}
+
+model lethaldecay_tribes {
+  serverid         BigInt
+  steamid          BigInt @default(0) @db.UnsignedBigInt
+  tribeid          BigInt @default(0)
+  tribename        String @default("") @db.VarChar(256)
+  decayday         BigInt
+  rapiddecayday    BigInt @default(0)
+  lastlogin        BigInt @default(0)
+  decayedlastlogin BigInt @default(0)
+
+  @@id([serverid, steamid, tribeid])
+  @@index([serverid, decayday], map: "index1")
+}
+
+model lethalquests_claim {
+  rowid     BigInt @id @default(autoincrement())
+  SteamId   BigInt @db.UnsignedBigInt
+  QuestID   BigInt
+  QuestType Int    @db.TinyInt
+
+  @@unique([SteamId, QuestID, QuestType], map: "SteamId_QuestID")
+}
+
+model lethalquests_discord {
+  SteamId BigInt @id @default(0) @db.UnsignedBigInt
+  Discord String @unique(map: "Discord") @default("") @db.VarChar(255)
+  Code    String @default("") @db.Char(10)
+
+  @@index([Code], map: "Code")
+}
+
+model lethalquests_quests {
+  rowid                          BigInt   @id @default(autoincrement())
+  ID                             Int      @unique(map: "ID")
+  Name                           String   @db.VarChar(50)
+  Description                    String   @db.VarChar(300)
+  PlayerKills                    BigInt?  @default(0)
+  PlayerDeaths                   BigInt?  @default(0)
+  WildDinoKills                  BigInt?  @default(0)
+  TamedDinoKills                 BigInt?  @default(0)
+  BossKills                      BigInt?  @default(0)
+  K_D                            Decimal? @default(0.00) @map("K/D") @db.Decimal(65, 2)
+  MinutesPlayed                  BigInt?  @default(0)
+  TotalDeaths                    BigInt?  @default(0)
+  PvPDamage                      BigInt?  @default(0)
+  TamedDinos                     BigInt?  @default(0)
+  RareTamedDinos                 BigInt?  @default(0)
+  RareDinoKills                  BigInt?  @default(0)
+  SuperRareDinoKills             BigInt?  @default(0)
+  ServerEventsCompleted          BigInt?  @default(0)
+  MissionsCompleted              BigInt?  @default(0)
+  MissionsFailed                 BigInt?  @default(0)
+  BlueOSD                        BigInt?  @default(0)
+  YellowOSD                      BigInt?  @default(0)
+  RedOSD                         BigInt?  @default(0)
+  PurpleOSD                      BigInt?  @default(0)
+  PurpleOSDWaves                 BigInt?  @default(0)
+  ElementNodeEasy                BigInt?  @default(0)
+  ElementNodeMedium              BigInt?  @default(0)
+  ElementNodeHard                BigInt?  @default(0)
+  FishCaught                     BigInt?  @default(0)
+  AberrantDinosKills             BigInt   @default(0)
+  AlphaDinosKills                BigInt   @default(0)
+  AquaticKills                   BigInt   @default(0)
+  CorruptedKills                 BigInt   @default(0)
+  FishKills                      BigInt   @default(0)
+  GolemKills                     BigInt   @default(0)
+  IceQueenKills                  BigInt   @default(0)
+  LavaGolemKills                 BigInt   @default(0)
+  TekDinosKills                  BigInt   @default(0)
+  TitansKills                    BigInt   @default(0)
+  WyvernKills                    BigInt   @default(0)
+  AquaticTame                    BigInt   @default(0)
+  FishTame                       BigInt   @default(0)
+  GolemTame                      BigInt   @default(0)
+  TekDinosTame                   BigInt   @default(0)
+  TitansTame                     BigInt   @default(0)
+  WyvernTame                     BigInt   @default(0)
+  SpamStrucs                     BigInt   @default(0)
+  SpecialTek                     BigInt   @default(0)
+  TekArmor                       BigInt   @default(0)
+  TekSaddle                      BigInt   @default(0)
+  TekStructures                  BigInt   @default(0)
+  AerialKills                    BigInt   @default(0)
+  AmphibiansKills                BigInt   @default(0)
+  BirdsKills                     BigInt   @default(0)
+  BruteDinosKills                BigInt   @default(0)
+  CarnivoresKills                BigInt   @default(0)
+  CarrionFeedersKills            BigInt   @default(0)
+  DinosaursKills                 BigInt   @default(0)
+  EnragedCreaturesKills          BigInt   @default(0)
+  EventCreaturesKills            BigInt   @default(0)
+  FantasyCreaturesKills          BigInt   @default(0)
+  Invertebrates                  BigInt   @default(0)
+  MalfunctionedTekCreaturesKills BigInt   @default(0)
+  MammalsKills                   BigInt   @default(0)
+  MechanicalCreaturesKills       BigInt   @default(0)
+  PiscivoresKills                BigInt   @default(0)
+  RDinosKills                    BigInt   @default(0)
+  ReptilesKills                  BigInt   @default(0)
+  SynapsidsKills                 BigInt   @default(0)
+  TerrestrialKills               BigInt   @default(0)
+  XDinosKills                    BigInt   @default(0)
+  AberrantDinosTame              BigInt   @default(0)
+  AerialTame                     BigInt   @default(0)
+  AmphibiansTame                 BigInt   @default(0)
+  BirdsTame                      BigInt   @default(0)
+  BruteDinosTame                 BigInt   @default(0)
+  CarnivoresTame                 BigInt   @default(0)
+  CarrionFeedersTame             BigInt   @default(0)
+  CorruptedTame                  BigInt   @default(0)
+  DinosaursTame                  BigInt   @default(0)
+  EnragedCreaturesTame           BigInt   @default(0)
+  EventCreaturesTame             BigInt   @default(0)
+  FantasyCreaturesTame           BigInt   @default(0)
+  InvertebratesTame              BigInt   @default(0)
+  MalfunctionedTekCreaturesTame  BigInt   @default(0)
+  MammalsTame                    BigInt   @default(0)
+  MechanicalCreaturesTame        BigInt   @default(0)
+  PiscivoresTame                 BigInt   @default(0)
+  RDinosTame                     BigInt   @default(0)
+  ReptilesTame                   BigInt   @default(0)
+  SynapsidsTame                  BigInt   @default(0)
+  TerrestrialTame                BigInt   @default(0)
+  XDinosTame                     BigInt   @default(0)
+  AnglerGel                      BigInt   @default(0)
+  Berries                        BigInt   @default(0)
+  BioToxin                       BigInt   @default(0)
+  BlackPearl                     BigInt   @default(0)
+  BlueGem                        BigInt   @default(0)
+  CactusSap                      BigInt   @default(0)
+  Chitin                         BigInt   @default(0)
+  Crystal                        BigInt   @default(0)
+  Element                        BigInt   @default(0)
+  ElementOre                     BigInt   @default(0)
+  ElementShard                   BigInt   @default(0)
+  Fiber                          BigInt   @default(0)
+  Flint                          BigInt   @default(0)
+  GreenGem                       BigInt   @default(0)
+  Hide                           BigInt   @default(0)
+  Honey                          BigInt   @default(0)
+  Keratin                        BigInt   @default(0)
+  Metal                          BigInt   @default(0)
+  Mushroom                       BigInt   @default(0)
+  Mutagel                        BigInt   @default(0)
+  Obsidian                       BigInt   @default(0)
+  Oil                            BigInt   @default(0)
+  OrganicPolymer                 BigInt   @default(0)
+  Pelt                           BigInt   @default(0)
+  RareFlower                     BigInt   @default(0)
+  RawMeat                        BigInt   @default(0)
+  RawSalt                        BigInt   @default(0)
+  RedGem                         BigInt   @default(0)
+  Sand                           BigInt   @default(0)
+  SilicaPearl                    BigInt   @default(0)
+  Silk                           BigInt   @default(0)
+  Stone                          BigInt   @default(0)
+  Sulfur                         BigInt   @default(0)
+  Thatch                         BigInt   @default(0)
+  Wood                           BigInt   @default(0)
+  TekStrucs                      BigInt   @default(0)
+}
+
+model lethalquests_quests_daily {
+  rowid                          BigInt   @id @default(autoincrement())
+  ID                             Int      @unique(map: "ID")
+  Name                           String   @db.VarChar(50)
+  Description                    String   @db.VarChar(300)
+  PlayerKills                    BigInt?  @default(0)
+  PlayerDeaths                   BigInt?  @default(0)
+  WildDinoKills                  BigInt?  @default(0)
+  TamedDinoKills                 BigInt?  @default(0)
+  BossKills                      BigInt?  @default(0)
+  K_D                            Decimal? @default(0.00) @map("K/D") @db.Decimal(65, 2)
+  MinutesPlayed                  BigInt?  @default(0)
+  TotalDeaths                    BigInt?  @default(0)
+  PvPDamage                      BigInt?  @default(0)
+  TamedDinos                     BigInt?  @default(0)
+  RareTamedDinos                 BigInt?  @default(0)
+  RareDinoKills                  BigInt?  @default(0)
+  SuperRareDinoKills             BigInt?  @default(0)
+  ServerEventsCompleted          BigInt?  @default(0)
+  MissionsCompleted              BigInt?  @default(0)
+  MissionsFailed                 BigInt?  @default(0)
+  BlueOSD                        BigInt?  @default(0)
+  YellowOSD                      BigInt?  @default(0)
+  RedOSD                         BigInt?  @default(0)
+  PurpleOSD                      BigInt?  @default(0)
+  PurpleOSDWaves                 BigInt?  @default(0)
+  ElementNodeEasy                BigInt?  @default(0)
+  ElementNodeMedium              BigInt?  @default(0)
+  ElementNodeHard                BigInt?  @default(0)
+  FishCaught                     BigInt?  @default(0)
+  AberrantDinosKills             BigInt   @default(0)
+  AlphaDinosKills                BigInt   @default(0)
+  AquaticKills                   BigInt   @default(0)
+  CorruptedKills                 BigInt   @default(0)
+  FishKills                      BigInt   @default(0)
+  GolemKills                     BigInt   @default(0)
+  IceQueenKills                  BigInt   @default(0)
+  LavaGolemKills                 BigInt   @default(0)
+  TekDinosKills                  BigInt   @default(0)
+  TitansKills                    BigInt   @default(0)
+  WyvernKills                    BigInt   @default(0)
+  AquaticTame                    BigInt   @default(0)
+  FishTame                       BigInt   @default(0)
+  GolemTame                      BigInt   @default(0)
+  TekDinosTame                   BigInt   @default(0)
+  TitansTame                     BigInt   @default(0)
+  WyvernTame                     BigInt   @default(0)
+  SpamStrucs                     BigInt   @default(0)
+  SpecialTek                     BigInt   @default(0)
+  TekArmor                       BigInt   @default(0)
+  TekSaddle                      BigInt   @default(0)
+  TekStructures                  BigInt   @default(0)
+  AerialKills                    BigInt   @default(0)
+  AmphibiansKills                BigInt   @default(0)
+  BirdsKills                     BigInt   @default(0)
+  BruteDinosKills                BigInt   @default(0)
+  CarnivoresKills                BigInt   @default(0)
+  CarrionFeedersKills            BigInt   @default(0)
+  DinosaursKills                 BigInt   @default(0)
+  EnragedCreaturesKills          BigInt   @default(0)
+  EventCreaturesKills            BigInt   @default(0)
+  FantasyCreaturesKills          BigInt   @default(0)
+  Invertebrates                  BigInt   @default(0)
+  MalfunctionedTekCreaturesKills BigInt   @default(0)
+  MammalsKills                   BigInt   @default(0)
+  MechanicalCreaturesKills       BigInt   @default(0)
+  PiscivoresKills                BigInt   @default(0)
+  RDinosKills                    BigInt   @default(0)
+  ReptilesKills                  BigInt   @default(0)
+  SynapsidsKills                 BigInt   @default(0)
+  TerrestrialKills               BigInt   @default(0)
+  XDinosKills                    BigInt   @default(0)
+  AberrantDinosTame              BigInt   @default(0)
+  AerialTame                     BigInt   @default(0)
+  AmphibiansTame                 BigInt   @default(0)
+  BirdsTame                      BigInt   @default(0)
+  BruteDinosTame                 BigInt   @default(0)
+  CarnivoresTame                 BigInt   @default(0)
+  CarrionFeedersTame             BigInt   @default(0)
+  CorruptedTame                  BigInt   @default(0)
+  DinosaursTame                  BigInt   @default(0)
+  EnragedCreaturesTame           BigInt   @default(0)
+  EventCreaturesTame             BigInt   @default(0)
+  FantasyCreaturesTame           BigInt   @default(0)
+  InvertebratesTame              BigInt   @default(0)
+  MalfunctionedTekCreaturesTame  BigInt   @default(0)
+  MammalsTame                    BigInt   @default(0)
+  MechanicalCreaturesTame        BigInt   @default(0)
+  PiscivoresTame                 BigInt   @default(0)
+  RDinosTame                     BigInt   @default(0)
+  ReptilesTame                   BigInt   @default(0)
+  SynapsidsTame                  BigInt   @default(0)
+  TerrestrialTame                BigInt   @default(0)
+  XDinosTame                     BigInt   @default(0)
+  AnglerGel                      BigInt   @default(0)
+  Berries                        BigInt   @default(0)
+  BioToxin                       BigInt   @default(0)
+  BlackPearl                     BigInt   @default(0)
+  BlueGem                        BigInt   @default(0)
+  CactusSap                      BigInt   @default(0)
+  Chitin                         BigInt   @default(0)
+  Crystal                        BigInt   @default(0)
+  Element                        BigInt   @default(0)
+  ElementOre                     BigInt   @default(0)
+  ElementShard                   BigInt   @default(0)
+  Fiber                          BigInt   @default(0)
+  Flint                          BigInt   @default(0)
+  GreenGem                       BigInt   @default(0)
+  Hide                           BigInt   @default(0)
+  Honey                          BigInt   @default(0)
+  Keratin                        BigInt   @default(0)
+  Metal                          BigInt   @default(0)
+  Mushroom                       BigInt   @default(0)
+  Mutagel                        BigInt   @default(0)
+  Obsidian                       BigInt   @default(0)
+  Oil                            BigInt   @default(0)
+  OrganicPolymer                 BigInt   @default(0)
+  Pelt                           BigInt   @default(0)
+  RareFlower                     BigInt   @default(0)
+  RawMeat                        BigInt   @default(0)
+  RawSalt                        BigInt   @default(0)
+  RedGem                         BigInt   @default(0)
+  Sand                           BigInt   @default(0)
+  SilicaPearl                    BigInt   @default(0)
+  Silk                           BigInt   @default(0)
+  Stone                          BigInt   @default(0)
+  Sulfur                         BigInt   @default(0)
+  Thatch                         BigInt   @default(0)
+  Wood                           BigInt   @default(0)
+  TekStrucs                      BigInt   @default(0)
+}
+
+model lethalquests_quests_status {
+  SteamId   BigInt @db.UnsignedBigInt
+  QuestType Int    @db.TinyInt
+  QuestID   BigInt
+  TimeStamp BigInt @default(0)
+  Completed Int    @default(0) @db.TinyInt
+
+  @@id([SteamId, QuestType, QuestID])
+}
+
+model lethalquests_quests_weekly {
+  rowid                          BigInt   @id @default(autoincrement())
+  ID                             Int      @unique(map: "ID")
+  Name                           String   @db.VarChar(50)
+  Description                    String   @db.VarChar(300)
+  PlayerKills                    BigInt?  @default(0)
+  PlayerDeaths                   BigInt?  @default(0)
+  WildDinoKills                  BigInt?  @default(0)
+  TamedDinoKills                 BigInt?  @default(0)
+  BossKills                      BigInt?  @default(0)
+  K_D                            Decimal? @default(0.00) @map("K/D") @db.Decimal(65, 2)
+  MinutesPlayed                  BigInt?  @default(0)
+  TotalDeaths                    BigInt?  @default(0)
+  PvPDamage                      BigInt?  @default(0)
+  TamedDinos                     BigInt?  @default(0)
+  RareTamedDinos                 BigInt?  @default(0)
+  RareDinoKills                  BigInt?  @default(0)
+  SuperRareDinoKills             BigInt?  @default(0)
+  ServerEventsCompleted          BigInt?  @default(0)
+  MissionsCompleted              BigInt?  @default(0)
+  MissionsFailed                 BigInt?  @default(0)
+  BlueOSD                        BigInt?  @default(0)
+  YellowOSD                      BigInt?  @default(0)
+  RedOSD                         BigInt?  @default(0)
+  PurpleOSD                      BigInt?  @default(0)
+  PurpleOSDWaves                 BigInt?  @default(0)
+  ElementNodeEasy                BigInt?  @default(0)
+  ElementNodeMedium              BigInt?  @default(0)
+  ElementNodeHard                BigInt?  @default(0)
+  FishCaught                     BigInt?  @default(0)
+  AberrantDinosKills             BigInt   @default(0)
+  AerialKills                    BigInt   @default(0)
+  AlphaDinosKills                BigInt   @default(0)
+  AmphibiansKills                BigInt   @default(0)
+  AquaticKills                   BigInt   @default(0)
+  BirdsKills                     BigInt   @default(0)
+  BruteDinosKills                BigInt   @default(0)
+  CarnivoresKills                BigInt   @default(0)
+  CarrionFeedersKills            BigInt   @default(0)
+  CorruptedKills                 BigInt   @default(0)
+  DinosaursKills                 BigInt   @default(0)
+  EnragedCreaturesKills          BigInt   @default(0)
+  EventCreaturesKills            BigInt   @default(0)
+  FantasyCreaturesKills          BigInt   @default(0)
+  FishKills                      BigInt   @default(0)
+  GolemKills                     BigInt   @default(0)
+  IceQueenKills                  BigInt   @default(0)
+  Invertebrates                  BigInt   @default(0)
+  LavaGolemKills                 BigInt   @default(0)
+  MalfunctionedTekCreaturesKills BigInt   @default(0)
+  MammalsKills                   BigInt   @default(0)
+  MechanicalCreaturesKills       BigInt   @default(0)
+  PiscivoresKills                BigInt   @default(0)
+  RDinosKills                    BigInt   @default(0)
+  ReptilesKills                  BigInt   @default(0)
+  SynapsidsKills                 BigInt   @default(0)
+  TekDinosKills                  BigInt   @default(0)
+  TerrestrialKills               BigInt   @default(0)
+  TitansKills                    BigInt   @default(0)
+  WyvernKills                    BigInt   @default(0)
+  XDinosKills                    BigInt   @default(0)
+  AberrantDinosTame              BigInt   @default(0)
+  AerialTame                     BigInt   @default(0)
+  AmphibiansTame                 BigInt   @default(0)
+  AquaticTame                    BigInt   @default(0)
+  BirdsTame                      BigInt   @default(0)
+  BruteDinosTame                 BigInt   @default(0)
+  CarnivoresTame                 BigInt   @default(0)
+  CarrionFeedersTame             BigInt   @default(0)
+  CorruptedTame                  BigInt   @default(0)
+  DinosaursTame                  BigInt   @default(0)
+  EnragedCreaturesTame           BigInt   @default(0)
+  EventCreaturesTame             BigInt   @default(0)
+  FantasyCreaturesTame           BigInt   @default(0)
+  FishTame                       BigInt   @default(0)
+  GolemTame                      BigInt   @default(0)
+  InvertebratesTame              BigInt   @default(0)
+  MalfunctionedTekCreaturesTame  BigInt   @default(0)
+  MammalsTame                    BigInt   @default(0)
+  MechanicalCreaturesTame        BigInt   @default(0)
+  PiscivoresTame                 BigInt   @default(0)
+  RDinosTame                     BigInt   @default(0)
+  ReptilesTame                   BigInt   @default(0)
+  SynapsidsTame                  BigInt   @default(0)
+  TekDinosTame                   BigInt   @default(0)
+  TerrestrialTame                BigInt   @default(0)
+  TitansTame                     BigInt   @default(0)
+  WyvernTame                     BigInt   @default(0)
+  XDinosTame                     BigInt   @default(0)
+  AnglerGel                      BigInt   @default(0)
+  Berries                        BigInt   @default(0)
+  BioToxin                       BigInt   @default(0)
+  BlackPearl                     BigInt   @default(0)
+  BlueGem                        BigInt   @default(0)
+  CactusSap                      BigInt   @default(0)
+  Chitin                         BigInt   @default(0)
+  Crystal                        BigInt   @default(0)
+  Element                        BigInt   @default(0)
+  ElementOre                     BigInt   @default(0)
+  ElementShard                   BigInt   @default(0)
+  Fiber                          BigInt   @default(0)
+  Flint                          BigInt   @default(0)
+  GreenGem                       BigInt   @default(0)
+  Hide                           BigInt   @default(0)
+  Honey                          BigInt   @default(0)
+  Keratin                        BigInt   @default(0)
+  Metal                          BigInt   @default(0)
+  Mushroom                       BigInt   @default(0)
+  Mutagel                        BigInt   @default(0)
+  Obsidian                       BigInt   @default(0)
+  Oil                            BigInt   @default(0)
+  OrganicPolymer                 BigInt   @default(0)
+  Pelt                           BigInt   @default(0)
+  RareFlower                     BigInt   @default(0)
+  RawMeat                        BigInt   @default(0)
+  RawSalt                        BigInt   @default(0)
+  RedGem                         BigInt   @default(0)
+  Sand                           BigInt   @default(0)
+  SilicaPearl                    BigInt   @default(0)
+  Silk                           BigInt   @default(0)
+  Stone                          BigInt   @default(0)
+  Sulfur                         BigInt   @default(0)
+  Thatch                         BigInt   @default(0)
+  Wood                           BigInt   @default(0)
+  SpamStrucs                     BigInt   @default(0)
+  SpecialTek                     BigInt   @default(0)
+  TekArmor                       BigInt   @default(0)
+  TekSaddle                      BigInt   @default(0)
+  TekStrucs                      BigInt   @default(0)
+}
+
+model lethalquests_stats {
+  SteamId                        BigInt  @id @db.UnsignedBigInt
+  Name                           String? @db.VarChar(100)
+  TribeName                      String? @db.VarChar(100)
+  PlayerKills                    BigInt  @default(0)
+  PlayerDeaths                   BigInt  @default(0)
+  WildDinoKills                  BigInt  @default(0)
+  TamedDinoKills                 BigInt  @default(0)
+  BossKills                      BigInt  @default(0)
+  K_D                            Decimal @default(0.00) @map("K/D") @db.Decimal(65, 2)
+  MinutesPlayed                  BigInt  @default(0)
+  TotalDeaths                    BigInt  @default(0)
+  PvPDamage                      BigInt  @default(0)
+  TamedDinos                     BigInt  @default(0)
+  RareTamedDinos                 BigInt  @default(0)
+  RareDinoKills                  BigInt  @default(0)
+  SuperRareDinoKills             BigInt  @default(0)
+  ServerEventsCompleted          BigInt  @default(0)
+  MissionsCompleted              BigInt  @default(0)
+  MissionsFailed                 BigInt  @default(0)
+  BlueOSD                        BigInt  @default(0)
+  YellowOSD                      BigInt  @default(0)
+  RedOSD                         BigInt  @default(0)
+  PurpleOSD                      BigInt  @default(0)
+  PurpleOSDWaves                 BigInt  @default(0)
+  ElementNodeEasy                BigInt  @default(0)
+  ElementNodeMedium              BigInt  @default(0)
+  ElementNodeHard                BigInt  @default(0)
+  FishCaught                     BigInt  @default(0)
+  AberrantDinosKills             BigInt  @default(0)
+  AlphaDinosKills                BigInt  @default(0)
+  AquaticKills                   BigInt  @default(0)
+  CorruptedKills                 BigInt  @default(0)
+  FishKills                      BigInt  @default(0)
+  GolemKills                     BigInt  @default(0)
+  IceQueenKills                  BigInt  @default(0)
+  LavaGolemKills                 BigInt  @default(0)
+  TekDinosKills                  BigInt  @default(0)
+  TitansKills                    BigInt  @default(0)
+  WyvernKills                    BigInt  @default(0)
+  AquaticTame                    BigInt  @default(0)
+  FishTame                       BigInt  @default(0)
+  GolemTame                      BigInt  @default(0)
+  TekDinosTame                   BigInt  @default(0)
+  TitansTame                     BigInt  @default(0)
+  WyvernTame                     BigInt  @default(0)
+  SpamStrucs                     BigInt  @default(0)
+  SpecialTek                     BigInt  @default(0)
+  TekArmor                       BigInt  @default(0)
+  TekSaddle                      BigInt  @default(0)
+  TekStructures                  BigInt  @default(0)
+  AerialKills                    BigInt  @default(0)
+  AmphibiansKills                BigInt  @default(0)
+  BirdsKills                     BigInt  @default(0)
+  BruteDinosKills                BigInt  @default(0)
+  CarnivoresKills                BigInt  @default(0)
+  CarrionFeedersKills            BigInt  @default(0)
+  DinosaursKills                 BigInt  @default(0)
+  EnragedCreaturesKills          BigInt  @default(0)
+  EventCreaturesKills            BigInt  @default(0)
+  FantasyCreaturesKills          BigInt  @default(0)
+  Invertebrates                  BigInt  @default(0)
+  MalfunctionedTekCreaturesKills BigInt  @default(0)
+  MammalsKills                   BigInt  @default(0)
+  MechanicalCreaturesKills       BigInt  @default(0)
+  PiscivoresKills                BigInt  @default(0)
+  RDinosKills                    BigInt  @default(0)
+  ReptilesKills                  BigInt  @default(0)
+  SynapsidsKills                 BigInt  @default(0)
+  TerrestrialKills               BigInt  @default(0)
+  XDinosKills                    BigInt  @default(0)
+  AberrantDinosTame              BigInt  @default(0)
+  AerialTame                     BigInt  @default(0)
+  AmphibiansTame                 BigInt  @default(0)
+  BirdsTame                      BigInt  @default(0)
+  BruteDinosTame                 BigInt  @default(0)
+  CarnivoresTame                 BigInt  @default(0)
+  CarrionFeedersTame             BigInt  @default(0)
+  CorruptedTame                  BigInt  @default(0)
+  DinosaursTame                  BigInt  @default(0)
+  EnragedCreaturesTame           BigInt  @default(0)
+  EventCreaturesTame             BigInt  @default(0)
+  FantasyCreaturesTame           BigInt  @default(0)
+  InvertebratesTame              BigInt  @default(0)
+  MalfunctionedTekCreaturesTame  BigInt  @default(0)
+  MammalsTame                    BigInt  @default(0)
+  MechanicalCreaturesTame        BigInt  @default(0)
+  PiscivoresTame                 BigInt  @default(0)
+  RDinosTame                     BigInt  @default(0)
+  ReptilesTame                   BigInt  @default(0)
+  SynapsidsTame                  BigInt  @default(0)
+  TerrestrialTame                BigInt  @default(0)
+  XDinosTame                     BigInt  @default(0)
+  AnglerGel                      BigInt  @default(0)
+  Berries                        BigInt  @default(0)
+  BioToxin                       BigInt  @default(0)
+  BlackPearl                     BigInt  @default(0)
+  BlueGem                        BigInt  @default(0)
+  CactusSap                      BigInt  @default(0)
+  Chitin                         BigInt  @default(0)
+  Crystal                        BigInt  @default(0)
+  Element                        BigInt  @default(0)
+  ElementOre                     BigInt  @default(0)
+  ElementShard                   BigInt  @default(0)
+  Fiber                          BigInt  @default(0)
+  Flint                          BigInt  @default(0)
+  GreenGem                       BigInt  @default(0)
+  Hide                           BigInt  @default(0)
+  Honey                          BigInt  @default(0)
+  Keratin                        BigInt  @default(0)
+  Metal                          BigInt  @default(0)
+  Mushroom                       BigInt  @default(0)
+  Mutagel                        BigInt  @default(0)
+  Obsidian                       BigInt  @default(0)
+  Oil                            BigInt  @default(0)
+  OrganicPolymer                 BigInt  @default(0)
+  Pelt                           BigInt  @default(0)
+  RareFlower                     BigInt  @default(0)
+  RawMeat                        BigInt  @default(0)
+  RawSalt                        BigInt  @default(0)
+  RedGem                         BigInt  @default(0)
+  Sand                           BigInt  @default(0)
+  SilicaPearl                    BigInt  @default(0)
+  Silk                           BigInt  @default(0)
+  Stone                          BigInt  @default(0)
+  Sulfur                         BigInt  @default(0)
+  Thatch                         BigInt  @default(0)
+  Wood                           BigInt  @default(0)
+  TekStrucs                      BigInt  @default(0)
+}
+
+model lethalquests_stats_daily {
+  SteamId                        BigInt  @id @db.UnsignedBigInt
+  Name                           String? @db.VarChar(100)
+  TribeName                      String? @db.VarChar(100)
+  PlayerKills                    BigInt  @default(0)
+  PlayerDeaths                   BigInt  @default(0)
+  WildDinoKills                  BigInt  @default(0)
+  TamedDinoKills                 BigInt  @default(0)
+  BossKills                      BigInt  @default(0)
+  K_D                            Decimal @default(0.00) @map("K/D") @db.Decimal(65, 2)
+  MinutesPlayed                  BigInt  @default(0)
+  TotalDeaths                    BigInt  @default(0)
+  PvPDamage                      BigInt  @default(0)
+  TamedDinos                     BigInt  @default(0)
+  RareTamedDinos                 BigInt  @default(0)
+  RareDinoKills                  BigInt  @default(0)
+  SuperRareDinoKills             BigInt  @default(0)
+  ServerEventsCompleted          BigInt  @default(0)
+  MissionsCompleted              BigInt  @default(0)
+  MissionsFailed                 BigInt  @default(0)
+  BlueOSD                        BigInt  @default(0)
+  YellowOSD                      BigInt  @default(0)
+  RedOSD                         BigInt  @default(0)
+  PurpleOSD                      BigInt  @default(0)
+  PurpleOSDWaves                 BigInt  @default(0)
+  ElementNodeEasy                BigInt  @default(0)
+  ElementNodeMedium              BigInt  @default(0)
+  ElementNodeHard                BigInt  @default(0)
+  FishCaught                     BigInt  @default(0)
+  AberrantDinosKills             BigInt  @default(0)
+  AlphaDinosKills                BigInt  @default(0)
+  AquaticKills                   BigInt  @default(0)
+  CorruptedKills                 BigInt  @default(0)
+  FishKills                      BigInt  @default(0)
+  GolemKills                     BigInt  @default(0)
+  IceQueenKills                  BigInt  @default(0)
+  LavaGolemKills                 BigInt  @default(0)
+  TekDinosKills                  BigInt  @default(0)
+  TitansKills                    BigInt  @default(0)
+  WyvernKills                    BigInt  @default(0)
+  AquaticTame                    BigInt  @default(0)
+  FishTame                       BigInt  @default(0)
+  GolemTame                      BigInt  @default(0)
+  TekDinosTame                   BigInt  @default(0)
+  TitansTame                     BigInt  @default(0)
+  WyvernTame                     BigInt  @default(0)
+  SpamStrucs                     BigInt  @default(0)
+  SpecialTek                     BigInt  @default(0)
+  TekArmor                       BigInt  @default(0)
+  TekSaddle                      BigInt  @default(0)
+  TekStructures                  BigInt  @default(0)
+  AerialKills                    BigInt  @default(0)
+  AmphibiansKills                BigInt  @default(0)
+  BirdsKills                     BigInt  @default(0)
+  BruteDinosKills                BigInt  @default(0)
+  CarnivoresKills                BigInt  @default(0)
+  CarrionFeedersKills            BigInt  @default(0)
+  DinosaursKills                 BigInt  @default(0)
+  EnragedCreaturesKills          BigInt  @default(0)
+  EventCreaturesKills            BigInt  @default(0)
+  FantasyCreaturesKills          BigInt  @default(0)
+  Invertebrates                  BigInt  @default(0)
+  MalfunctionedTekCreaturesKills BigInt  @default(0)
+  MammalsKills                   BigInt  @default(0)
+  MechanicalCreaturesKills       BigInt  @default(0)
+  PiscivoresKills                BigInt  @default(0)
+  RDinosKills                    BigInt  @default(0)
+  ReptilesKills                  BigInt  @default(0)
+  SynapsidsKills                 BigInt  @default(0)
+  TerrestrialKills               BigInt  @default(0)
+  XDinosKills                    BigInt  @default(0)
+  AberrantDinosTame              BigInt  @default(0)
+  AerialTame                     BigInt  @default(0)
+  AmphibiansTame                 BigInt  @default(0)
+  BirdsTame                      BigInt  @default(0)
+  BruteDinosTame                 BigInt  @default(0)
+  CarnivoresTame                 BigInt  @default(0)
+  CarrionFeedersTame             BigInt  @default(0)
+  CorruptedTame                  BigInt  @default(0)
+  DinosaursTame                  BigInt  @default(0)
+  EnragedCreaturesTame           BigInt  @default(0)
+  EventCreaturesTame             BigInt  @default(0)
+  FantasyCreaturesTame           BigInt  @default(0)
+  InvertebratesTame              BigInt  @default(0)
+  MalfunctionedTekCreaturesTame  BigInt  @default(0)
+  MammalsTame                    BigInt  @default(0)
+  MechanicalCreaturesTame        BigInt  @default(0)
+  PiscivoresTame                 BigInt  @default(0)
+  RDinosTame                     BigInt  @default(0)
+  ReptilesTame                   BigInt  @default(0)
+  SynapsidsTame                  BigInt  @default(0)
+  TerrestrialTame                BigInt  @default(0)
+  XDinosTame                     BigInt  @default(0)
+  AnglerGel                      BigInt  @default(0)
+  Berries                        BigInt  @default(0)
+  BioToxin                       BigInt  @default(0)
+  BlackPearl                     BigInt  @default(0)
+  BlueGem                        BigInt  @default(0)
+  CactusSap                      BigInt  @default(0)
+  Chitin                         BigInt  @default(0)
+  Crystal                        BigInt  @default(0)
+  Element                        BigInt  @default(0)
+  ElementOre                     BigInt  @default(0)
+  ElementShard                   BigInt  @default(0)
+  Fiber                          BigInt  @default(0)
+  Flint                          BigInt  @default(0)
+  GreenGem                       BigInt  @default(0)
+  Hide                           BigInt  @default(0)
+  Honey                          BigInt  @default(0)
+  Keratin                        BigInt  @default(0)
+  Metal                          BigInt  @default(0)
+  Mushroom                       BigInt  @default(0)
+  Mutagel                        BigInt  @default(0)
+  Obsidian                       BigInt  @default(0)
+  Oil                            BigInt  @default(0)
+  OrganicPolymer                 BigInt  @default(0)
+  Pelt                           BigInt  @default(0)
+  RareFlower                     BigInt  @default(0)
+  RawMeat                        BigInt  @default(0)
+  RawSalt                        BigInt  @default(0)
+  RedGem                         BigInt  @default(0)
+  Sand                           BigInt  @default(0)
+  SilicaPearl                    BigInt  @default(0)
+  Silk                           BigInt  @default(0)
+  Stone                          BigInt  @default(0)
+  Sulfur                         BigInt  @default(0)
+  Thatch                         BigInt  @default(0)
+  Wood                           BigInt  @default(0)
+  TekStrucs                      BigInt  @default(0)
+}
+
+model lethalquests_stats_weekly {
+  SteamId                        BigInt  @id @db.UnsignedBigInt
+  Name                           String? @db.VarChar(100)
+  TribeName                      String? @db.VarChar(100)
+  PlayerKills                    BigInt  @default(0)
+  PlayerDeaths                   BigInt  @default(0)
+  WildDinoKills                  BigInt  @default(0)
+  TamedDinoKills                 BigInt  @default(0)
+  BossKills                      BigInt  @default(0)
+  K_D                            Decimal @default(0.00) @map("K/D") @db.Decimal(65, 2)
+  MinutesPlayed                  BigInt  @default(0)
+  TotalDeaths                    BigInt  @default(0)
+  PvPDamage                      BigInt  @default(0)
+  TamedDinos                     BigInt  @default(0)
+  RareTamedDinos                 BigInt  @default(0)
+  RareDinoKills                  BigInt  @default(0)
+  SuperRareDinoKills             BigInt  @default(0)
+  ServerEventsCompleted          BigInt  @default(0)
+  MissionsCompleted              BigInt  @default(0)
+  MissionsFailed                 BigInt  @default(0)
+  BlueOSD                        BigInt  @default(0)
+  YellowOSD                      BigInt  @default(0)
+  RedOSD                         BigInt  @default(0)
+  PurpleOSD                      BigInt  @default(0)
+  PurpleOSDWaves                 BigInt  @default(0)
+  ElementNodeEasy                BigInt  @default(0)
+  ElementNodeMedium              BigInt  @default(0)
+  ElementNodeHard                BigInt  @default(0)
+  FishCaught                     BigInt  @default(0)
+  AberrantDinosKills             BigInt  @default(0)
+  AlphaDinosKills                BigInt  @default(0)
+  AquaticKills                   BigInt  @default(0)
+  CorruptedKills                 BigInt  @default(0)
+  FishKills                      BigInt  @default(0)
+  GolemKills                     BigInt  @default(0)
+  IceQueenKills                  BigInt  @default(0)
+  LavaGolemKills                 BigInt  @default(0)
+  TekDinosKills                  BigInt  @default(0)
+  TitansKills                    BigInt  @default(0)
+  WyvernKills                    BigInt  @default(0)
+  AquaticTame                    BigInt  @default(0)
+  FishTame                       BigInt  @default(0)
+  GolemTame                      BigInt  @default(0)
+  TekDinosTame                   BigInt  @default(0)
+  TitansTame                     BigInt  @default(0)
+  WyvernTame                     BigInt  @default(0)
+  SpamStrucs                     BigInt  @default(0)
+  SpecialTek                     BigInt  @default(0)
+  TekArmor                       BigInt  @default(0)
+  TekSaddle                      BigInt  @default(0)
+  TekStructures                  BigInt  @default(0)
+  AerialKills                    BigInt  @default(0)
+  AmphibiansKills                BigInt  @default(0)
+  BirdsKills                     BigInt  @default(0)
+  BruteDinosKills                BigInt  @default(0)
+  CarnivoresKills                BigInt  @default(0)
+  CarrionFeedersKills            BigInt  @default(0)
+  DinosaursKills                 BigInt  @default(0)
+  EnragedCreaturesKills          BigInt  @default(0)
+  EventCreaturesKills            BigInt  @default(0)
+  FantasyCreaturesKills          BigInt  @default(0)
+  Invertebrates                  BigInt  @default(0)
+  MalfunctionedTekCreaturesKills BigInt  @default(0)
+  MammalsKills                   BigInt  @default(0)
+  MechanicalCreaturesKills       BigInt  @default(0)
+  PiscivoresKills                BigInt  @default(0)
+  RDinosKills                    BigInt  @default(0)
+  ReptilesKills                  BigInt  @default(0)
+  SynapsidsKills                 BigInt  @default(0)
+  TerrestrialKills               BigInt  @default(0)
+  XDinosKills                    BigInt  @default(0)
+  AberrantDinosTame              BigInt  @default(0)
+  AerialTame                     BigInt  @default(0)
+  AmphibiansTame                 BigInt  @default(0)
+  BirdsTame                      BigInt  @default(0)
+  BruteDinosTame                 BigInt  @default(0)
+  CarnivoresTame                 BigInt  @default(0)
+  CarrionFeedersTame             BigInt  @default(0)
+  CorruptedTame                  BigInt  @default(0)
+  DinosaursTame                  BigInt  @default(0)
+  EnragedCreaturesTame           BigInt  @default(0)
+  EventCreaturesTame             BigInt  @default(0)
+  FantasyCreaturesTame           BigInt  @default(0)
+  InvertebratesTame              BigInt  @default(0)
+  MalfunctionedTekCreaturesTame  BigInt  @default(0)
+  MammalsTame                    BigInt  @default(0)
+  MechanicalCreaturesTame        BigInt  @default(0)
+  PiscivoresTame                 BigInt  @default(0)
+  RDinosTame                     BigInt  @default(0)
+  ReptilesTame                   BigInt  @default(0)
+  SynapsidsTame                  BigInt  @default(0)
+  TerrestrialTame                BigInt  @default(0)
+  XDinosTame                     BigInt  @default(0)
+  AnglerGel                      BigInt  @default(0)
+  Berries                        BigInt  @default(0)
+  BioToxin                       BigInt  @default(0)
+  BlackPearl                     BigInt  @default(0)
+  BlueGem                        BigInt  @default(0)
+  CactusSap                      BigInt  @default(0)
+  Chitin                         BigInt  @default(0)
+  Crystal                        BigInt  @default(0)
+  Element                        BigInt  @default(0)
+  ElementOre                     BigInt  @default(0)
+  ElementShard                   BigInt  @default(0)
+  Fiber                          BigInt  @default(0)
+  Flint                          BigInt  @default(0)
+  GreenGem                       BigInt  @default(0)
+  Hide                           BigInt  @default(0)
+  Honey                          BigInt  @default(0)
+  Keratin                        BigInt  @default(0)
+  Metal                          BigInt  @default(0)
+  Mushroom                       BigInt  @default(0)
+  Mutagel                        BigInt  @default(0)
+  Obsidian                       BigInt  @default(0)
+  Oil                            BigInt  @default(0)
+  OrganicPolymer                 BigInt  @default(0)
+  Pelt                           BigInt  @default(0)
+  RareFlower                     BigInt  @default(0)
+  RawMeat                        BigInt  @default(0)
+  RawSalt                        BigInt  @default(0)
+  RedGem                         BigInt  @default(0)
+  Sand                           BigInt  @default(0)
+  SilicaPearl                    BigInt  @default(0)
+  Silk                           BigInt  @default(0)
+  Stone                          BigInt  @default(0)
+  Sulfur                         BigInt  @default(0)
+  Thatch                         BigInt  @default(0)
+  Wood                           BigInt  @default(0)
+  TekStrucs                      BigInt  @default(0)
+}
+
+model mindwipecontrol_timestamps {
+  ItemHash  BigInt
+  SteamID   BigInt
+  TimeStamp BigInt?
+
+  @@id([ItemHash, SteamID])
+}
+
+model nowandersettings {
+  Id      Int    @id
+  Name    String @db.Text
+  Setting Int
+}
+
+model nowandertribeoverrides {
+  TribeId   Int
+  SettingId Int
+  Enabled   Int
+
+  @@id([TribeId, SettingId])
+}
+
+model permissiongroups {
+  Id          Int    @id @default(autoincrement())
+  GroupName   String @unique(map: "GroupName_UNIQUE") @db.VarChar(128)
+  Permissions String @default("") @db.VarChar(768)
+}
+
+model player_data {
+  playerid      BigInt    @default(0) @db.UnsignedBigInt
+  steamid       BigInt    @unique(map: "Index") @default(0) @db.UnsignedBigInt
+  map           String    @default("0") @db.VarChar(50)
+  creation_date DateTime? @default(now()) @db.Timestamp(0)
+  playername    String    @default("0") @db.VarChar(255)
+  playtime      BigInt    @default(0) @db.UnsignedBigInt
+  isInTribe     Int?      @default(0)
+
+  @@index([playerid], map: "Index 2")
+}
+
+model player_renamer_player_name_changes {
+  id       BigInt    @id @unique(map: "id_UNIQUE") @default(autoincrement())
+  SteamID  BigInt
+  Old_Name String?   @db.VarChar(60)
+  New_Name String?   @db.VarChar(60)
+  DateTime DateTime? @default(now()) @db.Timestamp(0)
+}
+
+model player_renamer_player_tokens {
+  SteamID BigInt @id @unique(map: "steamid_UNIQUE")
+  Tokens  Int?   @default(0) @db.TinyInt
+}
+
+model playerbases {
+  Id         Int    @id @default(autoincrement())
+  SteamId    BigInt
+  BaseLoc    String @default("0,0,0") @db.VarChar(20)
+  CustomLocs String @default("") @db.VarChar(200)
+  Map        String @default("") @db.VarChar(100)
+
+  @@unique([SteamId, Map], map: "SteamId_UNIQUE")
+}
+
+model players {
+  Id                    Int     @id @default(autoincrement())
+  SteamId               BigInt  @unique(map: "SteamId_UNIQUE")
+  PermissionGroups      String  @default("Default,") @db.VarChar(256)
+  TimedPermissionGroups String? @default("") @db.VarChar(256)
+  NewPlayer             Int     @default(0)
+  TimedData             String  @default("{\"Default\":{\"Time\":-1}}") @db.VarChar(4096)
+}
+
+model players_temporary {
+  Id          Int    @id @default(autoincrement())
+  SteamId     BigInt
+  GroupName   String @db.VarChar(256)
+  Start_Time  BigInt
+  Expire_Time BigInt
+
+  @@unique([GroupName, SteamId], map: "Group_UNIQUE")
+}
+
+model pvpplusalliances {
+  AllianceID Int
+  TribeID    Int
+
+  @@id([AllianceID, TribeID])
+}
+
+model pvpplusplayeroverrides {
+  SteamId   BigInt @db.UnsignedBigInt
+  SettingId Int
+  Enabled   Int
+
+  @@id([SteamId, SettingId])
+}
+
+model pvpplussettings {
+  Id      Int    @id
+  Name    String @db.Text
+  Setting Int
+}
+
+model pvpve_playerids {
+  PlayerID Int    @id @unique(map: "PlayerID_UNIQUE")
+  SteamID  BigInt
+}
+
+model pvpve_players {
+  SteamID        BigInt  @id @unique(map: "SteamID_UNIQUE")
+  TribeList      String? @db.VarChar(255)
+  Name           String? @db.VarChar(100)
+  bPVP           Int?    @db.TinyInt
+  LastSwitchTime BigInt?
+}
+
+model pvpve_strikes {
+  TribeID  BigInt @id @db.UnsignedBigInt
+  Warnings Int?
+  Strikes  Int?
+}
+
+model pvpve_tribes {
+  ID             Int     @unique(map: "ID_UNIQUE")
+  TribeID        Int?
+  ServerID       BigInt
+  ServerName     String? @db.VarChar(100)
+  TribeName      String? @db.VarChar(100)
+  OwnerSteamID   BigInt
+  OwnerName      String? @db.VarChar(100)
+  bPVP           Int?    @db.TinyInt
+  LastSwitchTime BigInt?
+
+  @@id([ServerID, OwnerSteamID])
+}
+
+model smooth_transfer_cloud_data {
+  ID           BigInt  @id @unique(map: "ID_UNIQUE") @default(autoincrement())
+  ServerID     BigInt
+  SlotName     String? @db.VarChar(25)
+  OwnerSteamID BigInt?
+  isDownloaded Int?    @default(0) @db.TinyInt
+  Item_Data    Bytes?  @db.MediumBlob
+  TimeStamp    BigInt?
+}
+
+model smooth_transfer_data {
+  ID           BigInt  @id @unique(map: "ID_UNIQUE") @default(autoincrement())
+  ClusterID    String? @db.VarChar(25)
+  OwnerSteamID BigInt?
+  Item_Data    Bytes?  @db.MediumBlob
+  TimeStamp    BigInt?
+}
+
+model tribe_data {
+  tribeid       BigInt    @unique(map: "Index") @default(0) @db.UnsignedBigInt
+  map           String    @default("0") @db.VarChar(50)
+  tribename     String    @default("0") @db.VarChar(255)
+  creation_date DateTime? @default(now()) @db.Timestamp(0)
+  ownername     String    @default("0") @db.VarChar(255)
+  ownerid       Int       @default(0) @db.UnsignedInt
+  isListed      Int       @default(0)
+
+  @@index([isListed], map: "Index 2")
+}
+
+model tribelogrelay {
+  TribeId        Int     @id
+  DiscordWebhook String  @db.VarChar(256)
+  TribeName      String? @db.VarChar(256)
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model tribelogs {
+  TribeId BigInt
+  Log     String @db.VarChar(512)
+  Time    Float
+
+  @@ignore
+}
+
+model tribepermissions {
+  Id                    Int    @id @default(autoincrement())
+  TribeId               BigInt @unique(map: "SteamId_UNIQUE")
+  PermissionGroups      String @default("") @db.VarChar(256)
+  TimedPermissionGroups String @default("") @db.VarChar(256)
+}
+
+model wlootbox_boxes {
+  ID      Int     @id @default(autoincrement())
+  SteamID BigInt?
+  BoxID   BigInt?
+  Amount  Int?
+
+  @@unique([SteamID, BoxID], map: "MainKey")
+}
+
+model wlootbox_items {
+  ID          Int     @id @unique(map: "ID_UNIQUE") @default(autoincrement()) @db.UnsignedInt
+  Key         Int     @db.UnsignedInt
+  AllowedTime BigInt?
+}
+
+model wlootbox_timedrewards {
+  id        Int     @id @default(autoincrement())
+  steamid   BigInt? @db.UnsignedBigInt
+  reward_id Int?
+  time      BigInt?
+
+  @@unique([steamid, reward_id], map: "sec")
+}
+
+model wtribes_events {
+  ID        BigInt  @id @unique(map: "SteamID_UNIQUE") @default(autoincrement()) @db.UnsignedBigInt
+  TribeID   Int?    @default(0)
+  EventType Int?    @default(0)
+  SteamID   BigInt? @default(0)
+  ServerID  BigInt? @default(0)
+  TribeName String? @db.VarChar(256)
+}
+
+model wtribes_log {
+  ID        BigInt @id @unique(map: "SteamID_UNIQUE") @default(autoincrement()) @db.UnsignedBigInt
+  Type      Int    @db.UnsignedInt
+  SteamID   BigInt @db.UnsignedBigInt
+  TribeID   Int?   @default(0) @db.UnsignedInt
+  Text      String @db.Text
+  TimeStamp BigInt @db.UnsignedBigInt
+}
+
+model wtribes_playerdata {
+  SteamID            BigInt  @id @unique(map: "SteamID_UNIQUE") @db.UnsignedBigInt
+  TribeID            Int?    @default(0) @db.UnsignedInt
+  PlayerID           Int?    @default(0) @db.UnsignedInt
+  CharacterName      String? @db.VarChar(50)
+  LastMap            String? @db.VarChar(25)
+  LastLeaveTribeTime BigInt? @db.UnsignedBigInt
+  LastTribeCount     Int?
+  isOwnerInTribe     Int?    @default(0) @db.TinyInt
+  isAdminInTribe     Int?    @default(0) @db.TinyInt
+}
+
+model wtribes_playerids {
+  PlayerID Int    @id @unique(map: "PlayerID_UNIQUE")
+  SteamID  BigInt
+}
+
+model wtribes_reserved_names {
+  Type       Int     @db.UnsignedInt
+  SteamID    BigInt  @db.UnsignedBigInt
+  ExpireTime BigInt  @db.UnsignedBigInt
+  Name       String? @db.VarChar(160)
+
+  @@id([SteamID, Type])
+  @@unique([SteamID, Type], map: "Type_UNIQUE")
+}
+
+model wtribes_tribedata {
+  TribeID                          Int     @id @unique(map: "TribeID_UNIQUE") @db.UnsignedInt
+  OwnerSteamID                     BigInt  @db.UnsignedBigInt
+  TribeName                        String? @db.VarChar(255)
+  LastNameChange                   BigInt? @db.UnsignedBigInt
+  LastTimeMemberLeft               BigInt? @db.UnsignedBigInt
+  LastTribeCount                   Int?
+  Members                          Bytes?  @db.Blob
+  TribeGovern_PINCode              Int?
+  TribeGovern_DinoOwnership        Int?
+  TribeGovern_StructureOwnership   Int?
+  TribeGovern_DinoTaming           Int?
+  TribeGovern_DinoUnclaimAdminOnly Int?
+}
+
+model wtribes_tribelog_webhooks {
+  TribeID  Int     @unique(map: "TS_UNIQUE") @db.UnsignedInt
+  ServerID Int     @db.UnsignedInt
+  WebHook  String? @db.VarChar(160)
+
+  @@id([TribeID, ServerID])
+}
+
+model active_invites {
+  tribeid_requester Int    @default(0)
+  steamid_requested BigInt @id @default(0) @db.UnsignedBigInt
+}
