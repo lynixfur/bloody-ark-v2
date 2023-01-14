@@ -7,17 +7,17 @@ import useSWR from 'swr'
 import { env } from "process";
 
 let fetcher = async () => {
-  const response = await fetch(`${env.DOMAIN}/api/hub/tribe_manager/find`);
+  const response = await fetch(`/api/hub/tribe_manager/find`);
   const data = await response.json()
   return data
 }
 
 export default function HubDashboard() {
   /* Fetch Data */
-  const { data, error } = useSWR(`/api/hub/tribe_manager/find`, fetcher)
+  const { data, error } = useSWR('find', fetcher)
 
-  if (error) return <Layout><div className="p-5 text-xl text-white">An error occured</div></Layout>
-  if (!data) return <Layout><div className="p-5 text-xl text-white">Loading</div></Layout>
+  if (error) return <Layout><div className="p-5 text-xl text-white">An error occured while loading data!</div></Layout>
+  if (!data) return <Layout><div className="p-5 text-xl text-white">Loading...</div></Layout>
 
   return (
       <>

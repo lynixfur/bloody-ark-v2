@@ -5,6 +5,7 @@ import Layout from "../../components/HubLayout";
 
 import useSWR from 'swr'
 import axios from 'axios'
+import fetcher from "../../lib/fetcher"
 
 export default function HubDashboard() {
   /* Get Page */
@@ -19,8 +20,7 @@ export default function HubDashboard() {
   const handleFilterDropdown = () => setFilterMenu(!filterMenu);
 
   /* Fetch Data */
-  const fetcher = (...args) => fetch(...args).then(res => res.json())
-  const { data, error } = useSWR(`/api/hub/rankings?page=${page}&search=${search}&sort_by={"${sorted_by}":"desc"}`, fetcher)
+  let { data, error }: any = useSWR(`/api/hub/rankings?page=${page}&search=${search}&sort_by={"${sorted_by}":"desc"}`, fetcher)
 
   if (error) return <Layout><div className="p-5 text-xl text-white">Failed to load</div></Layout>
   if (!data) return <Layout><div className="p-5 text-xl text-white">Loading...</div></Layout>
@@ -95,7 +95,7 @@ export default function HubDashboard() {
                         <label htmlFor="users-search" className="sr-only">Search</label>
                         <div className="mt-1 relative lg:w-64 xl:w-96 flex">
                           <input type="text" name="search" id="search" className="dark:bg-bgray-overlay bg-gray-50 border dark:border-gray-700 border-gray-400 text-gray-100 sm:text-sm rounded-l-lg focus:ring-gray-600 focus:border-gray-600 block w-full p-2.5" placeholder="Search for players" />
-                          <button type="submit" className="inline-flex items-center px-3 py-1 font-bold leading-6 text-md shadow rounded-r-lg text-gray-100 bg-bred-2 transition ease-in-out duration-150">  <i class="fa-solid fa-magnifying-glass m-1 mr-2 my-auto text-gray-100"></i> Search</button>
+                          <button type="submit" className="inline-flex items-center px-3 py-1 font-bold leading-6 text-md shadow rounded-r-lg text-gray-100 bg-bred-2 transition ease-in-out duration-150">  <i className="fa-solid fa-magnifying-glass m-1 mr-2 my-auto text-gray-100"></i> Search</button>
                         </div>
                       </form>
                     </div>

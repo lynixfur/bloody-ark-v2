@@ -2,21 +2,25 @@ import Head from "next/head";
 import axios from 'axios';
 import moment from 'moment';
 import Layout from '../../components/HubLayout'
+import useUser from "../../lib/hooks/useUser";
+import useSWR from 'swr'
 
-import { useState, useEffect } from 'react';
+
+let fetcher = async () => {
+  const response = await fetch(`/api/hub/home`);
+  const data = await response.json()
+  return data
+}
 
 export default function HubDashboard() {
+  /* User */
+  const { user } = useUser();
 
-  /* Player Data */
-  const [hubData, setHubData] = useState(null);
+  /* Fetch Data */
+  const { data, error } = useSWR('find', fetcher)
 
-    useEffect(() => {
-        axios.get('/api/hub/home').then(function (response) {
-            setHubData(response.data);
-        }).catch(function (error) {
-            setHubData(null);
-        })
-    },[]);
+  if (error) return <Layout><div className="p-5 text-xl text-white">An error occured while loading data!</div></Layout>
+  if (!data) return <Layout><div className="p-5 text-xl text-white">Loading...</div></Layout>
 
   return (
       <>
@@ -33,7 +37,7 @@ export default function HubDashboard() {
           <link rel="icon" href="/favicon.ico" />
         </Head>
             <Layout>
-            <div class="">
+            <div>
               <div
                 style={{
                   background: "url(/auth2.jpg)",
@@ -47,13 +51,13 @@ export default function HubDashboard() {
                   style={{ backdropFilter: "blur(5px)" }}
                 >
                   <img
-                    src={user.avatar}
+                    src={user?.avatarUrl}
                     alt="image"
                     className="h-14 w-14 rounded-full"
                   />
                   <div className="ml-4">
                     <h2 className="text-gray-100 font-bold text-xl">
-                      Welcome, {user.username}!
+                      Welcome, {user?.username}!
                     </h2>
                     <p className=" text-gray-200 text-md font-semibold cursor-pointer">
                       Welcome to your home page of Bloody Hub, you can manage
@@ -65,7 +69,7 @@ export default function HubDashboard() {
               <div className="hub_page px-20 py-10">
                 <div className="mt-4 w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
                   <div className="bg-white dark:bg-bgray-secondary shadow rounded-lg">
-                    <div className>
+                    <div>
                       <div className="w-full  flex flex-wrap items-center  justify-center  rounded-t-md">
                         <div className="container w-full  transform   duration-200 easy-in-out rounded-t-md">
                           <div className=" h-32 overflow-hidden rounded-t-md">
@@ -78,14 +82,14 @@ export default function HubDashboard() {
                           <div className="flex justify-center px-5  -mt-12">
                             <img
                               className="h-32 w-32 bg-white dark:bg-bgray-secondary p-2 rounded-full object-cover"
-                              src={user.avatar}
-                              alt={user.username}
+                              src={user?.avatarUrl}
+                              alt={user?.username}
                             />
                           </div>
                         </div>
                       </div>
                       <h2 className="text-gray-800 dark:text-gray-50 text-3xl mt-1 font-bold text-center">
-                        {user.username}
+                        {user?.username}
                       </h2>
                       <div className="flex justify-center my-1 hidden">
                         <p className="text-gray-600 dark:text-gray-50 mt-2 bg-gray-200 dark:bg-bgray-overlay rounded-full py-1 px-4 text-sm text-center font-bold">
@@ -95,42 +99,42 @@ export default function HubDashboard() {
                       <hr className="mx-5 mt-5 dark:border-gray-600" />
                       <div className="p-5 mb-10">
                         <h1 className="text-2xl font-bold dark:text-gray-50">
-                        <i class="fa-solid fa-vector-square"></i> Your Survivor
+                        <i className="fa-solid fa-vector-square"></i> Your Survivor
                         </h1>
                         <p className="text-md text-gray-500 dark:text-gray-200 sm:mb-0 mb-5 mt-5">
-                          Survivor Name : {hubData?.player?.username}
+                          Survivor Name : {data?.player?.username}
                         </p>
                         <p className="text-md text-gray-500 dark:text-gray-200  sm:mb-0 mb-5 mt-1">
-                          Player ID : {hubData?.player?.playerId}
+                          Player ID : {data?.player?.playerId}
                         </p>
                         <p className="text-md text-gray-500 dark:text-gray-200  sm:mb-0 mb-5 mt-1">
-                          Steam ID : {user.id}
+                          Steam ID : {user?.userId}
                         </p>
                         <br />
                         <hr className="dark:border-gray-600 dark:text-gray-200 " />
                         <p className="text-md font-bold text-gray-500 dark:text-gray-200  sm:mb-0 mb-2 mt-5">
                           <i className="fa-solid fa-coins text-gray-500 dark:text-gray-200  mr-2" />
-                          Bloody Points : {hubData?.extra_data?.points ? hubData?.extra_data?.points : 0}
+                          Bloody Points : {data?.extra_data?.points ? data?.extra_data?.points : 0}
                         </p>
                         <p className="text-md font-bold text-gray-500 dark:text-gray-200  sm:mb-5 mb-5">
                           <i className="fa-solid fa-coins text-gray-500 dark:text-gray-200  mr-2" />
-                          Total Points Spent : {hubData?.extra_data?.points_spent ? hubData?.extra_data?.points_spent : 0}
+                          Total Points Spent : {data?.extra_data?.points_spent ? data?.extra_data?.points_spent : 0}
                         </p>
                         <p className="text-md font-bold text-gray-500 dark:text-gray-200  sm:mb-0 mb-2">
                           <i className="fa-solid fa-ticket text-gray-500 dark:text-gray-200  mr-2" />
-                          Dino Color Tokens : {hubData?.extra_data?.dino_tokens ? hubData?.extra_data?.dino_tokens : 0}
+                          Dino Color Tokens : {data?.extra_data?.dino_tokens ? data?.extra_data?.dino_tokens : 0}
                         </p>
                         <p className="text-md font-bold text-gray-500 dark:text-gray-200  sm:mb-0 mb-2">
                           <i className="fa-solid fa-ticket text-gray-500 dark:text-gray-200  mr-2" />
-                          Renamer Tokens : {hubData?.extra_data?.player_rename_tokens ? hubData?.extra_data?.player_rename_tokens : 0}
+                          Renamer Tokens : {data?.extra_data?.player_rename_tokens ? data?.extra_data?.player_rename_tokens : 0}
                         </p>
                         <p className="text-md font-bold text-gray-500 dark:text-gray-200  sm:mb-0 mb-2 mt-2">
                           <i className="fa-solid fa-shield-halved text-gray-500 dark:text-gray-200 mr-2" />
-                          {hubData?.extra_data?.pvp_status ? "PVPVE Status : PvP" : "PVPVE Status : PvE" }
+                          {data?.extra_data?.pvp_status ? "PVPVE Status : PvP" : "PVPVE Status : PvE" }
                         </p>
                         <p className="text-md font-bold text-gray-500 dark:text-gray-200  sm:mb-0 mb-2 mt-2">
                           <i className="fa-solid fa-object-ungroup text-gray-500 dark:text-gray-200 mr-2" />
-                          Groups : {hubData?.extra_data?.groups}
+                          Groups : {data?.extra_data?.groups}
                         </p>
                       </div>
                     </div>
@@ -141,34 +145,34 @@ export default function HubDashboard() {
                     </div>
                     <div className="p-5 mb-10">
                       <h1 className="text-2xl font-bold dark:text-gray-50">
-                      <i class="fa-solid fa-users"></i> Tribe Information
+                      <i className="fa-solid fa-users"></i> Tribe Information
                       </h1>
-                      {hubData?.tribe?.tribeId
+                      {data?.tribe?.tribeId
                       
                       ?
                       <><img
-                        src={"https://ui-avatars.com/api/?name=" + hubData?.tribe?.tribeName + "&color=9ca3af&background=272a35&size=512"}
+                        src={"https://ui-avatars.com/api/?name=" + data?.tribe?.tribeName + "&color=9ca3af&background=272a35&size=512"}
                         className="h-32 w-32 mt-4 rounded-lg shadow-md "
                       />
                       <p className="text-md text-gray-500 dark:text-gray-300 sm:mb-0 mb-5 mt-5">
-                        Tribe Name : {hubData?.tribe?.tribeName}
+                        Tribe Name : {data?.tribe?.tribeName}
                       </p>
                       <p className="text-md text-gray-500 dark:text-gray-300  sm:mb-0 mb-5 mt-1">
-                        Tribe Owner : {hubData?.tribe?.tribeOwner}
+                        Tribe Owner : {data?.tribe?.tribeOwner}
                       </p>
                       <p className="text-md text-gray-500 dark:text-gray-300  sm:mb-0 mb-2 mt-1">
-                        Tribe Location : {hubData?.tribe?.tribeLocation}
+                        Tribe Location : {data?.tribe?.tribeLocation}
                       </p>
                       <p className="text-md text-gray-500 dark:text-gray-300  sm:mb-0 mb-2 mt-1">
-                        Creation Date : {moment(hubData?.tribe?.tribeCreationDate).format('MMMM Do YYYY, h:mm:ss a')}
+                        Creation Date : {moment(data?.tribe?.tribeCreationDate).format('MMMM Do YYYY, h:mm:ss a')}
                       </p>
                       <p className="text-md text-gray-500 dark:text-gray-300 sm:mb-0 mb-5 mt-1">
-                        Tribe Members Count : {hubData?.tribe?.tribeMembers.length}
+                        Tribe Members Count : {data?.tribe?.tribeMembers.length}
                       </p>
                       <h1 className="text-2xl font-bold dark:text-gray-50 mt-5 mb-5">
                       <i className="fa-solid fa-users"></i> Tribe Members
                       </h1>
-                      {hubData?.tribe?.tribeMembers?.map((member: any) => {     
+                      {data?.tribe?.tribeMembers?.map((member: any) => {     
                         return (<p className="text-md text-gray-500 dark:text-gray-300  sm:mb-0 mb-5 mt-1">
                         {member.CharacterName}
                         </p>)
@@ -211,12 +215,12 @@ export default function HubDashboard() {
                       <h1 className="text-2xl font-bold dark:text-gray-50">
                       <i className="fa-solid fa-inbox"></i> Notifications
                       </h1>
-                      {hubData?.notifications?.invites == [] && hubData?.notifications?.join_requests == [] ? <></>
+                      {data?.notifications?.invites != null && data?.notifications?.join_requests != null ? <></>
                       : <p className="text-md mt-1 text-gray-500 dark:text-gray-300  sm:mb-0 mb-5 hidden">
                         You currently have no notifications.
                       </p>}
 
-                      {hubData?.notifications?.invites?.map((invite) => {
+                      {data?.notifications?.invites?.map((invite: any) => {
                               return (
                       <div className="bg-gray-200 dark:bg-bgray-overlay shadow px-4 py-2 rounded-lg mt-5">
                         <h1 className="text-xl font-bold dark:text-gray-50 mb-2">
@@ -248,7 +252,7 @@ export default function HubDashboard() {
                       </div>)})}
 
 
-                      {hubData?.notifications?.join_requests?.map((request) => {
+                      {data?.notifications?.join_requests?.map((request: any) => {
                               return (
                       <div className="bg-gray-200 dark:bg-bgray-overlay shadow px-4 py-2 rounded-lg mt-5">
                         <h1 className="text-xl font-bold dark:text-gray-50 mb-2">

@@ -1,9 +1,4 @@
-import { useAuth } from '../context/AuthContext';
-import auth_service from '../services/auth_service';
-
-export default function HubSidebar(props) {
-    const { user, setUser } = useAuth();
-
+export default function HubSidebar() {
     return (
         <div className="flex overflow-hidden bg-white dark:bg-bgray-secondary pt-16">
         <aside id="sidebar" className="fixed hidden z-20 h-full top-0 left-0 pt-16 lg:flex flex-shrink-0 flex-col w-64 transition-width duration-75" aria-label="Sidebar">
@@ -73,6 +68,5 @@ export default function HubSidebar(props) {
           </div>
         </aside>
       </div>
-      
     )
 }

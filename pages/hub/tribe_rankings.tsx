@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 import Layout from "../../components/HubLayout";
 
 import { useRouter } from 'next/router'
-
+import fetcher from '../../lib/fetcher'
 import useSWR from 'swr'
 
 export default function HubDashboard() {
@@ -17,8 +17,7 @@ export default function HubDashboard() {
   const search = router.query.search ? router.query.search : "";
 
   /* Fetch Data */
-  const fetcher = (...args) => fetch(...args).then(res => res.json())
-  const { data, error } = useSWR(`/api/hub/tribe_rankings?page=${page}&search=${search}`, fetcher)
+  let { data, error }: any = useSWR(`/api/hub/tribe_rankings?page=${page}&search=${search}`, fetcher)
 
   if (error) return <Layout><div className="p-5 text-xl text-white">Failed to load</div></Layout>
   if (!data) return <Layout><div className="p-5 text-xl text-white">Loading...</div></Layout>

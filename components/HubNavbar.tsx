@@ -1,21 +1,9 @@
 import { useState } from "react";
-import useSWR, { Key, Fetcher } from "swr";
+import useUser from "../lib/hooks/useUser";
 
-function Navbar(props) {
-  /* Auth */
-  const { user, setUser } = useAuth();
-
-  console.log(user);
-
-  const handleLogout = async() => {
-    try {
-      const data = await auth_service.logout();
-      if(data.success) setUser(data.user);
-      else throw new Error("Something went wrong...");
-    } catch (err) {
-      console.error(err);
-    }
-  }
+function Navbar() {
+  /* User */
+  const { user } = useUser();
 
   /* Mobile Menu */
   const [mobileMenu, setMobileMenu] = useState(false);
@@ -63,13 +51,13 @@ function Navbar(props) {
         </div>
       </div>
       <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-      <a href="https://bloody-ark.com" class="inline-flex items-center px-3 py-1 font-bold leading-6 text-md shadow rounded-full text-gray-100 bg-bred-2 transition ease-in-out duration-150">  <i class="fa-solid fa-earth-americas m-1 mr-2 my-auto text-gray-100"></i> Website</a>
+      <a href="https://bloody-ark.com" className="inline-flex items-center px-3 py-1 font-bold leading-6 text-md shadow rounded-full text-gray-100 bg-bred-2 transition ease-in-out duration-150">  <i className="fa-solid fa-earth-americas m-1 mr-2 my-auto text-gray-100"></i> Website</a>
             
         {/* Profile dropdown */}
         <div className="ml-3 relative">
         <button type="button" className="bg-gray-800 flex text-sm rounded-full" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
                   <span className="sr-only">Open user menu</span>
-                  <img className="h-8 w-8 rounded-full" src={user?.avatar} alt={user?.username} />
+                  <img className="h-8 w-8 rounded-full" src={user?.avatarUrl} alt={user?.username} />
                 </button>
         </div>
       </div>

@@ -3,21 +3,20 @@ import axios from "axios";
 import moment from "moment";
 import { useState, useEffect } from "react";
 import Layout from "../../../components/HubLayout";
+import useSWR from 'swr';
+
+let fetcher = async () => {
+  const response = await fetch(`/api/hub/tribe_manager`);
+  const data = await response.json()
+  return data
+}
 
 export default function HubDashboard() {
-  /* Player Data */
-  const [hubData, setHubData] = useState(null);
+  /* Fetch Data */
+  const { data, error } = useSWR('find', fetcher)
 
-  useEffect(() => {
-    axios
-      .get("/api/hub/tribe_manager")
-      .then(function (response) {
-        setHubData(response.data);
-      })
-      .catch(function (error) {
-        setHubData(null);
-      });
-  }, []);
+  if (error) return <Layout><div className="p-5 text-xl text-white">An error occured while loading data!</div></Layout>
+  if (!data) return <Layout><div className="p-5 text-xl text-white">Loading...</div></Layout>
 
   return (
       <>
@@ -35,7 +34,7 @@ export default function HubDashboard() {
         </Head>
         <Layout>
           <div className="w-full">
-            {hubData?.tribe?.tribeId ? (
+            {data?.tribe?.tribeId ? (
               <>
                 <div>
                   <div className="p-4 bg-white dark:bg-bgray-secondary dark:border-gray-700 items-center justify-between border-b border-gray-200 flex">
@@ -123,7 +122,7 @@ export default function HubDashboard() {
                         <img
                           src={
                             "https://ui-avatars.com/api/?name=" +
-                            hubData?.tribe?.tribeName +
+                            data?.tribe?.tribeName +
                             "&color=9ca3af&background=272a35"
                           }
                           className="h-40 w-40 rounded-full shadow-md "
@@ -138,13 +137,13 @@ export default function HubDashboard() {
           !*/}
                   <div className="bg-gray-100 dark:bg-bgray-dropdown p-5 pt-20 flex flex-col justify-center text-center mb-10">
                     <h2 className="font-semibold text-3xl dark:text-gray-200 leading-tight py-1 mt-2">
-                      {hubData?.tribe?.tribeName}
+                      {data?.tribe?.tribeName}
                     </h2>
                     <p
                       className="font-semibold text-md dark:text-gray-400 leading-tight mt-1"
                       v-if="$page.props.player_data.isInTribe"
                     >
-                      Owned by {hubData?.tribe?.tribeOwner}
+                      Owned by {data?.tribe?.tribeOwner}
                     </p>
                     <div className="text-sm mt-2 dark:text-gray-200 flex justify-center">
                       <div className="flex flex-row space-x-2 items-center">
@@ -160,11 +159,11 @@ export default function HubDashboard() {
                           v-if="$page.props.player_data.isInTribe"
                         >
                           <i className="fa-solid fa-users" />{" "}
-                          {hubData?.tribe?.tribeMembers.length} Members
+                          {data?.tribe?.tribeMembers.length} Members
                         </p>
                       </div>
                     </div>
-                    {hubData?.tribe?.tribeAcceptingMembers ? (
+                    {data?.tribe?.tribeAcceptingMembers ? (
                       <div className="flex justify-center my-3">
                         <a
                           href="/api/hub/tribe_manager/set_tribe_requests?value=0"
@@ -227,7 +226,7 @@ export default function HubDashboard() {
                                 tabIndex={0}
                                 className="focus:outline-none h-16 bg-gray-500 dark:bg-bgray-overlay"
                               >
-                                <td className>
+                                <td>
                                   <div className="flex items-center pl-5">
                                     <p className="text-base leading-none text-gray-50 font-bold mr-2">
                                       Player Name
@@ -242,13 +241,13 @@ export default function HubDashboard() {
                                   </div>
                                 </td>
                               </tr>
-                              {hubData?.tribe?.tribeMembers?.map((member) => {
+                              {data?.tribe?.tribeMembers?.map((member: any) => {
                                 return (
                                   <tr
                                     key={member.CharacterName}
                                     className="focus:outline-none h-16 border-t bg-gray-100 dark:border-gray-700 dark:bg-bgray-secondary"
                                   >
-                                    <td className>
+                                    <td>
                                       <div className="flex items-center pl-5">
                                         <p className="text-base leading-none text-gray-700 dark:text-gray-400 mr-2">
                                           {member.CharacterName}

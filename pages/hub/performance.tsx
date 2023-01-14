@@ -1,28 +1,25 @@
 import Head from "next/head";
 import axios from "axios";
-import moment from "moment";
-
-import { useState, useEffect } from "react";
-import { useAuth } from "../../context/AuthContext";
 import Layout from "../../components/HubLayout";
+import useUser from "../../lib/hooks/useUser";
+import useSWR from 'swr'
 
-export default function HubDashboard() {
-  /* Auth */
-  const { user, setUser } = useAuth();
+let fetcher = async () => {
+  const response = await fetch(`/api/hub/performance`);
+  const data = await response.json()
+  return data
+}
 
-  /* Player Data */
-  const [hubData, setHubData] = useState(null);
+export default function Performance() {
+  /* User */
+  const { user } = useUser();
 
-  useEffect(() => {
-    axios
-      .get("/api/hub/performance")
-      .then(function (response) {
-        setHubData(response.data);
-      })
-      .catch(function (error) {
-        setHubData(null);
-      });
-  }, []);
+  /* Fetch Data */
+  const { data, error } = useSWR('find', fetcher)
+
+  if (error) return <Layout><div className="p-5 text-xl text-white">An error occured while loading data!</div></Layout>
+  if (!data) return <Layout><div className="p-5 text-xl text-white">Loading...</div></Layout>
+
 
   return (
     user && (
@@ -93,10 +90,10 @@ export default function HubDashboard() {
               </div>
             </div>
             <div className="pb-12 px-16">
-              {hubData ? (
+              {data ? (
                 <>
                 <div className="mt-4 w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-4">
-                  {hubData?.daily_performance ? (
+                  {data?.daily_performance ? (
                     <div>
                       <p className="font-bold text-xl text-gray-800 dark:text-gray-200 mb-2 mt-10">
                         Today's Performance
@@ -110,7 +107,7 @@ export default function HubDashboard() {
                             <tbody>
 
                             <tr className="focus:outline-none h-16 border-t border-b-[7px] border-gray-200 bg-white dark:border-bgray-bg dark:bg-bgray-secondary">
-                                <td className>
+                                <td>
                                   <div className="flex items-center pl-5">
                                     <p className="text-base leading-none text-gray-700 dark:text-gray-400 mr-2 font-bold">
                                     PVP Damage
@@ -120,14 +117,14 @@ export default function HubDashboard() {
                                 <td className="pl-5">
                                   <div className="flex items-center">
                                     <p className="text-sm leading-none text-gray-700 dark:text-gray-400 ml-2">
-                                    {hubData?.daily_score_data?.value ? hubData?.daily_score_data?.value : 0}
+                                    {data?.daily_score_data?.value ? data?.daily_score_data?.value : 0}
                                     </p>
                                   </div>
                                 </td>
                               </tr>
 
                               <tr className="focus:outline-none h-16 border-t border-b-[7px] border-gray-200 bg-white dark:border-bgray-bg dark:bg-bgray-secondary">
-                                <td className>
+                                <td>
                                   <div className="flex items-center pl-5">
                                     <p className="text-base leading-none text-gray-700 dark:text-gray-400 mr-2 font-bold">
                                       Play Time
@@ -137,14 +134,14 @@ export default function HubDashboard() {
                                 <td className="pl-5">
                                   <div className="flex items-center">
                                     <p className="text-sm leading-none text-gray-700 dark:text-gray-400 ml-2">
-                                      {hubData?.daily_performance?.PlayTime ? (parseInt(hubData?.daily_performance?.PlayTime) / 60).toFixed(2) : 0} hrs
+                                      {data?.daily_performance?.PlayTime ? (parseInt(data?.daily_performance?.PlayTime) / 60).toFixed(2) : 0} hrs
                                     </p>
                                   </div>
                                 </td>
                               </tr>
 
                               <tr className="focus:outline-none h-16 border-t border-b-[7px] border-gray-200 bg-white dark:border-bgray-bg dark:bg-bgray-secondary">
-                                <td className>
+                                <td>
                                   <div className="flex items-center pl-5">
                                     <p className="text-base leading-none text-gray-700 dark:text-gray-400 mr-2 font-bold">
                                     Player Kills
@@ -154,14 +151,14 @@ export default function HubDashboard() {
                                 <td className="pl-5">
                                   <div className="flex items-center">
                                     <p className="text-sm leading-none text-gray-700 dark:text-gray-400 ml-2">
-                                    {hubData?.daily_performance?.PlayerKills ? hubData?.daily_performance?.PlayerKills : 0}
+                                    {data?.daily_performance?.PlayerKills ? data?.daily_performance?.PlayerKills : 0}
                                     </p>
                                   </div>
                                 </td>
                               </tr>
 
                               <tr className="focus:outline-none h-16 border-t border-b-[7px] border-gray-200 bg-white dark:border-bgray-bg dark:bg-bgray-secondary">
-                                <td className>
+                                <td>
                                   <div className="flex items-center pl-5">
                                     <p className="text-base leading-none text-gray-700 dark:text-gray-400 mr-2 font-bold">
                                      Dino Kills
@@ -171,14 +168,14 @@ export default function HubDashboard() {
                                 <td className="pl-5">
                                   <div className="flex items-center">
                                     <p className="text-sm leading-none text-gray-700 dark:text-gray-400 ml-2">
-                                    {hubData?.daily_performance?.DinoKills ? hubData?.daily_performance?.DinoKills : 0}
+                                    {data?.daily_performance?.DinoKills ? data?.daily_performance?.DinoKills : 0}
                                     </p>
                                   </div>
                                 </td>
                               </tr>
 
                               <tr className="focus:outline-none h-16 border-t border-b-[7px] border-gray-200 bg-white dark:border-bgray-bg dark:bg-bgray-secondary">
-                                <td className>
+                                <td>
                                   <div className="flex items-center pl-5">
                                     <p className="text-base leading-none text-gray-700 dark:text-gray-400 mr-2 font-bold">
                                       Wild Dino Kills
@@ -188,14 +185,14 @@ export default function HubDashboard() {
                                 <td className="pl-5">
                                   <div className="flex items-center">
                                     <p className="text-sm leading-none text-gray-700 dark:text-gray-400 ml-2">
-                                    {hubData?.daily_performance?.WildDinoKills}
+                                    {data?.daily_performance?.WildDinoKills}
                                     </p>
                                   </div>
                                 </td>
                               </tr>
 
                               <tr className="focus:outline-none h-16 border-t border-b-[7px] border-gray-200 bg-white dark:border-bgray-bg dark:bg-bgray-secondary">
-                                <td className>
+                                <td>
                                   <div className="flex items-center pl-5">
                                     <p className="text-base leading-none text-gray-700 dark:text-gray-400 mr-2 font-bold">
                                       Dinos Tamed
@@ -205,14 +202,14 @@ export default function HubDashboard() {
                                 <td className="pl-5">
                                   <div className="flex items-center">
                                     <p className="text-sm leading-none text-gray-700 dark:text-gray-400 ml-2">
-                                    {hubData?.daily_performance?.DinosTamed}
+                                    {data?.daily_performance?.DinosTamed}
                                     </p>
                                   </div>
                                 </td>
                               </tr>
 
                               <tr className="focus:outline-none h-16 border-t border-b-[7px] border-gray-200 bg-white dark:border-bgray-bg dark:bg-bgray-secondary">
-                                <td className>
+                                <td>
                                   <div className="flex items-center pl-5">
                                     <p className="text-base leading-none text-gray-700 dark:text-gray-400 mr-2 font-bold">
                                     Death By Player
@@ -222,14 +219,14 @@ export default function HubDashboard() {
                                 <td className="pl-5">
                                   <div className="flex items-center">
                                     <p className="text-sm leading-none text-gray-700 dark:text-gray-400 ml-2">
-                                    {hubData?.daily_performance?.DeathByPlayer}
+                                    {data?.daily_performance?.DeathByPlayer}
                                     </p>
                                   </div>
                                 </td>
                               </tr>
 
                               <tr className="focus:outline-none h-16 border-t border-b-[7px] border-gray-200 bg-white dark:border-bgray-bg dark:bg-bgray-secondary">
-                                <td className>
+                                <td>
                                   <div className="flex items-center pl-5">
                                     <p className="text-base leading-none text-gray-700 dark:text-gray-400 mr-2 font-bold">
                                     Death By Dino
@@ -239,14 +236,14 @@ export default function HubDashboard() {
                                 <td className="pl-5">
                                   <div className="flex items-center">
                                     <p className="text-sm leading-none text-gray-700 dark:text-gray-400 ml-2">
-                                    {hubData?.daily_performance?.DeathByDino}
+                                    {data?.daily_performance?.DeathByDino}
                                     </p>
                                   </div>
                                 </td>
                               </tr>
 
                               <tr className="focus:outline-none h-16 border-t border-b-[7px] border-gray-200 bg-white dark:border-bgray-bg dark:bg-bgray-secondary">
-                                <td className>
+                                <td>
                                   <div className="flex items-center pl-5">
                                     <p className="text-base leading-none text-gray-700 dark:text-gray-400 mr-2 font-bold">
                                     Death By Wild Dino
@@ -256,7 +253,7 @@ export default function HubDashboard() {
                                 <td className="pl-5">
                                   <div className="flex items-center">
                                     <p className="text-sm leading-none text-gray-700 dark:text-gray-400 ml-2">
-                                    {hubData?.daily_performance?.DeathByWildDino}
+                                    {data?.daily_performance?.DeathByWildDino}
                                     </p>
                                   </div>
                                 </td>
@@ -277,7 +274,7 @@ export default function HubDashboard() {
                         className="text-gray-100 px-4 py-3  mt-10"
                         role="alert"
                       >
-                        <div className>
+                        <div>
                           <div className="my-auto flex justify-center mb-5">
                             <i className="fa-solid fa-hard-drive text-5xl text-bred-2" />
                           </div>
@@ -294,12 +291,12 @@ export default function HubDashboard() {
                       </div>
                     </div>
                   )}
-                  {hubData?.performance ? (
+                  {data?.performance ? (
                     <div>
                       <p className="font-bold text-xl text-gray-800 dark:text-gray-200 mb-2 mt-10">
                         Season Performance
                       </p>
-                      <div className>
+                      <div>
                         <div className="overflow-x-auto">
                           <table
                             className="w-full whitespace-nowrap"
@@ -308,7 +305,7 @@ export default function HubDashboard() {
                             <tbody>
 
                             <tr className="focus:outline-none h-16 border-t border-b-[7px] border-gray-200 bg-white dark:border-bgray-bg dark:bg-bgray-secondary">
-                                <td className>
+                                <td>
                                   <div className="flex items-center pl-5">
                                     <p className="text-base leading-none text-gray-700 dark:text-gray-400 mr-2 font-bold">
                                     PVP Damage
@@ -318,14 +315,14 @@ export default function HubDashboard() {
                                 <td className="pl-5">
                                   <div className="flex items-center">
                                     <p className="text-sm leading-none text-gray-700 dark:text-gray-400 ml-2">
-                                    {hubData?.score_data?.value ? hubData?.score_data?.value : 0}
+                                    {data?.score_data?.value ? data?.score_data?.value : 0}
                                     </p>
                                   </div>
                                 </td>
                               </tr>
 
                               <tr className="focus:outline-none h-16 border-t border-b-[7px] border-gray-200 bg-white dark:border-bgray-bg dark:bg-bgray-secondary">
-                                <td className>
+                                <td>
                                   <div className="flex items-center pl-5">
                                     <p className="text-base leading-none text-gray-700 dark:text-gray-400 mr-2 font-bold">
                                       Play Time
@@ -335,14 +332,14 @@ export default function HubDashboard() {
                                 <td className="pl-5">
                                   <div className="flex items-center">
                                     <p className="text-sm leading-none text-gray-700 dark:text-gray-400 ml-2">
-                                      {hubData?.performance?.PlayTime ? (parseInt(hubData?.performance?.PlayTime) / 60).toFixed(2) : 0} hrs
+                                      {data?.performance?.PlayTime ? (parseInt(data?.performance?.PlayTime) / 60).toFixed(2) : 0} hrs
                                     </p>
                                   </div>
                                 </td>
                               </tr>
 
                               <tr className="focus:outline-none h-16 border-t border-b-[7px] border-gray-200 bg-white dark:border-bgray-bg dark:bg-bgray-secondary">
-                                <td className>
+                                <td>
                                   <div className="flex items-center pl-5">
                                     <p className="text-base leading-none text-gray-700 dark:text-gray-400 mr-2 font-bold">
                                     Player Kills
@@ -352,14 +349,14 @@ export default function HubDashboard() {
                                 <td className="pl-5">
                                   <div className="flex items-center">
                                     <p className="text-sm leading-none text-gray-700 dark:text-gray-400 ml-2">
-                                    {hubData?.performance?.PlayerKills}
+                                    {data?.performance?.PlayerKills}
                                     </p>
                                   </div>
                                 </td>
                               </tr>
 
                               <tr className="focus:outline-none h-16 border-t border-b-[7px] border-gray-200 bg-white dark:border-bgray-bg dark:bg-bgray-secondary">
-                                <td className>
+                                <td>
                                   <div className="flex items-center pl-5">
                                     <p className="text-base leading-none text-gray-700 dark:text-gray-400 mr-2 font-bold">
                                      Dino Kills
@@ -369,14 +366,14 @@ export default function HubDashboard() {
                                 <td className="pl-5">
                                   <div className="flex items-center">
                                     <p className="text-sm leading-none text-gray-700 dark:text-gray-400 ml-2">
-                                    {hubData?.performance?.DinoKills}
+                                    {data?.performance?.DinoKills}
                                     </p>
                                   </div>
                                 </td>
                               </tr>
 
                               <tr className="focus:outline-none h-16 border-t border-b-[7px] border-gray-200 bg-white dark:border-bgray-bg dark:bg-bgray-secondary">
-                                <td className>
+                                <td>
                                   <div className="flex items-center pl-5">
                                     <p className="text-base leading-none text-gray-700 dark:text-gray-400 mr-2 font-bold">
                                       Wild Dino Kills
@@ -386,14 +383,14 @@ export default function HubDashboard() {
                                 <td className="pl-5">
                                   <div className="flex items-center">
                                     <p className="text-sm leading-none text-gray-700 dark:text-gray-400 ml-2">
-                                    {hubData?.performance?.WildDinoKills}
+                                    {data?.performance?.WildDinoKills}
                                     </p>
                                   </div>
                                 </td>
                               </tr>
 
                               <tr className="focus:outline-none h-16 border-t border-b-[7px] border-gray-200 bg-white dark:border-bgray-bg dark:bg-bgray-secondary">
-                                <td className>
+                                <td>
                                   <div className="flex items-center pl-5">
                                     <p className="text-base leading-none text-gray-700 dark:text-gray-400 mr-2 font-bold">
                                       Dinos Tamed
@@ -403,14 +400,14 @@ export default function HubDashboard() {
                                 <td className="pl-5">
                                   <div className="flex items-center">
                                     <p className="text-sm leading-none text-gray-700 dark:text-gray-400 ml-2">
-                                    {hubData?.performance?.DinosTamed}
+                                    {data?.performance?.DinosTamed}
                                     </p>
                                   </div>
                                 </td>
                               </tr>
 
                               <tr className="focus:outline-none h-16 border-t border-b-[7px] border-gray-200 bg-white dark:border-bgray-bg dark:bg-bgray-secondary">
-                                <td className>
+                                <td>
                                   <div className="flex items-center pl-5">
                                     <p className="text-base leading-none text-gray-700 dark:text-gray-400 mr-2 font-bold">
                                     Death By Player
@@ -420,14 +417,14 @@ export default function HubDashboard() {
                                 <td className="pl-5">
                                   <div className="flex items-center">
                                     <p className="text-sm leading-none text-gray-700 dark:text-gray-400 ml-2">
-                                    {hubData?.performance?.DeathByPlayer}
+                                    {data?.performance?.DeathByPlayer}
                                     </p>
                                   </div>
                                 </td>
                               </tr>
 
                               <tr className="focus:outline-none h-16 border-t border-b-[7px] border-gray-200 bg-white dark:border-bgray-bg dark:bg-bgray-secondary">
-                                <td className>
+                                <td>
                                   <div className="flex items-center pl-5">
                                     <p className="text-base leading-none text-gray-700 dark:text-gray-400 mr-2 font-bold">
                                     Death By Dino
@@ -437,14 +434,14 @@ export default function HubDashboard() {
                                 <td className="pl-5">
                                   <div className="flex items-center">
                                     <p className="text-sm leading-none text-gray-700 dark:text-gray-400 ml-2">
-                                    {hubData?.performance?.DeathByDino}
+                                    {data?.performance?.DeathByDino}
                                     </p>
                                   </div>
                                 </td>
                               </tr>
 
                               <tr className="focus:outline-none h-16 border-t border-b-[7px] border-gray-200 bg-white dark:border-bgray-bg dark:bg-bgray-secondary">
-                                <td className>
+                                <td>
                                   <div className="flex items-center pl-5">
                                     <p className="text-base leading-none text-gray-700 dark:text-gray-400 mr-2 font-bold">
                                     Death By Wild Dino
@@ -454,7 +451,7 @@ export default function HubDashboard() {
                                 <td className="pl-5">
                                   <div className="flex items-center">
                                     <p className="text-sm leading-none text-gray-700 dark:text-gray-400 ml-2">
-                                    {hubData?.performance?.DeathByWildDino}
+                                    {data?.performance?.DeathByWildDino}
                                     </p>
                                   </div>
                                 </td>
@@ -475,7 +472,7 @@ export default function HubDashboard() {
                         className="text-gray-100 px-4 py-3  mt-10"
                         role="alert"
                       >
-                        <div className>
+                        <div>
                           <div className="my-auto flex justify-center mb-5">
                             <i className="fa-solid fa-hard-drive text-5xl text-bred-2" />
                           </div>
@@ -496,7 +493,7 @@ export default function HubDashboard() {
                 </>
               ) : (
                 <div className="text-gray-100 px-4 py-3  mt-10" role="alert">
-                  <div className>
+                  <div>
                     <div className="my-auto flex justify-center mb-5">
                       <i className="fa-solid fa-triangle-exclamation text-5xl text-bred-2" />
                     </div>
