@@ -4,11 +4,8 @@ import moment from 'moment';
 import Layout from '../../components/HubLayout'
 
 import { useState, useEffect } from 'react';
-import { useAuth } from "../../context/AuthContext";
 
 export default function HubDashboard() {
-  /* Auth */
-  const { user, setUser } = useAuth();
 
   /* Player Data */
   const [hubData, setHubData] = useState(null);
@@ -22,7 +19,6 @@ export default function HubDashboard() {
     },[]);
 
   return (
-    user && (
       <>
         <Head>
           <title>Bloody ARK Hub</title>
@@ -170,9 +166,9 @@ export default function HubDashboard() {
                         Tribe Members Count : {hubData?.tribe?.tribeMembers.length}
                       </p>
                       <h1 className="text-2xl font-bold dark:text-gray-50 mt-5 mb-5">
-                      <i class="fa-solid fa-users"></i> Tribe Members
+                      <i className="fa-solid fa-users"></i> Tribe Members
                       </h1>
-                      {hubData?.tribe?.tribeMembers?.map((member) => {     
+                      {hubData?.tribe?.tribeMembers?.map((member: any) => {     
                         return (<p className="text-md text-gray-500 dark:text-gray-300  sm:mb-0 mb-5 mt-1">
                         {member.CharacterName}
                         </p>)
@@ -183,7 +179,7 @@ export default function HubDashboard() {
                         className="text-gray-100 px-4 py-3  mt-10"
                         role="alert"
                       >
-                        <div className>
+                        <div>
                           <div className="my-auto flex justify-center mb-5">
                             <i className="fa-solid fa-users text-5xl text-bred-2" />
                           </div>
@@ -207,13 +203,13 @@ export default function HubDashboard() {
                     </div>
                     <div className="p-5 mb-10">
                       <h1 className="text-2xl font-bold dark:text-gray-50">
-                      <i class="fa-solid fa-gear"></i> Notification Actions
+                      <i className="fa-solid fa-gear"></i> Notification Actions
                       </h1>
-                      <a href="/api/hub/delete_requests" data-modal-toggle="add-user-modal" class="w-full text-white bg-bred-2 hover:bg-red-700 focus:ring-4 focus:ring-cyan-200 font-bold inline-flex items-center justify-center rounded-lg text-sm px-3 py-2 text-center mt-3">Delete All Requests</a>
-                      <a href="/api/hub/delete_invites" data-modal-toggle="add-user-modal" class="w-full text-white bg-bred-2 hover:bg-red-700 focus:ring-4 focus:ring-cyan-200 font-bold inline-flex items-center justify-center rounded-lg text-sm px-3 py-2 text-center mt-3 mb-5">Clear Notifications</a>
+                      <a href="/api/hub/delete_requests" data-modal-toggle="add-user-modal" className="w-full text-white bg-bred-2 hover:bg-red-700 focus:ring-4 focus:ring-cyan-200 font-bold inline-flex items-center justify-center rounded-lg text-sm px-3 py-2 text-center mt-3">Delete All Requests</a>
+                      <a href="/api/hub/delete_invites" data-modal-toggle="add-user-modal" className="w-full text-white bg-bred-2 hover:bg-red-700 focus:ring-4 focus:ring-cyan-200 font-bold inline-flex items-center justify-center rounded-lg text-sm px-3 py-2 text-center mt-3 mb-5">Clear Notifications</a>
 
                       <h1 className="text-2xl font-bold dark:text-gray-50">
-                      <i class="fa-solid fa-inbox"></i> Notifications
+                      <i className="fa-solid fa-inbox"></i> Notifications
                       </h1>
                       {hubData?.notifications?.invites == [] && hubData?.notifications?.join_requests == [] ? <></>
                       : <p className="text-md mt-1 text-gray-500 dark:text-gray-300  sm:mb-0 mb-5 hidden">
@@ -355,5 +351,4 @@ export default function HubDashboard() {
             </Layout>
       </>
     )
-  );
 }

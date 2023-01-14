@@ -1,16 +1,12 @@
 import Head from "next/head";
 import { useState, useEffect } from "react";
 import { useRouter } from 'next/router'
-import { useAuth } from "../../context/AuthContext";
 import Layout from "../../components/HubLayout";
 
 import useSWR from 'swr'
 import axios from 'axios'
 
 export default function HubDashboard() {
-  /* Auth */
-  const { user, setUser } = useAuth();
-
   /* Get Page */
   const router = useRouter();
 
@@ -30,7 +26,6 @@ export default function HubDashboard() {
   if (!data) return <Layout><div className="p-5 text-xl text-white">Loading...</div></Layout>
 
   return (
-    user && (
       <>
         <Head>
           <title>Bloody ARK Hub</title>
@@ -100,7 +95,7 @@ export default function HubDashboard() {
                         <label htmlFor="users-search" className="sr-only">Search</label>
                         <div className="mt-1 relative lg:w-64 xl:w-96 flex">
                           <input type="text" name="search" id="search" className="dark:bg-bgray-overlay bg-gray-50 border dark:border-gray-700 border-gray-400 text-gray-100 sm:text-sm rounded-l-lg focus:ring-gray-600 focus:border-gray-600 block w-full p-2.5" placeholder="Search for players" />
-                          <button type="submit" class="inline-flex items-center px-3 py-1 font-bold leading-6 text-md shadow rounded-r-lg text-gray-100 bg-bred-2 transition ease-in-out duration-150">  <i class="fa-solid fa-magnifying-glass m-1 mr-2 my-auto text-gray-100"></i> Search</button>
+                          <button type="submit" className="inline-flex items-center px-3 py-1 font-bold leading-6 text-md shadow rounded-r-lg text-gray-100 bg-bred-2 transition ease-in-out duration-150">  <i class="fa-solid fa-magnifying-glass m-1 mr-2 my-auto text-gray-100"></i> Search</button>
                         </div>
                       </form>
                     </div>
@@ -261,7 +256,7 @@ export default function HubDashboard() {
                                 </div>
                               </td>
                             </tr>
-                            {data?.ranking_data?.map((player, rank) => {
+                            {data?.ranking_data?.map((player: any, rank: any) => {
                               return (
                                 <tr className="focus:outline-none h-16 border-t border-b-[7px] border-gray-200 bg-white dark:border-bgray-bg dark:bg-bgray-secondary">
                                                                 {page == 0 ? <td className="pl-5">
@@ -327,11 +322,11 @@ export default function HubDashboard() {
                       <p className="text-gray-300">Page <strong>{data?.pagination?.current_page + 1}</strong> of <strong>{data?.pagination?.total_pages + 1}</strong></p>
                       <div className="flex space-x-2 mt-3">
                         {data?.pagination?.prev ?
-                        <a href={(data?.pagination?.prev).replace("https://bloody.gg/api/hub/rankings","https://bloody.gg/hub/rankings")} class="inline-flex items-center px-3 py-1 font-bold leading-6 text-md shadow rounded-full text-gray-100 bg-bred-2 transition ease-in-out duration-150">  <i class="fa-solid fa-arrow-left m-1 mr-2 my-auto"></i> Previous</a>
+                        <a href={(data?.pagination?.prev).replace("https://bloody.gg/api/hub/rankings","https://bloody.gg/hub/rankings")} className="inline-flex items-center px-3 py-1 font-bold leading-6 text-md shadow rounded-full text-gray-100 bg-bred-2 transition ease-in-out duration-150">  <i className="fa-solid fa-arrow-left m-1 mr-2 my-auto"></i> Previous</a>
                         : <></>
                         }
                         {data?.pagination?.next ?
-                        <a href={(data?.pagination?.next).replace("https://bloody.gg/api/hub/rankings","https://bloody.gg/hub/rankings")} class="inline-flex items-center px-3 py-1 font-bold leading-6 text-md shadow rounded-full text-gray-100 bg-bred-2 transition ease-in-out duration-150">  Next <i class="fa-solid fa-arrow-right m-1 ml-1 my-auto"></i></a>
+                        <a href={(data?.pagination?.next).replace("https://bloody.gg/api/hub/rankings","https://bloody.gg/hub/rankings")} className="inline-flex items-center px-3 py-1 font-bold leading-6 text-md shadow rounded-full text-gray-100 bg-bred-2 transition ease-in-out duration-150">  Next <i className="fa-solid fa-arrow-right m-1 ml-1 my-auto"></i></a>
                         : <></>
                         }
                         </div>
@@ -340,7 +335,7 @@ export default function HubDashboard() {
                 </div>
               ) : (
                 <div className="text-gray-700 px-4 py-3 mt-10" role="alert">
-                  <div className>
+                  <div>
                     <div className="my-auto flex justify-center mb-5">
                       <i className="fa-solid fa-clock-rotate-left text-5xl text-bred-2" />
                     </div>
@@ -362,5 +357,4 @@ export default function HubDashboard() {
         </Layout>
       </>
     )
-  );
 }
