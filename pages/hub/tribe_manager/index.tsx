@@ -5,9 +5,6 @@ import { useState, useEffect } from "react";
 import Layout from "../../../components/HubLayout";
 
 export default function HubDashboard() {
-  /* Auth */
-  const { user, setUser } = useAuth();
-
   /* Player Data */
   const [hubData, setHubData] = useState(null);
 
@@ -23,7 +20,6 @@ export default function HubDashboard() {
   }, []);
 
   return (
-    user && (
       <>
         <Head>
           <title>Bloody ARK Hub</title>
@@ -313,5 +309,4 @@ export default function HubDashboard() {
         </Layout>
       </>
     )
-  );
 }

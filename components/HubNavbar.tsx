@@ -1,9 +1,6 @@
 import { useState } from "react";
 import useSWR, { Key, Fetcher } from "swr";
 
-import { useAuth } from '../context/AuthContext';
-import auth_service from '../services/auth_service';
-
 function Navbar(props) {
   /* Auth */
   const { user, setUser } = useAuth();

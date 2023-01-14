@@ -4,17 +4,22 @@ import moment from 'moment';
 import { useState, useEffect } from 'react';
 import Layout from '../../../components/HubLayout'
 import useSWR from 'swr'
+import { env } from "process";
+
+let fetcher = async () => {
+  const response = await fetch(`${env.DOMAIN}/api/hub/tribe_manager/find`);
+  const data = await response.json()
+  return data
+}
 
 export default function HubDashboard() {
   /* Fetch Data */
-  const fetcher = (...args) => fetch(...args).then(res => res.json())
   const { data, error } = useSWR(`/api/hub/tribe_manager/find`, fetcher)
 
-  if (error) return <Layout><div className="p-5 text-xl text-white">Failed to load</div></Layout>
-  if (!data) return <Layout><div className="p-5 text-xl text-white">Loading...</div></Layout>
+  if (error) return <Layout><div className="p-5 text-xl text-white">An error occured</div></Layout>
+  if (!data) return <Layout><div className="p-5 text-xl text-white">Loading</div></Layout>
 
   return (
-    user && (
       <>
         <Head>
           <title>Bloody ARK Hub</title>
@@ -78,7 +83,7 @@ export default function HubDashboard() {
   </div>
   <div className="pb-12 px-16 mt-10">
 
-  {data?.map((tribe) => {
+  {data?.map((tribe: any) => {
     return (
     <div className="px-4 bg-white w-full rounded-lg shadow-md sm:p-8 dark:bg-bgray-secondary mb-5">
       <div className="flow-root w-full">
@@ -93,7 +98,7 @@ export default function HubDashboard() {
                   {tribe?.tribename}
                 </p>
                 <p className="text-md text-gray-500 truncate dark:text-gray-400 py-1">
-                  <i className="fa-solid fa-earth-americas" /> {tribe?.map} | <span className> Owner : {tribe?.ownername} <br /> Created At : {moment(tribe?.creation_date).format('MMMM Do YYYY, h:mm:ss a')}</span>
+                  <i className="fa-solid fa-earth-americas" /> {tribe?.map} | <span> Owner : {tribe?.ownername} <br /> Created At : {moment(tribe?.creation_date).format('MMMM Do YYYY, h:mm:ss a')}</span>
                 </p>
               </div>
               {true === true 
@@ -127,5 +132,4 @@ export default function HubDashboard() {
                 </Layout>
       </>
     )
-  );
 }
