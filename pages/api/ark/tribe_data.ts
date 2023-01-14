@@ -11,12 +11,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   const tribe_data = await prisma.wtribes_tribedata.findFirst({
     where: {
-      TribeID: parseInt(req.query.TribeID[0]),
+      TribeID: parseInt(req.query.TribeID.toString()),
     },
   });
 
   if (!tribe_data) {
-    res.status(403).json({ error: "No data found!", error_id: 300 });
+    res.status(403).json({ error: "No data found!", dataset: req.query.TribeID, error_id: 300 });
     return;
   }
 
