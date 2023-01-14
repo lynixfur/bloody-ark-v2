@@ -1,4 +1,4 @@
-export default function HomeHeader({text, players}) {
+export default function HomeHeader({text, players}: any) {
   return (
     <div
       className="h-full"

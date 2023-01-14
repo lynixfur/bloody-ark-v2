@@ -1,18 +1,18 @@
 import useSWR, { Key, Fetcher } from "swr";
 
 export default function Footer() {
-  const fetcher = (url) => fetch(url).then((r) => r.json());
+  const fetcher = (url: any) => fetch(url).then((r) => r.json());
   const { data, error } = useSWR("/api/highpop_servers", fetcher);
 
   return (
     <footer className="text-gray-600 body-font bg-bgray-secondary">
       <div className="container px-5 py-24 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
         <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-            <a href="https://nitra.do/BloodyARK">
+            <a href="https://bloody.gg">
               <nav className="list-none mb-5 flex justify-center sm:justify-left sm:block">
               <img
                     alt="Bloody ARK Logo"
-                    src="https://bloody-ark.com/images/favicon.png"
+                    src="/images/favicon.png"
                     className="h-32 w-32"
                   />
               </nav>
