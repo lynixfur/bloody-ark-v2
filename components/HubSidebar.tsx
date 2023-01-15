@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useState } from "react";
 import useUser from "../lib/hooks/useUser";
 
@@ -21,7 +22,7 @@ export default function HubSidebar() {
           className="bg-bgray-bg border-b-2 border-gray-700 px-2 sm:px-4 py-2.5 fixed top-0 w-full z-20 block sm:hidden"
         >
           <div className="container flex flex-wrap justify-between items-center mx-auto">
-            <a
+            <Link
               href="/"
               className="ml-2 flex text-lg font-semibold tracking-widest uppercase rounded-lg text-white focus:outline-none focus:shadow-outline"
             >
@@ -31,7 +32,7 @@ export default function HubSidebar() {
                 src="/logo.png"
               />
               <p className="my-auto">BloodyHUB</p>
-            </a>
+            </Link>
             <button
               onClick={handleMobile}
               type="button"
@@ -57,49 +58,49 @@ export default function HubSidebar() {
             <div className="w-full md:block md:w-auto" id="navbar-default">
               <ul className="flex flex-col p-4 mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-mesa-gray bg-mesa-gray">
                 <li>
-                  <a
+                  <Link
                     href="/hub"
                     className="block py-2 pr-4 pl-3 text-white rounded hover:text-mesa-orange md:p-0 font-bold transition-colors"
                   >
                     <i className="fa fa-solid fa-home" /> Dashboard
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
+                  <Link
                     href="/hub/tribe_manager"
                     className="block py-2 pr-4 pl-3 text-white rounded hover:text-mesa-orange md:p-0 font-bold transition-colors"
                   >
                     <i className="fa fa-users fa-home" /> Tribe Manager
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
+                  <Link
                     href="/hub/performance"
                     className="block py-2 pr-4 pl-3 text-white rounded hover:text-mesa-orange md:p-0 font-bold transition-colors"
                   >
                     <i className="fa fa-solid fa-chart-area" /> Performance
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
+                  <Link
                     href="/hub/rankings"
                     className="block py-2 pr-4 pl-3 text-white rounded hover:text-mesa-orange md:p-0 font-bold transition-colors"
                   >
                     <i className="fa fa-solid fa-solid fa-trophy" /> Player
                     Rankings
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
+                  <Link
                     href="/hub/tribe_rankings"
                     className="block py-2 pr-4 pl-3 text-white rounded hover:text-mesa-orange md:p-0 font-bold transition-colors"
                   >
                     <i className="fa fa-solid fa-solid fa-trophy" /> Tribe
                     Rankings
-                  </a>
+                  </Link>
                 </li>
                 <li className="w-full justify-center p-4 px-1 space-x-4 w-full lg:flex">
-          <a
+          <Link
             href="/"
             className="inline-flex justify-center p-2 rounded cursor-pointer text-gray-400 hover:bg-bgray-bg transition-colors"
           >
@@ -117,8 +118,8 @@ export default function HubSidebar() {
                 d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418"
               />
             </svg>
-          </a>
-          <a
+          </Link>
+          <Link
             href="/api/auth/logout"
             data-tooltip-target="tooltip-settings"
             className="inline-flex justify-center p-2 rounded cursor-pointer text-gray-400 hover:bg-bgray-bg transition-colors"
@@ -135,8 +136,8 @@ export default function HubSidebar() {
                 clipRule="evenodd"
               />
             </svg>
-          </a>
-          <a
+          </Link>
+          <Link
             href="#"
             data-tooltip-target="tooltip-settings"
             className="inline-flex justify-center p-2 text-gray-500 rounded cursor-pointer dark:text-gray-400"
@@ -146,7 +147,7 @@ export default function HubSidebar() {
               src={user?.avatarUrl}
               alt={user?.username}
             />
-          </a>
+          </Link>
         </li>
               </ul>
             </div>
@@ -159,7 +160,7 @@ export default function HubSidebar() {
           }
         >
           <div className="container flex flex-wrap justify-between items-center mx-auto">
-            <a
+            <Link
               href="/"
               className="ml-2 flex text-lg font-semibold tracking-widest uppercase rounded-lg text-white focus:outline-none focus:shadow-outline"
             >
@@ -169,7 +170,7 @@ export default function HubSidebar() {
                 src="/logo.png"
               />
               <p className="my-auto">BloodyHUB</p>
-            </a>
+            </Link>
             <button
               onClick={handleMobile}
               type="button"
@@ -223,30 +224,30 @@ export default function HubSidebar() {
                         }
                       >
                         <div className="rounded-md ring-1 ring-black ring-opacity-5 py-1 bg-bgray-secondary">
-                          <a
+                          <Link
                             className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-100 hover:bg-bgray-forward focus:outline-none focus:bg-bgray-forward transition duration-150 ease-in-out"
                             href="/hub"
                           >
                             Bloody Hub
-                          </a>
-                          <a
+                          </Link>
+                          <Link
                             className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-100 hover:bg-bgray-forward focus:outline-none focus:bg-bgray-forward transition duration-150 ease-in-out"
                             href="/api/auth/logout"
                           >
                             Logout
-                          </a>
+                          </Link>
                         </div>
                       </div>
                     </div>
                   </li>
                 ) : (
                   <li>
-                    <a
+                    <Link
                       href="/api/auth/login"
                       className="block py-2 pr-4 pl-3 text-white bg-bred-2 rounded-full p-4 font-bold transition-colors"
                     >
                       <i className="fas fa-cubes mr-2"></i>Hub
-                    </a>
+                    </Link>
                   </li>
                 )}
               </ul>
@@ -264,7 +265,7 @@ export default function HubSidebar() {
           <ul className="space-y-2">
             <li className="mb-5">
               <div className="flex justify-center">
-                <a
+                <Link
                   href="/"
                   className="flex text-lg font-semibold tracking-widest uppercase rounded-lg text-white focus:outline-none focus:shadow-outline"
                 >
@@ -274,31 +275,31 @@ export default function HubSidebar() {
                     src="/logo.png"
                   />
                   <p className="my-auto">BloodyHub</p>
-                </a>
+                </Link>
               </div>
             </li>
             <li>
-              <a
+              <Link
                 href="/hub"
                 className="flex items-center p-2 text-base font-normal rounded-lg text-gray-400 hover:bg-bgray-bg transition-colors group"
               >
                 <span className="ml-3">
                   <i className="fa-solid fa-house my-auto mr-2" /> Dashboard
                 </span>
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 href="/hub/tribe_manager"
                 className="flex items-center p-2 text-base font-normal rounded-lg text-gray-400 hover:bg-bgray-bg transition-colors group"
               >
                 <span className="ml-3">
                   <i className="fa-solid fa-users my-auto mr-2" /> Tribe Manager
                 </span>
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 href="/hub/performance"
                 className="flex items-center p-2 text-base font-normal rounded-lg text-gray-400 hover:bg-bgray-bg transition-colors group"
               >
@@ -306,10 +307,10 @@ export default function HubSidebar() {
                   <i className="fa-solid fa-chart-area my-auto mr-2" />{" "}
                   Performance
                 </span>
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 href="/hub/rankings"
                 className="flex items-center p-2 text-base font-normal rounded-lg text-gray-400 hover:bg-bgray-bg transition-colors group"
               >
@@ -317,10 +318,10 @@ export default function HubSidebar() {
                   <i className="fa-solid fa-trophy my-auto mr-2" /> Player
                   Rankings
                 </span>
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 href="/hub/tribe_rankings"
                 className="flex items-center p-2 text-base font-normal rounded-lg text-gray-400 hover:bg-bgray-bg transition-colors group"
               >
@@ -328,22 +329,22 @@ export default function HubSidebar() {
                   <i className="fa-solid fa-trophy my-auto mr-2" /> Tribe
                   Rankings
                 </span>
-              </a>
+              </Link>
             </li>
             <li className="hidden">
-              <a
+              <Link
                 href="/hub/portal"
                 className="flex items-center p-2 text-base font-normal rounded-lg text-gray-400 hover:bg-bgray-bg transition-colors group"
               >
                 <span className="ml-3">
                   <i className="fa-solid fa-cube my-auto mr-2" /> Bloody Portal
                 </span>
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
         <div className="hidden absolute bottom-0 left-0 justify-center p-4 space-x-4 w-full lg:flex bg-bgray-secondary z-20 border-r border-gray-700">
-          <a
+          <Link
             href="/"
             className="inline-flex justify-center p-2 rounded cursor-pointer text-gray-400 hover:bg-bgray-bg transition-colors"
           >
@@ -361,8 +362,8 @@ export default function HubSidebar() {
                 d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418"
               />
             </svg>
-          </a>
-          <a
+          </Link>
+          <Link
             href="/api/auth/logout"
             data-tooltip-target="tooltip-settings"
             className="inline-flex justify-center p-2 rounded cursor-pointer text-gray-400 hover:bg-bgray-bg transition-colors"
@@ -379,8 +380,8 @@ export default function HubSidebar() {
                 clipRule="evenodd"
               />
             </svg>
-          </a>
-          <a
+          </Link>
+          <Link
             href="#"
             data-tooltip-target="tooltip-settings"
             className="inline-flex justify-center p-2 text-gray-500 rounded cursor-pointer dark:text-gray-400"
@@ -390,7 +391,7 @@ export default function HubSidebar() {
               src={user?.avatarUrl}
               alt={user?.username}
             />
-          </a>
+          </Link>
         </div>
       </aside>
     </>

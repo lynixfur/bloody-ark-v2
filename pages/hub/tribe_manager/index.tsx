@@ -4,6 +4,7 @@ import moment from "moment";
 import { useState, useEffect } from "react";
 import Layout from "../../../components/HubLayout";
 import useSWR from 'swr';
+import Link from "next/link";
 
 let fetcher = async () => {
   const response = await fetch(`/api/hub/tribe_manager`);
@@ -89,14 +90,14 @@ export default function HubDashboard() {
                             </h1>
                           </div>
                           <div className="flex items-center space-x-2 sm:space-x-3 ml-auto">
-                            <a
+                            <Link
                               href="/hub/tribe_manager/find"
                               data-modal-toggle="add-user-modal"
                               className="w-1/2 text-white bg-bred-2 hover:bg-red-700 focus:ring-4 focus:ring-cyan-200 font-bold inline-flex items-center justify-center rounded-lg text-sm px-3 py-2 text-center sm:w-auto"
                             >
                               <i className="fa-solid fa-magnifying-glass mr-2" />
                               Tribe Finder
-                            </a>
+                            </Link>
                           </div>
                         </div>
                       </div>

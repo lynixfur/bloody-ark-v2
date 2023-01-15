@@ -4,6 +4,7 @@ import moment from 'moment';
 import Layout from '../../components/HubLayout'
 import useUser from "../../lib/hooks/useUser";
 import useSWR from 'swr'
+import Link from "next/link";
 
 
 let fetcher = async () => {
@@ -66,7 +67,7 @@ export default function HubDashboard() {
                   </div>
                 </div>
               </div>
-              <div className="hub_page px-5 sm:px-16 py-10">
+              <div className="hub_page px-20 py-10">
                 <div className="mt-4 w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
                   <div className="bg-white dark:bg-bgray-secondary shadow rounded-lg">
                     <div>
@@ -173,7 +174,7 @@ export default function HubDashboard() {
                       <i className="fa-solid fa-users"></i> Tribe Members
                       </h1>
                       {data?.tribe?.tribeMembers?.map((member: any) => {     
-                        return (<p className="text-md text-gray-500 dark:text-gray-300  sm:mb-0 mb-5 mt-1">
+                        return (<p key={member.CharacterName} className="text-md text-gray-500 dark:text-gray-300  sm:mb-0 mb-5 mt-1">
                         {member.CharacterName}
                         </p>)
                       })}
@@ -189,11 +190,11 @@ export default function HubDashboard() {
                           </div>
                           <div>
                             <p className="font-bold text-2xl text-center text-gray-800 dark:text-gray-100">
-                              You're not in a tribe!
+                              You&apos;re not in a tribe!
                             </p>
                             <p className="text-lg text-gray-400 mt-2 text-center">
-                              Sorry, but our shadowmanes can't display your
-                              tribe if you're not in a tribe!
+                              Sorry, but our shadowmanes can&apos;t display your
+                              tribe if you&apos;re not in a tribe!
                             </p>
                           </div>
                         </div>
@@ -209,8 +210,8 @@ export default function HubDashboard() {
                       <h1 className="text-2xl font-bold dark:text-gray-50">
                       <i className="fa-solid fa-gear"></i> Notification Actions
                       </h1>
-                      <a href="/api/hub/delete_requests" data-modal-toggle="add-user-modal" className="w-full text-white bg-bred-2 hover:bg-red-700 focus:ring-4 focus:ring-cyan-200 font-bold inline-flex items-center justify-center rounded-lg text-sm px-3 py-2 text-center mt-3">Delete All Requests</a>
-                      <a href="/api/hub/delete_invites" data-modal-toggle="add-user-modal" className="w-full text-white bg-bred-2 hover:bg-red-700 focus:ring-4 focus:ring-cyan-200 font-bold inline-flex items-center justify-center rounded-lg text-sm px-3 py-2 text-center mt-3 mb-5">Clear Notifications</a>
+                      <Link href="/api/hub/delete_requests" data-modal-toggle="add-user-modal" className="w-full text-white bg-bred-2 hover:bg-red-700 focus:ring-4 focus:ring-cyan-200 font-bold inline-flex items-center justify-center rounded-lg text-sm px-3 py-2 text-center mt-3">Delete All Requests</Link>
+                      <Link href="/api/hub/delete_invites" data-modal-toggle="add-user-modal" className="w-full text-white bg-bred-2 hover:bg-red-700 focus:ring-4 focus:ring-cyan-200 font-bold inline-flex items-center justify-center rounded-lg text-sm px-3 py-2 text-center mt-3 mb-5">Clear Notifications</Link>
 
                       <h1 className="text-2xl font-bold dark:text-gray-50">
                       <i className="fa-solid fa-inbox"></i> Notifications
@@ -222,7 +223,7 @@ export default function HubDashboard() {
 
                       {data?.notifications?.invites?.map((invite: any) => {
                               return (
-                      <div className="bg-gray-200 dark:bg-bgray-overlay shadow px-4 py-2 rounded-lg mt-5">
+                      <div key={invite.tribe.tribename} className="bg-gray-200 dark:bg-bgray-overlay shadow px-4 py-2 rounded-lg mt-5">
                         <h1 className="text-xl font-bold dark:text-gray-50 mb-2">
                           Tribe Invite from {invite.tribe.tribename}
                         </h1>
@@ -237,24 +238,24 @@ export default function HubDashboard() {
                           </strong>{" "}
                           . Please type in-game
                           {" "}<strong>
-                            /tribe acceptinvite '{invite.tribe.tribename}'
+                            /tribe acceptinvite &apos;{invite.tribe.tribename}&apos;
                           </strong>{" "}
                           to join.
                         </p>
-                        <a
+                        <Link
                           href={`/api/hub/delete_invites`}
                           data-modal-toggle="add-user-modal"
                           className="mt-5 w-1/2 text-white bg-bred-2 hover:bg-red-700 focus:ring-4 focus:ring-cyan-200 font-bold inline-flex items-center justify-center rounded-lg text-sm px-3 py-2 text-center sm:w-auto"
                         >
                           <i className="fa-solid fa-times mr-2" />
                           Reject Request
-                        </a>
+                        </Link>
                       </div>)})}
 
 
                       {data?.notifications?.join_requests?.map((request: any) => {
                               return (
-                      <div className="bg-gray-200 dark:bg-bgray-overlay shadow px-4 py-2 rounded-lg mt-5">
+                      <div key={request?.survivor?.playername} className="bg-gray-200 dark:bg-bgray-overlay shadow px-4 py-2 rounded-lg mt-5">
                         <h1 className="text-xl font-bold dark:text-gray-50 mb-2">
                           Join Request by{" "}
                           <strong>
@@ -268,7 +269,7 @@ export default function HubDashboard() {
                           </strong>{" "}
                           has requested to join your tribe. Please type in-game{" "}
                           <strong>
-                            /tribe acceptreq '{request?.survivor?.playername}'
+                            /tribe acceptreq &apos;{request?.survivor?.playername}&apos;
                           </strong>{" "}
                           to invite them.
                         </p>
@@ -284,7 +285,7 @@ export default function HubDashboard() {
                     <nav className="mb-5" aria-label="Breadcrumb">
                       <ol className="inline-flex items-center space-x-1 md:space-x-2">
                         <li className="inline-flex items-center">
-                          <a
+                          <Link
                             href="#"
                             className="text-gray-700 hover:text-gray-900 inline-flex items-center"
                           >
@@ -297,7 +298,7 @@ export default function HubDashboard() {
                               <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
                             </svg>
                             Home
-                          </a>
+                          </Link>
                         </li>
                         <li>
                           <div className="flex items-center">
@@ -313,12 +314,12 @@ export default function HubDashboard() {
                                 clipRule="evenodd"
                               />
                             </svg>
-                            <a
+                            <Link
                               href="#"
                               className="text-gray-700 hover:text-gray-900 ml-1 md:ml-2 text-sm font-medium"
                             >
                               Users
-                            </a>
+                            </Link>
                           </div>
                         </li>
                         <li>

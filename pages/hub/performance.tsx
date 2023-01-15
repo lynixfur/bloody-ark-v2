@@ -96,7 +96,7 @@ export default function Performance() {
                   {data?.daily_performance ? (
                     <div>
                       <p className="font-bold text-xl text-gray-800 dark:text-gray-200 mb-2 mt-10">
-                        Today's Performance
+                        Today&apos;s Performance
                       </p>
                       <div className="mb-10">
                         <div className="overflow-x-auto">
@@ -268,7 +268,7 @@ export default function Performance() {
                   ) : (
                     <div>
                       <p className="font-bold text-xl text-gray-800 dark:text-gray-200 mb-2 mt-10">
-                        Today's Performance
+                        Today&apos;s Performance
                       </p>
                       <div
                         className="text-gray-100 px-4 py-3  mt-10"
@@ -283,7 +283,7 @@ export default function Performance() {
                               Daily Stats not available!
                             </p>
                             <p className="text-lg text-gray-400 mt-2 text-center">
-                              You havent played on the server today. Let's hop
+                              You havent played on the server today. Let&apos;s hop
                               on before we get raided, survivor!
                             </p>
                           </div>
@@ -481,7 +481,7 @@ export default function Performance() {
                               Stats not available!
                             </p>
                             <p className="text-lg text-gray-400 mt-2 text-center">
-                              You havent played on server yet. Let's hop on and
+                              You havent played on server yet. Let&apos;s hop on and
                               have some fun, survivor!
                             </p>
                           </div>

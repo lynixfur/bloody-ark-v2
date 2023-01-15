@@ -101,7 +101,7 @@ export default function HubDashboard() {
     {data ? 
     <div className="mt-4 w-full grid grid-cols-1 md:grid-cols-1 xl:grid-cols-1 gap-4">
       <div>
-        <p className="font-bold text-xl text-gray-800 dark:text-gray-200 mb-2 mt-10"><i className="fa-solid fa-trophy mr-2" /> Bloody ARK's Top Tribes</p>  
+        <p className="font-bold text-xl text-gray-800 dark:text-gray-200 mb-2 mt-10"><i className="fa-solid fa-trophy mr-2" /> Bloody ARK&apos;s Top Tribes</p>  
         <div className="mb-10">
         {search != "" ? <p className="text-gray-300 my-3">Filtered all results for <strong>{search}</strong></p> : <></> }
                       
@@ -125,7 +125,7 @@ export default function HubDashboard() {
                   </td></tr>
                   {data?.ranking_data?.map((tribe: any, rank: any) => {     
                         return (
-                  <tr className="focus:outline-none h-16 border-t border-b-[7px] border-gray-200 bg-white dark:border-bgray-bg dark:bg-bgray-secondary">
+                  <tr key={tribe?.TribeID} className="focus:outline-none h-16 border-t border-b-[7px] border-gray-200 bg-white dark:border-bgray-bg dark:bg-bgray-secondary">
                   {page == 0 ? <td className="pl-5">
                     <div className="flex items-center">
                       <p className="text-base leading-none text-gray-700 dark:text-gray-400 mr-2 font-bold">{rank + 1}</p>

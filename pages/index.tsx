@@ -5,6 +5,7 @@ import HomeHeader from "../components/headers/homeHeader";
 import ReactMarkdown from 'react-markdown'
 import Footer from "../components/footer";
 import { env } from "process";
+import Link from "next/link";
 
 function Home({ homepage_options, player_count, news }: any) {
   return (
@@ -108,6 +109,7 @@ function Home({ homepage_options, player_count, news }: any) {
                   <span className="hidden">It has finally arrived!</span>
                   <span className="block">Experience the Bloody Hub.</span>
                 </h2>
+                <h1 className="my-5 font-bold text-green-500"><i className="fa fa-solid fa-star text-green-500"></i> 2023 UI Update Now Available!</h1>
                 <p className="text-gray-300 mt-5">
                   Experienece a whole new web platform to monitor your
                   survivors, tribe and stats! Find your tames, view base stats
@@ -117,19 +119,19 @@ function Home({ homepage_options, player_count, news }: any) {
                   your profile.
                 </p>
                 <div className="inline-block shadow mt-5">
-                  <a
+                  <Link
                     href="https://hub.bloody-ark.com"
                     className="rounded-full px-4 py-2 bg-red-700 text-white font-bold"
                   >
                     Access Hub
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div className="lg:relative lg:mt-16">
                 <img
                   className="lg:absolute border-t border-l border-gray-700 lg:inset-0 h-60 w-full lg:h-full object-cover object-center lg:rounded-tl-md"
-                  src="https://cdn.discordapp.com/attachments/698233082314096711/948559168862822440/unknown.png"
-                  alt="Woman workcation on the beach" />
+                  src="https://cdn.discordapp.com/attachments/885607142051184700/1057834163463520436/image.png"
+                  alt="Bloody Hub" />
               </div>
             </div>
           </div>
@@ -148,7 +150,7 @@ function Home({ homepage_options, player_count, news }: any) {
               </div>
               <div className="mt-2 mb-2 flex justify-between w-full">
                 <div className="p-5 w-full">
-                  <a
+                  <Link
                     href="/info/rates"
                     className="transition-colors duration-300 flex items-center w-full py-2.5 px-3 mt-2 rounded text-forward hover:bg-bgray-overlay"
                   >
@@ -156,8 +158,8 @@ function Home({ homepage_options, player_count, news }: any) {
                     <span className="ml-2 text-md font-bold text-gray-400">
                       Rates
                     </span>
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href="/info/pvp-system"
                     className="transition-colors duration-300 flex items-center w-full py-2.5 px-3 mt-2 rounded hover:bg-bgray-overlay hover:text-gray-300"
                   >
@@ -165,8 +167,8 @@ function Home({ homepage_options, player_count, news }: any) {
                     <span className="ml-2 text-md font-bold text-gray-400">
                       PVP System
                     </span>
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href="/info/settings"
                     className="transition-colors duration-300 flex items-center w-full py-2.5 px-3 mt-2 rounded hover:bg-bgray-overlay hover:text-gray-300"
                   >
@@ -174,7 +176,7 @@ function Home({ homepage_options, player_count, news }: any) {
                     <span className="ml-2 text-md font-bold text-gray-400">
                       Settings
                     </span>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -190,7 +192,7 @@ function Home({ homepage_options, player_count, news }: any) {
               </div>
               <div className="mt-2 mb-2 flex justify-between w-full">
                 <div className="p-5 w-full">
-                  <a
+                  <Link
                     href="https://support.survivetheark.com/hc/en-us/articles/220278968-Code-of-Conduct"
                     className="transition-colors duration-300 flex items-center w-full py-2.5 px-3 mt-2 rounded text-forward hover:bg-bgray-overlay"
                   >
@@ -198,8 +200,8 @@ function Home({ homepage_options, player_count, news }: any) {
                     <span className="ml-2 text-md font-bold text-gray-400">
                       ARK Code of Conduct
                     </span>
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href="/info/rules"
                     className="transition-colors duration-300 flex items-center w-full py-2.5 px-3 mt-2 rounded hover:bg-bgray-overlay hover:text-gray-300"
                   >
@@ -207,8 +209,8 @@ function Home({ homepage_options, player_count, news }: any) {
                     <span className="ml-2 text-md font-bold text-gray-400">
                       Bloody ARK Rules
                     </span>
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href="https://discord.gg/bloody"
                     className="transition-colors duration-300 flex items-center w-full py-2.5 px-3 mt-2 rounded hover:bg-bgray-overlay hover:text-gray-300"
                   >
@@ -216,7 +218,7 @@ function Home({ homepage_options, player_count, news }: any) {
                     <span className="ml-2 text-md font-bold text-gray-400">
                       Discord Rules
                     </span>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -232,7 +234,7 @@ function Home({ homepage_options, player_count, news }: any) {
               </div>
               <div className="mt-2 mb-2 flex justify-between w-full">
                 <div className="p-5 w-full">
-                  <a
+                  <Link
                     href="/info/vote"
                     className="transition-colors duration-300 flex items-center w-full py-2.5 px-3 mt-2 rounded text-forward hover:bg-bgray-overlay"
                   >
@@ -240,8 +242,8 @@ function Home({ homepage_options, player_count, news }: any) {
                     <span className="ml-2 text-md font-bold text-gray-400">
                       Vote Rewards
                     </span>
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href="https://shop.bloody.gg/category/1266875"
                     className="transition-colors duration-300 flex items-center w-full py-2.5 px-3 mt-2 rounded hover:bg-bgray-overlay hover:text-gray-300"
                   >
@@ -249,8 +251,8 @@ function Home({ homepage_options, player_count, news }: any) {
                     <span className="ml-2 text-md font-bold text-gray-400">
                       Shop Daily Rewards
                     </span>
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href="https://bloody.gg/info/road-to-alpha"
                     className="transition-colors duration-300 flex items-center w-full py-2.5 px-3 mt-2 rounded hover:bg-bgray-overlay hover:text-gray-300"
                   >
@@ -258,7 +260,7 @@ function Home({ homepage_options, player_count, news }: any) {
                     <span className="ml-2 text-md font-bold text-gray-400">
                       Quest System
                     </span>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -280,14 +282,14 @@ function Home({ homepage_options, player_count, news }: any) {
                 Join our Community
               </h2>
               <div className="flex justify-center w-full mt-5">
-                <a
+                <Link
                   href="https://discord.gg/bloody"
                   className="h-[70px] w-72 relative"
                 >
                   <img
                     className="object-cover shadow-xl rounded-full"
                     src="https://discordapp.com/api/guilds/356693332623228928/widget.png?style=banner2&w=1080&q=75" />
-                </a>
+                </Link>
               </div>
             </div>
           </div>

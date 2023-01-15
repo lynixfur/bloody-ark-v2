@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import Layout from '../../../components/HubLayout'
 import useSWR from 'swr'
 import { env } from "process";
+import Link from "next/link";
 
 let fetcher = async () => {
   const response = await fetch(`/api/hub/tribe_manager/find`);
@@ -41,13 +42,13 @@ export default function HubDashboard() {
         <nav className="mb-5" aria-label="Breadcrumb">
           <ol className="inline-flex items-center space-x-1 md:space-x-2">
             <li className="inline-flex items-center dark:text-gray-300">
-              <a href="#" className="dark:text-gray-100 text-gray-700 hover:text-gray-900 inline-flex items-center">
+              <Link href="#" className="dark:text-gray-100 text-gray-700 hover:text-gray-900 inline-flex items-center">
                 <svg className="w-5 h-5 mr-2.5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                   <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z">
                   </path>
                 </svg>
                 Home
-              </a>
+              </Link>
             </li>
             <li>
               <div className="flex items-center dark:text-gray-300">
@@ -72,10 +73,10 @@ export default function HubDashboard() {
             <h1 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-gray-200">Tribe Finder</h1>
           </div>
           <div className="flex items-center space-x-2 sm:space-x-3 ml-auto">
-            <a href="/hub/tribe_manager" data-modal-toggle="add-user-modal" className="w-1/2 text-white bg-bred-2 hover:bg-red-700 focus:ring-4 focus:ring-cyan-200 font-bold inline-flex items-center justify-center rounded-lg text-sm px-3 py-2 text-center sm:w-auto">
+            <Link href="/hub/tribe_manager" data-modal-toggle="add-user-modal" className="w-1/2 text-white bg-bred-2 hover:bg-red-700 focus:ring-4 focus:ring-cyan-200 font-bold inline-flex items-center justify-center rounded-lg text-sm px-3 py-2 text-center sm:w-auto">
               <i className="fa-solid fa-cog mr-2" />
               Tribe Manager
-            </a>
+            </Link>
           </div>
         </div>
       </div>
@@ -85,7 +86,7 @@ export default function HubDashboard() {
 
   {data?.map((tribe: any) => {
     return (
-    <div className="px-4 bg-white w-full rounded-lg shadow-md sm:p-8 dark:bg-bgray-secondary mb-5">
+    <div key={tribe?.tribename} className="px-4 bg-white w-full rounded-lg shadow-md sm:p-8 dark:bg-bgray-secondary mb-5">
       <div className="flow-root w-full">
         <ul role="list" className="divide-y divide-gray-200 dark:divide-gray-700">
           <li className="py-2">
@@ -122,7 +123,7 @@ export default function HubDashboard() {
       <div>
         <p className="font-bold text-2xl text-center dark:text-gray-100">Something went wrong on our end!</p>
         <p className="text-lg text-gray-500 mt-2 text-center">
-          We're looking to resolve this as soon as we can.<br />
+          We&apos;re looking to resolve this as soon as we can.<br />
         </p>
       </div>
     </div>
