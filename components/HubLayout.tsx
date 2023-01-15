@@ -1,14 +1,12 @@
 import HubSidebar from "./HubSidebar";
-import HubNavbar from "./HubNavbar";
 
 export default function Layout({ children }: any) {
   return (
     <>
       <div className="bg-bgray-bg">
-      <HubNavbar/>
       <HubSidebar/>
-      <div className="ml-0 lg:ml-64 flex flex-col" style={{minHeight: 'calc(100vh - 4rem)'}}>
-          <div className="flex-1">{children}</div>
+      <div className="ml-0 lg:ml-64 flex flex-col mt-16 sm:mt-0">
+          <div className="min-h-screen">{children}</div>
 
           <div className="bg-white dark:bg-bgray-overlay">
             <div className="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">

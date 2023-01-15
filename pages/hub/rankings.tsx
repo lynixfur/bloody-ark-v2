@@ -183,7 +183,7 @@ export default function HubDashboard() {
                 </div>
               </div>
             </div>
-            <div className="pb-12 px-16">
+            <div className="pb-12 px-5 sm:px-16">
               {data ? (
                 <div className="mt-4 w-full grid grid-cols-1 md:grid-cols-1 xl:grid-cols-1 gap-4">
                   <div>

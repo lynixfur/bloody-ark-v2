@@ -4,7 +4,7 @@ export default function HomeHeader({text, players}: any) {
       className="h-full"
       style={{
         background:
-          "url(https://bloody-ark.com/bloodybgs3.jpg)",
+          "url(https://cdn.discordapp.com/attachments/885607142051184700/1056018778221183066/bloodybg.jpg)",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",

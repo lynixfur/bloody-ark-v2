@@ -66,7 +66,7 @@ export default function HubDashboard() {
                   </div>
                 </div>
               </div>
-              <div className="hub_page px-20 py-10">
+              <div className="hub_page px-5 sm:px-16 py-10">
                 <div className="mt-4 w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
                   <div className="bg-white dark:bg-bgray-secondary shadow rounded-lg">
                     <div>

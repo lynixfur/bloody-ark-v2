@@ -65,7 +65,7 @@ function InfoPage({wiki_data, page_list}: any) {
         <ul className="flex-col py-2 space-y-1 text-gray-300 px-2 mt-10 w-full md:w-64 md:border-r border-gray-700">
           <span className="px-3 py-2 text-gray-400 text-sm font-bold">Information</span>
           {page_list.map((page_link: any) => (
-                      <a href={"/wiki/" + page_link?.str_id} className="transition-colors duration-300 flex items-center w-full py-2.5 px-3 mt-2 rounded text-forward hover:bg-bgray-overlay">
+                      <a href={"/info/" + page_link?.str_id} className="transition-colors duration-300 flex items-center w-full py-2.5 px-3 mt-2 rounded text-forward hover:bg-bgray-overlay">
                       <i className={page_link?.page_icon + " m-1 my-auto text-xl text-gray-500"} />
                       <span className="ml-2 text-md font-bold">{page_link?.title}</span>
                     </a>

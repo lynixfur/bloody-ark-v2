@@ -4,7 +4,6 @@ import moment from 'moment';
 
 import { useState, useEffect } from 'react';
 import Layout from "../../components/HubLayout";
-import Navbar from "../../components/HubNavbar";
 
 export default function HubDashboard() {
   return (
@@ -22,8 +21,7 @@ export default function HubDashboard() {
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <div className="flex flex-col bg-opacity-50 h-screen">
-        <Navbar/>
-                <div className="pt-16 w-full h-full">
+                <div className="w-full h-full">
                 <iframe id="bloodyPortal" src="https://portal.bloody-ark.com" className="w-full justify-center items-center scrollbar scrollbar-thumb-gray-900 scrollbar-track-gray-100 h-full flex flex-grow">
                 
                 </iframe>
