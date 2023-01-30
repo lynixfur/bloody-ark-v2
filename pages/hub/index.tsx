@@ -89,7 +89,7 @@ export default function HubDashboard() {
             
             {/* Important Notifications + Dismiss */}
             <div className="w-full bg-bgray-secondary border-bgray-forward border rounded-xl px-5 py-3 mt-2">
-              <h1 className="text-white text-xl"><i className="fa-solid fa-envelope"></i> You've been invited to a Tribe!</h1>
+              <h1 className="text-white text-xl"><i className="fa-solid fa-envelope"></i> You&apos;ve been invited to a Tribe!</h1>
               <p className="text-gray-400">This is a example notification for a preview.</p>
             </div>
 

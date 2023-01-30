@@ -332,11 +332,11 @@ export default function HubSidebar() {
             
             <br/>
             <li className="px-4">
-            <p className="font-bold text-gray-400 mb-4">Site Settings</p>
+            <p className="font-bold text-gray-400 mb-4">Admin Tools</p>
             </li>
             <li className="">
               <Link
-                href="/hub/portal"
+                href="#ServerManager"
                 className="flex items-center p-2 text-base font-normal rounded-lg text-gray-400 hover:bg-bgray-bg transition-colors group"
               >
                 <span className="ml-3">
@@ -346,7 +346,7 @@ export default function HubSidebar() {
             </li>
             <li className="">
               <Link
-                href="/hub/portal"
+                href="#PageEditor"
                 className="flex items-center p-2 text-base font-normal rounded-lg text-gray-400 hover:bg-bgray-bg transition-colors group"
               >
                 <span className="ml-3">
@@ -356,7 +356,7 @@ export default function HubSidebar() {
             </li>
             <li className="">
               <Link
-                href="/hub/portal"
+                href="#SiteSettings"
                 className="flex items-center p-2 text-base font-normal rounded-lg text-gray-400 hover:bg-bgray-bg transition-colors group"
               >
                 <span className="ml-3">
