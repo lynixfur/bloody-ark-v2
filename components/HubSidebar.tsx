@@ -311,23 +311,11 @@ export default function HubSidebar() {
             </li>
             <li>
               <Link
-                href="/hub/rankings"
+                href="/hub/leaderboards"
                 className="flex items-center p-2 text-base font-normal rounded-lg text-gray-400 hover:bg-bgray-bg transition-colors group"
               >
                 <span className="ml-3">
-                  <i className="fa-solid fa-trophy my-auto mr-2" /> Player
-                  Rankings
-                </span>
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/hub/tribe_rankings"
-                className="flex items-center p-2 text-base font-normal rounded-lg text-gray-400 hover:bg-bgray-bg transition-colors group"
-              >
-                <span className="ml-3">
-                  <i className="fa-solid fa-trophy my-auto mr-2" /> Tribe
-                  Rankings
+                  <i className="fa-solid fa-trophy my-auto mr-2" /> Leaderboards
                 </span>
               </Link>
             </li>
@@ -338,6 +326,41 @@ export default function HubSidebar() {
               >
                 <span className="ml-3">
                   <i className="fa-solid fa-cube my-auto mr-2" /> Bloody Portal
+                </span>
+              </Link>
+            </li>
+            
+            <br/>
+            <li className="px-4">
+            <p className="font-bold text-gray-400 mb-4">Site Settings</p>
+            </li>
+            <li className="">
+              <Link
+                href="/hub/portal"
+                className="flex items-center p-2 text-base font-normal rounded-lg text-gray-400 hover:bg-bgray-bg transition-colors group"
+              >
+                <span className="ml-3">
+                  <i className="fa-solid fa-server my-auto mr-2" /> Server Manager
+                </span>
+              </Link>
+            </li>
+            <li className="">
+              <Link
+                href="/hub/portal"
+                className="flex items-center p-2 text-base font-normal rounded-lg text-gray-400 hover:bg-bgray-bg transition-colors group"
+              >
+                <span className="ml-3">
+                  <i className="fa-solid fa-file my-auto mr-2" /> Page Editor
+                </span>
+              </Link>
+            </li>
+            <li className="">
+              <Link
+                href="/hub/portal"
+                className="flex items-center p-2 text-base font-normal rounded-lg text-gray-400 hover:bg-bgray-bg transition-colors group"
+              >
+                <span className="ml-3">
+                  <i className="fa-solid fa-gear fa-spin my-auto mr-2" /> Site Settings
                 </span>
               </Link>
             </li>

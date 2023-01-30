@@ -20,10 +20,12 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
       return res.redirect("/");
     } catch (error: any) {
-      return res.json({
+      /*return res.json({
         message: new Error(error).message,
         success: false,
-      });
+      });*/
+
+      return res.redirect(`/error?msg=${new Error(error).message}`);
     }
   }
 }

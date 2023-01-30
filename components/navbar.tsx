@@ -61,6 +61,9 @@ function Navbar(props: any) {
             <Link href="/servers" className="block py-2 pr-4 pl-3 text-white rounded hover:text-mesa-orange md:p-0 font-bold transition-colors"><i className="fa fa-solid fa-database" /> Servers</Link>
           </li>
           <li>
+            <Link href="/leaderboards" className="block py-2 pr-4 pl-3 text-white rounded hover:text-mesa-orange md:p-0 font-bold transition-colors"><i className="fa fa-solid fa-trophy" /> Leaderboards</Link>
+          </li>
+          <li>
             <Link href="https://shop.bloody.gg" className="block py-2 pr-4 pl-3 text-white rounded hover:text-mesa-orange md:p-0 font-bold transition-colors"><i className="fa fa-solid fa-shop" /> Shop</Link>
           </li>
           <li>
@@ -121,6 +124,9 @@ function Navbar(props: any) {
           </li>
           <li>
             <Link href="/servers" className="block py-2 pr-4 pl-3 text-white rounded hover:text-mesa-orange md:p-0 font-bold transition-colors"><i className="fa fa-solid fa-database" /> Servers</Link>
+          </li>
+          <li>
+            <Link href="/leaderboards" className="block py-2 pr-4 pl-3 text-white rounded hover:text-mesa-orange md:p-0 font-bold transition-colors"><i className="fa fa-solid fa-trophy" /> Leaderboards</Link>
           </li>
           <li>
             <Link href="https://shop.bloody.gg" className="block py-2 pr-4 pl-3 text-white rounded hover:text-mesa-orange md:p-0 font-bold transition-colors"><i className="fa fa-solid fa-shop" /> Shop</Link>
