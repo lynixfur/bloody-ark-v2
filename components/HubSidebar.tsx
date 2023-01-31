@@ -4,7 +4,7 @@ import useUser from "../lib/hooks/useUser";
 
 export default function HubSidebar() {
   /* User */
-  const { user } = useUser();
+  const { user, userSettings } = useUser();
 
   /* Mobile Menu */
   const [mobileMenu, setMobileMenu] = useState(false);
@@ -261,10 +261,10 @@ export default function HubSidebar() {
         className="fixed top-0 left-0 w-64 h-screen sm:h-full z-30 hidden sm:block"
         aria-label="Sidenav"
       >
-        <div className="overflow-y-auto py-5 px-3 h-full bg-bgray-secondary border-r border-gray-700">
+        <div className="overflow-y-auto py-5 px-3 h-full bg-bgray-secondary border-r border-bgray-border">
           <ul className="space-y-2">
             <li className="mb-5">
-              <div className="flex justify-center">
+              <div className="ml-4">
                 <Link
                   href="/"
                   className="flex text-lg font-semibold tracking-widest uppercase rounded-lg text-white focus:outline-none focus:shadow-outline"
@@ -285,6 +285,36 @@ export default function HubSidebar() {
               >
                 <span className="ml-3">
                   <i className="fa-solid fa-house my-auto mr-2" /> Dashboard
+                </span>
+              </Link>
+            </li>
+            <li className="">
+              <Link
+                href="#WebShop"
+                className="flex items-center p-2 text-base font-normal rounded-lg text-gray-400 hover:bg-bgray-bg transition-colors group"
+              >
+                <span className="ml-3">
+                  <i className="fa-solid fa-shopping-cart my-auto mr-2" /> Web Shop
+                </span>
+              </Link>
+            </li>
+            <li className="">
+              <Link
+                href="#WebShop"
+                className="flex items-center p-2 text-base font-normal rounded-lg text-gray-400 hover:bg-bgray-bg transition-colors group"
+              >
+                <span className="ml-3">
+                  <i className="fa-solid fa-coins my-auto mr-2" /> Roulette
+                </span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/hub/sesrvers"
+                className="flex items-center p-2 text-base font-normal rounded-lg text-gray-400 hover:bg-bgray-bg transition-colors group"
+              >
+                <span className="ml-3">
+                  <i className="fa-solid fa-server my-auto mr-2" /> Servers
                 </span>
               </Link>
             </li>
@@ -319,9 +349,9 @@ export default function HubSidebar() {
                 </span>
               </Link>
             </li>
-            <li className="hidden">
+            <li className="">
               <Link
-                href="/hub/portal"
+                href="#Portal"
                 className="flex items-center p-2 text-base font-normal rounded-lg text-gray-400 hover:bg-bgray-bg transition-colors group"
               >
                 <span className="ml-3">
@@ -331,7 +361,7 @@ export default function HubSidebar() {
             </li>
             
             <br/>
-            <li className="px-4">
+            {userSettings?.permission_level == 2 && <><li className="px-4">
             <p className="font-bold text-gray-400 mb-4">Admin Tools</p>
             </li>
             <li className="">
@@ -346,7 +376,27 @@ export default function HubSidebar() {
             </li>
             <li className="">
               <Link
-                href="#PageEditor"
+                href="#ServerManager"
+                className="flex items-center p-2 text-base font-normal rounded-lg text-gray-400 hover:bg-bgray-bg transition-colors group"
+              >
+                <span className="ml-3">
+                  <i className="fa-solid fa-newspaper my-auto mr-2" /> Announcements
+                </span>
+              </Link>
+            </li>
+            <li className="">
+              <Link
+                href="#ServerManager"
+                className="flex items-center p-2 text-base font-normal rounded-lg text-gray-400 hover:bg-bgray-bg transition-colors group"
+              >
+                <span className="ml-3">
+                  <i className="fa-solid fa-chart-simple my-auto mr-2" /> Analytics 
+                </span>
+              </Link>
+            </li>
+            <li className="">
+              <Link
+                href="/hub/a/page_editor"
                 className="flex items-center p-2 text-base font-normal rounded-lg text-gray-400 hover:bg-bgray-bg transition-colors group"
               >
                 <span className="ml-3">
@@ -360,49 +410,25 @@ export default function HubSidebar() {
                 className="flex items-center p-2 text-base font-normal rounded-lg text-gray-400 hover:bg-bgray-bg transition-colors group"
               >
                 <span className="ml-3">
-                  <i className="fa-solid fa-gear fa-spin my-auto mr-2" /> Site Settings
+                  <i className="fa-solid fa-gear my-auto mr-2" /> Site Settings
                 </span>
               </Link>
-            </li>
+            </li></>}
           </ul>
         </div>
-        <div className="hidden absolute bottom-0 left-0 justify-center p-4 space-x-4 w-full lg:flex bg-bgray-secondary z-20 border-r border-gray-700">
+        <div className="hidden absolute bottom-0 left-0 justify-center p-4 space-x-4 w-full lg:flex bg-bgray-secondary z-20 border-r border-bgray-border">
           <Link
             href="/"
-            className="inline-flex justify-center p-2 rounded cursor-pointer text-gray-400 hover:bg-bgray-bg transition-colors"
+            className="inline-flex items-center justify-center p-2 rounded cursor-pointer text-gray-400 hover:bg-bgray-bg transition-colors"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-6 h-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418"
-              />
-            </svg>
+<i className="fa-solid fa-globe text-xl"></i>
           </Link>
           <Link
             href="/api/auth/logout"
             data-tooltip-target="tooltip-settings"
-            className="inline-flex justify-center p-2 rounded cursor-pointer text-gray-400 hover:bg-bgray-bg transition-colors"
+            className="inline-flex items-center justify-center p-2 rounded cursor-pointer text-gray-400 hover:bg-bgray-bg transition-colors"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              className="w-6 h-6"
-            >
-              <path
-                fillRule="evenodd"
-                d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3c0-2.9-2.35-5.25-5.25-5.25zm3.75 8.25v-3a3.75 3.75 0 10-7.5 0v3h7.5z"
-                clipRule="evenodd"
-              />
-            </svg>
+<i className="fa-solid fa-right-from-bracket text-xl"></i>
           </Link>
           <Link
             href="#"

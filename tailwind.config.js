@@ -11,8 +11,9 @@ module.exports = {
         colors: {
             'bred': '#E23C3C',
             'bred-2': '#DF2A2A',
-            'bgray-bg': '#121317',
-            'bgray-secondary': '#1A1C23',
+            'bgray-bg': '#0a0a0a',
+            'bgray-border': '#2a2a2a',
+            'bgray-secondary': '#111111',
             'bgray-overlay': '#272a35',
             'bgray-forward':'#393D4C',
             'bgray-dropdown':'#191a20',

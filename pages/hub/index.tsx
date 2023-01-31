@@ -5,6 +5,8 @@ import Layout from '../../components/HubLayout'
 import useUser from "../../lib/hooks/useUser";
 import useSWR from 'swr'
 import Link from "next/link";
+import Error from "@/components/errors/Error"
+import ServerCardNew from "@/components/ServerCardNew";
 
 
 let fetcher = async () => {
@@ -20,7 +22,7 @@ export default function HubDashboard() {
   /* Fetch Data */
   const { data, error } = useSWR('find', fetcher)
 
-  if (error) return <Layout><div className="p-5 text-xl text-white">An error occured while loading data!</div></Layout>
+  if (error) return <Layout><Error msg={"Failed to load Tribe Manager \n" + error.toString()}/></Layout>
   if (!data) return <Layout><div className="p-5 text-xl text-white">Loading...</div></Layout>
 
   return (
@@ -41,7 +43,7 @@ export default function HubDashboard() {
         <div>
           <div className="w-full">
             <div className="h-full w-full" style={{ background: 'url(https://preview.redd.it/q82kow7rz7m91.jpg?auto=webp&s=552cb5a950dea21c862928a193765862fe32ae84)', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
-              <div className="w-full h-full bg-bgray-bg bg-opacity-70">
+              <div className="w-full h-full bg-black bg-opacity-80">
                 <div className="flex h-full px-3 py-4 sm:p-5 md:p-0">
                   <div className="my-auto flex justify-center w-full">
                     <div>
@@ -60,15 +62,15 @@ export default function HubDashboard() {
                             your tribe, dinosaurs and more here!
                           </p>
                           <div className="flex space-x-5 items-center justify-center mt-5">
-                            <div className="h-24 w-[170px] bg-bgray-secondary bg-opacity-90 border-bgray-forward border rounded-2xl py-3">
+                            <div className="h-24 w-[170px] bg-bgray-secondary bg-opacity-90 border-bgray-border border rounded-2xl py-3">
                               <p className="text-center text-4xl text-gray-400"><i className="fa-solid fa-clock"></i></p>
                               <p className="text-center text-gray-400 mt-2">%PlayTime%</p>
                             </div>
-                            <div className="h-24 w-[170px] bg-bgray-secondary bg-opacity-90 border-bgray-forward border rounded-2xl py-3">
+                            <div className="h-24 w-[170px] bg-bgray-secondary bg-opacity-90 border-bgray-border border rounded-2xl py-3">
                               <p className="text-center text-4xl text-gray-400"><i className="fa-solid fa-user"></i></p>
                               <p className="text-center text-gray-400 mt-2">%p% Players Online</p>
                             </div>
-                            <div className="h-24 w-[170px] bg-bgray-secondary bg-opacity-90 border-bgray-forward border rounded-2xl py-3">
+                            <div className="h-24 w-[170px] bg-bgray-secondary bg-opacity-90 border-bgray-border border rounded-2xl py-3">
                               <p className="text-center text-4xl text-gray-400"><i className="fa-solid fa-khanda"></i></p>
                               <p className="text-center text-gray-400 mt-2">%k% Kills</p>
                             </div>
@@ -83,19 +85,29 @@ export default function HubDashboard() {
             </div>
           </div>
           <div className="py-4 bg-blue-600"><p className="text-base text-white font-bold text-center"><i className="fa-solid fa-star"></i> Welcome to the 2023 UI Update Preview! We hope you will enjoy all the new features and additions!</p></div>
+          <div className="py-4 bg-red-600"><p className="text-base text-white font-bold text-center"><i className="fa-solid fa-compass fa-spin"></i> Wipe Time! We&apos;re currently preparing for the next season of Bloody ARK, Season 5!</p></div>
+          
           <div className="hub_page px-20 py-10">
             {/* Modify Layout */}
             <a href="#LayoutChange"><p className="text-gray-400 hover:text-red-600 transition-colors"><i className="fa-solid fa-sliders"></i> Edit Layout</p></a>
             
             {/* Important Notifications + Dismiss */}
-            <div className="w-full bg-bgray-secondary border-bgray-forward border rounded-xl px-5 py-3 mt-2">
+            <div className="w-full bg-bgray-secondary rounded-xl px-5 py-3 mt-2 border-bgray-border border mb-2">
               <h1 className="text-white text-xl"><i className="fa-solid fa-envelope"></i> You&apos;ve been invited to a Tribe!</h1>
               <p className="text-gray-400">This is a example notification for a preview.</p>
             </div>
 
+            <h1 className="text-white text-2xl font-bold">Quick Server Access</h1>
+            <div className="grid  mt-4 gap-8 grid-cols-1 md:grid-cols-3 xl:grid-cols-4 mb-5">
+                        <ServerCardNew/>
+                        <ServerCardNew/>
+                        <ServerCardNew/>
+                        <ServerCardNew/>
+            </div>
             {/* Hub Layout */}
-            <div className="mt-4 w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-              <div className="bg-white dark:bg-bgray-secondary shadow rounded-lg border-bgray-forward border">
+            <h1 className="text-white text-2xl font-bold">Survivor Information</h1>
+            <div className="mt-4 w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-4">
+              <div className="bg-white dark:bg-bgray-secondary shadow rounded-lg border-bgray-border border">
                 <div>
                   <div className="w-full  flex flex-wrap items-center  justify-center  rounded-t-md">
                     <div className="container w-full  transform   duration-200 easy-in-out rounded-t-md">
@@ -166,7 +178,7 @@ export default function HubDashboard() {
                   </div>
                 </div>
               </div>
-              <div className="bg-white dark:bg-bgray-secondary shadow rounded-lg relative border-bgray-forward border">
+              <div className="bg-white dark:bg-bgray-secondary shadow rounded-lg relative border-bgray-border border">
                 <div className="absolute bottom-0 inset-x-0 rounded-b-lg overflow-hidden z-10">
                   <canvas id="playersChart" className="h-10" />
                 </div>
@@ -228,7 +240,7 @@ export default function HubDashboard() {
                   }
                 </div>
               </div>
-              <div className="bg-white dark:bg-bgray-secondary shadow rounded-lg relative border-bgray-forward border">
+              <div className="bg-white dark:bg-bgray-secondary shadow rounded-lg relative border-bgray-border border hidden">
                 <div className="absolute bottom-0 inset-x-0 rounded-b-lg overflow-hidden z-10">
                   <canvas id="playersChart" className="h-10" />
                 </div>

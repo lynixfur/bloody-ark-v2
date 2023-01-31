@@ -139,11 +139,11 @@ const TribeLeaderboard = () => {
                                                     <td className={search ? "hidden" : "pl-5"}>
                                                         <div className="flex items-center">
                                                             <p className="text-base leading-none text-white font-bold">
-                                                                {rank + 1}
+                                                            {((data?.pagination?.current_page) * 20) + rank + 1}
                                                             </p>
 
                                                             {/* Tribe Ranking Trophy */}
-                                                            {data?.pagination?.current_page == 1 &&
+                                                            {data?.pagination?.current_page == 0 &&
                                                                 <>
                                                                     {(() => {
                                                                         switch (rank) {
@@ -256,7 +256,7 @@ const TribeLeaderboard = () => {
                     <p className="text-gray-300">Page <strong>{data?.pagination?.current_page + 1}</strong> of <strong>{data?.pagination?.total_pages + 1}</strong></p>
                     <div className="flex space-x-2 mt-3">
                         {data?.pagination?.prev ?
-                            <a href="#" className="inline-flex items-center px-3 py-1 font-bold leading-6 text-md shadow rounded-full text-gray-100  bg-bgray-overlay transition ease-in-out duration-150">  <i className="fa-solid fa-arrow-left m-1 mr-2 my-auto"></i> Previous</a>
+                            <button onClick={prevPage} className="inline-flex items-center px-3 py-1 font-bold leading-6 text-md shadow rounded-full text-gray-100  bg-bgray-overlay transition ease-in-out duration-150">  <i className="fa-solid fa-arrow-left m-1 mr-2 my-auto"></i> Previous</button>
                             : <></>
                         }
                         {data?.pagination?.next ?

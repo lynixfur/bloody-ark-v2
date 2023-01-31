@@ -4,10 +4,13 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { withIronSessionApiRoute } from "iron-session/next";
 import { sessionOptions } from "../../../lib/auth/session";
 import { steamAuth } from "../../../lib/auth/steamAuth";
+import { connectToDatabase } from "@/lib/mongodb";
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "GET") {
     try {
+
+      // User Information
       const steamUser = await steamAuth.authenticate(req);
 
       req.session.user = {

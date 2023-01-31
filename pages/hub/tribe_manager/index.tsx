@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import Layout from "../../../components/HubLayout";
 import useSWR from 'swr';
 import Link from "next/link";
+import Error from "@/components/errors/Error"
 
 let fetcher = async () => {
   const response = await fetch(`/api/hub/tribe_manager`);
@@ -16,7 +17,7 @@ export default function HubDashboard() {
   /* Fetch Data */
   const { data, error } = useSWR('find', fetcher)
 
-  if (error) return <Layout><div className="p-5 text-xl text-white">An error occured while loading data!</div></Layout>
+  if (error) return <Layout><Error msg={"Failed to load Tribe Manager"} status={error.toString()}/></Layout>
   if (!data) return <Layout><div className="p-5 text-xl text-white">Loading...</div></Layout>
 
   return (

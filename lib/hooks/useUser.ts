@@ -5,7 +5,7 @@ import { User } from "../../types/User";
 import fetcher from "../fetcher";
 
 export default function useUser({ redirectTo = "" } = {}) {
-  const { data, isLoading } = useSWR<{ message: User; success: boolean }>(
+  const { data, isLoading } = useSWR<{ user: User; userSettings: any; success: boolean }>(
     `/api/auth/user`,
     fetcher
   );
@@ -22,9 +22,11 @@ export default function useUser({ redirectTo = "" } = {}) {
   }, [data, isLoading, redirectTo]);
 
   let user = undefined;
+  let userSettings = undefined;
   if (data && data.success) {
-    user = data.message;
+    user = data.user;
+    userSettings = data.userSettings;
   }
 
-  return { user };
+  return { user, userSettings };
 }

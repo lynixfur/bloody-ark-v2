@@ -1,5 +1,5 @@
 export default function HomeHeader({text, players}: any) {
-  return (
+  return (<>
     <div
       className="h-full"
       style={{
@@ -49,5 +49,7 @@ export default function HomeHeader({text, players}: any) {
         </div>
       </div>
     </div>
+    <div className="py-4 bg-red-600"><p className="text-base text-white font-bold text-center"><i className="fa-solid fa-compass fa-spin"></i> Wipe Time! We&apos;re currently preparing for the next season of Bloody ARK, Season 5!</p></div>
+</>
   );
 }
