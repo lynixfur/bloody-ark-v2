@@ -7,6 +7,8 @@ import useSWR from 'swr'
 import Link from "next/link";
 import Error from "@/components/errors/Error"
 import ServerCardNew from "@/components/ServerCardNew";
+import { useState } from "react";
+import { Transition } from '@tailwindui/react'
 
 
 let fetcher = async () => {
@@ -18,6 +20,7 @@ let fetcher = async () => {
 export default function HubDashboard() {
   /* User */
   const { user } = useUser();
+  const [patchnotes, setPatchnotes] = useState(true);
 
   /* Fetch Data */
   const { data, error } = useSWR('find', fetcher)
@@ -40,6 +43,64 @@ export default function HubDashboard() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
+      
+      <Transition 
+      show={patchnotes}
+      enter="transition-opacity duration-75"
+      enterFrom="opacity-0"
+      enterTo="opacity-100"
+      leave="transition-opacity duration-150"
+      leaveFrom="opacity-100"
+      leaveTo="opacity-0"><div className="relative z-50 w-full" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+  <div className="fixed inset-0 bg-bgray-bg bg-opacity-75 transition-opacity" />
+  <div className="fixed inset-0 z-10 overflow-y-auto">
+    <div className="flex min-h-full w-full items-center justify-center p-4 text-center sm:items-center sm:p-0">
+      {/* Main modal */}
+<div id="staticModal" data-modal-backdrop="static" tabIndex={-1} aria-hidden="true" className="relative transform z-50 p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
+  <div className="relative w-full h-full max-w-2xl md:h-auto">
+    {/* Modal content */}
+    <div className="relative rounded-lg shadow bg-bgray-bg border border-bgray-border">
+      {/* Modal header */}
+      <div className="flex items-start justify-between p-4 border-b rounded-t border-bgray-border">
+        <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+          What&apos;s New? A Wild Update! 🐺
+        </h3>
+        <button onClick={() => { setPatchnotes(false) }} type="button" className="text-gray-400 bg-transparent rounded-lg text-sm p-1.5 ml-auto inline-flex items-center hover:bg-bgray-secondary hover:text-white transition-colors" data-modal-hide="staticModal">
+          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" /></svg>  
+        </button>
+      </div>
+      {/* Modal body */}
+      <div className="p-6 space-y-6">
+        <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400 text-left">
+          It&apos;s a new year and we have a Wild, Wild, Wild Update for the Bloody Hub! We&apos;re also getting ready for Season 5! We&apos;ve decided to include a bunch of new features to the Bloody Hub to make your experience even wilder! Let&apos;s check what&apos;s new!
+        </p>
+        <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400 text-left">
+          <ul className="list-disc px-6">
+            <li>Quick Information & Redesigned Welcome Header</li>
+            <li>Added New Notification Section</li>
+            <li>Customizable Hub Home Layout</li>
+            <li>Quick Server Join</li>
+            <li>Server Viewer</li>
+            <li>Web Shop</li>
+            <li>Web Roulette</li>
+            <li>Redesigned Tribe Manager</li>
+            <li>Tribe Recruitment Pages</li>
+            <li>Redesigned Leaderboards</li>
+            <li>Improved & Darken UI</li>
+            <li>And much more...</li>
+          </ul><br/>
+          Break the rules of what you can do with The Bloody Hub...
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </div>
+  </div>
+</div></Transition>
+
+        {/* Content */}
         <div>
           <div className="w-full">
             <div className="h-full w-full" style={{ background: 'url(https://preview.redd.it/q82kow7rz7m91.jpg?auto=webp&s=552cb5a950dea21c862928a193765862fe32ae84)', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
