@@ -75,7 +75,7 @@ function PageEditor() {
 
                     <div className="flex flex-col space-y-3">
                         {data?.all_pages?.map((page_link: any) => (
-                            <div onClick={() => handleSelectPage(page_link?._id)} className="bg-bgray-secondary border border-bgray-border px-3 py-3 text-white hover:cursor-pointer">
+                            <div key={page_link?._id} onClick={() => handleSelectPage(page_link?._id)} className="bg-bgray-secondary border border-bgray-border px-3 py-3 text-white hover:cursor-pointer">
                                 <i className={page_link?.page_icon + " m-1 my-auto text-xl text-gray-500"} />
                                 <span className="ml-2 text-md font-bold">{page_link?.title}</span>
                             </div>
