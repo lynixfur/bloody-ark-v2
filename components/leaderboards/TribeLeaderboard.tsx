@@ -1,6 +1,8 @@
+import { Transition } from '@headlessui/react'
 import { useCallback, useEffect, useState } from "react";
 import useSWR from "swr";
 import fetcher from "../../lib/fetcher";
+import { Dropdown } from "../Dropdown"
 
 const TribeLeaderboard = () => {
 
@@ -48,19 +50,29 @@ const TribeLeaderboard = () => {
                 onChange={handleOnChange}
                 placeholder="Search for Tribes" name="tribe_search" id="tribe_search" className="px-3 py-2 text-gray-300 bg-bgray-overlay w-1/2 border-gray-700 border rounded-full" />
 
-            <div className="relative">
-                <button onClick={handleFilterDropdown} className="px-3 py-2 text-white bg-bgray-overlay font-bold rounded-full">
-                    Sort By : ??? <i className="ml-1 fa-solid fa-angle-down" />
+            {/*<div className="relative">
+                <button onClick={() => {setFilterDropdown(!filterDropdown)}} className="px-3 py-2 text-white bg-bgray-overlay font-bold rounded-full">
+                    Sort By : {filterDropdown.toString()} <i className="ml-1 fa-solid fa-angle-down" />
                 </button>
-                <div className={filterDropdown ? 'absolute z-50 mt-3 w-48 shadow-lg origin-top-left left-0' : 'hidden z-50 mt-3 w-48 shadow-lg origin-top-left left-0'}>
-                    <div className="ring-1 ring-black ring-opacity-5 py-1 bg-mesa-dropdown rounded-2xl">
-                        <button className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-100 hover:bg-mesa-gray focus:outline-none focus:bg-mesa-gray transition duration-150 ease-in-out">Kills</button>
-                        <button className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-100 hover:bg-mesa-gray focus:outline-none focus:bg-mesa-gray transition duration-150 ease-in-out">Deaths</button>
-                        <button className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-100 hover:bg-mesa-gray focus:outline-none focus:bg-mesa-gray transition duration-150 ease-in-out">Tame Kills</button>
-                        <button className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-100 hover:bg-mesa-gray focus:outline-none focus:bg-mesa-gray transition duration-150 ease-in-out">Time Played</button>
+                <Transition
+                    show={filterDropdown}
+                    enter="transition ease-out duration-75"
+                    enterFrom="transform opacity-0 scale-95"
+                    enterTo="transform opacity-100 scale-100"
+                    leave="transition ease-in duration-150"
+                    leaveFrom="transform opacity-100 scale-100"
+                    leaveTo="transform opacity-0 scale-95">
+                    <div className={'absolute z-50 mt-3 w-48 shadow-lg origin-top-left left-0'}>
+                        <div className="ring-1 ring-black ring-opacity-5 py-1 bg-bgray-secondary border border-bgray-border rounded-2xl">
+                            <button className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-100 hover:bg-mesa-gray focus:outline-none focus:bg-mesa-gray transition duration-150 ease-in-out">Kills</button>
+                            <button className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-100 hover:bg-mesa-gray focus:outline-none focus:bg-mesa-gray transition duration-150 ease-in-out">Deaths</button>
+                            <button className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-100 hover:bg-mesa-gray focus:outline-none focus:bg-mesa-gray transition duration-150 ease-in-out">Tame Kills</button>
+                            <button className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-100 hover:bg-mesa-gray focus:outline-none focus:bg-mesa-gray transition duration-150 ease-in-out">Time Played</button>
+                        </div>
                     </div>
-                </div>
-            </div>
+                </Transition>
+    </div>*/}
+    <Dropdown/>
 
         </div>
 
@@ -139,7 +151,7 @@ const TribeLeaderboard = () => {
                                                     <td className={search ? "hidden" : "pl-5"}>
                                                         <div className="flex items-center">
                                                             <p className="text-base leading-none text-white font-bold">
-                                                            {((data?.pagination?.current_page) * 20) + rank + 1}
+                                                                {((data?.pagination?.current_page) * 20) + rank + 1}
                                                             </p>
 
                                                             {/* Tribe Ranking Trophy */}

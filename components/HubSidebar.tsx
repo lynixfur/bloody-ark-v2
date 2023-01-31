@@ -428,7 +428,7 @@ export default function HubSidebar() {
             data-tooltip-target="tooltip-settings"
             className="inline-flex items-center justify-center p-2 rounded cursor-pointer text-gray-400 hover:bg-bgray-bg transition-colors"
           >
-<i className="fa-solid fa-right-from-bracket text-xl"></i>
+<i className="fa-solid fa-right-from-bracket text-2xl"></i>
           </Link>
           <Link
             href="#"

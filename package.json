@@ -9,11 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.8",
     "@next/font": "13.1.2",
     "@prisma/client": "^4.8.1",
     "@tailwindcss/forms": "^0.5.3",
     "@tailwindcss/typography": "^0.5.9",
-    "@tailwindui/react": "^0.1.1",
     "@types/node": "18.11.18",
     "@types/node-steam-openid": "^1.0.0",
     "@types/passport-steam": "^1.0.1",
