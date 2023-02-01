@@ -10,11 +10,39 @@ import ServerCardNew from "@/components/ServerCardNew";
 import { useState } from "react";
 import { Transition } from '@headlessui/react'
 
+/* Animations */
+import VisibilitySensor from "react-visibility-sensor";
+import { useSpring, animated } from "react-spring";
+
 let fetcher = async () => {
   const response = await fetch(`/api/hub/home`);
   const data = await response.json()
   return data
 }
+
+const FadeInDirection = ({ delay, isVisible, children }: any) => {
+  console.log(delay);
+  const props_test = useSpring({
+    delay: delay,
+    opacity: isVisible ? 1 : 0,
+    transform: isVisible ? "translateY(0px)" : "translateY(50px)",
+  });
+  return <animated.div style={props_test}>{children}</animated.div>;
+};
+
+export const FadeInContainer = ({ children, delay }: any) => {
+  const [isVisible, setVisibility]: any = useState(false);
+
+  const onChange = (visiblity: any) => {
+    visiblity && setVisibility(visiblity);
+  };
+
+  return (
+    <VisibilitySensor partialVisibility onChange={onChange}>
+      <FadeInDirection isVisible={isVisible} delay={delay}>{children}</FadeInDirection>
+    </VisibilitySensor>
+  );
+};
 
 export default function HubDashboard() {
   /* User */
@@ -112,28 +140,38 @@ export default function HubDashboard() {
                           <div className="flex justify-center"><img
                             src={user?.avatarUrl}
                             alt="image"
-                            className="h-24 w-24 rounded-full"
+                            className="h-24 w-24 rounded-full mb-3"
                           /></div>
-                          <h1 className="text-4xl lg:text-5xl xl:text-6xl text-center text-gray-50 font-black leading-7 md:leading-10">
+                          <h1 className="px-4 text-4xl lg:text-5xl xl:text-6xl text-center text-gray-50 font-black leading-7 md:leading-10">
                             Welcome, {user?.username}!
                           </h1><br />
-                          <p className="text-gray-200 text-md font-semibold cursor-pointer">
+                          <p className="px-4 text-gray-200 text-md font-semibold cursor-pointer text-center">
                             Welcome to your home page of Bloody Hub, you can manage
                             your tribe, dinosaurs and more here!
                           </p>
-                          <div className="flex space-x-5 items-center justify-center mt-5">
-                            <div className="h-24 w-[170px] bg-bgray-secondary bg-opacity-90 border-bgray-border border rounded-2xl py-3">
-                                <p className="text-center text-4xl text-gray-400"><i className="fa-solid fa-clock"></i></p>
-                                <p className="text-center text-gray-400 mt-2">%PlayTime%</p>
+                          <div className="flex justify-center">
+                            <FadeInContainer delay={500}>
+                              <div className="flex-warp sm:flex space-x-0 sm:space-x-3 space-y-3 sm:space-y-0 items-center justify-center mt-5">
+
+                                <div className="h-24 w-[170px] bg-bgray-secondary bg-opacity-90 border-bgray-border border rounded-2xl py-3">
+                                  <p className="text-center text-4xl text-gray-400"><i className="fa-solid fa-clock"></i></p>
+                                  <p className="text-center text-gray-400 mt-2">90 hrs</p>
+                                </div>
+
+
+                                <div className="h-24 w-[170px] bg-bgray-secondary bg-opacity-90 border-bgray-border border rounded-2xl py-3">
+                                  <p className="text-center text-4xl text-gray-400"><i className="fa-solid fa-user"></i></p>
+                                  <p className="text-center text-gray-400 mt-2">0 Players Online</p>
+                                </div>
+
+
+                                <div className="h-24 w-[170px] bg-bgray-secondary bg-opacity-90 border-bgray-border border rounded-2xl py-3">
+                                  <p className="text-center text-4xl text-gray-400"><i className="fa-solid fa-khanda"></i></p>
+                                  <p className="text-center text-gray-400 mt-2">593 Kills</p>
+                                </div>
+
                               </div>
-                            <div className="h-24 w-[170px] bg-bgray-secondary bg-opacity-90 border-bgray-border border rounded-2xl py-3">
-                              <p className="text-center text-4xl text-gray-400"><i className="fa-solid fa-user"></i></p>
-                              <p className="text-center text-gray-400 mt-2">%p% Players Online</p>
-                            </div>
-                            <div className="h-24 w-[170px] bg-bgray-secondary bg-opacity-90 border-bgray-border border rounded-2xl py-3">
-                              <p className="text-center text-4xl text-gray-400"><i className="fa-solid fa-khanda"></i></p>
-                              <p className="text-center text-gray-400 mt-2">%k% Kills</p>
-                            </div>
+                            </FadeInContainer>
                           </div>
 
                         </div>
@@ -147,10 +185,7 @@ export default function HubDashboard() {
           <div className="py-4 bg-blue-600" onClick={() => setPatchnotes(true)}><p className="text-base text-white font-bold text-center"><i className="fa-solid fa-star"></i> Welcome to the 2023 UI Update Preview! We hope you will enjoy all the new features and additions!</p></div>
           <div className="py-4 bg-red-600"><p className="text-base text-white font-bold text-center"><i className="fa-solid fa-compass fa-spin"></i> Wipe Time! We&apos;re currently preparing for the next season of Bloody ARK, Season 5!</p></div>
 
-          <div className="hub_page px-20 py-10">
-            {/* Modify Layout */}
-            <a href="#LayoutChange"><p className="text-gray-400 hover:text-red-600 transition-colors"><i className="fa-solid fa-sliders"></i> Edit Layout</p></a>
-
+          <div className="hub_page px-3 sm:px-20 py-10">
             {/* Important Notifications + Dismiss */}
             <div className="w-full bg-bgray-secondary rounded-xl px-5 py-3 mt-2 border-bgray-border border mb-2">
               <h1 className="text-white text-xl"><i className="fa-solid fa-envelope"></i> You&apos;ve been invited to a Tribe!</h1>
@@ -159,10 +194,11 @@ export default function HubDashboard() {
 
             <h1 className="text-white text-2xl font-bold">Quick Server Access</h1>
             <div className="grid  mt-4 gap-8 grid-cols-1 md:grid-cols-3 xl:grid-cols-4 mb-5">
-              <ServerCardNew />
-              <ServerCardNew />
-              <ServerCardNew />
-              <ServerCardNew />
+              {data?.quick_servers?.map((server: any, i: any) => (
+                <FadeInContainer key={server?.name} delay={200 * i}>
+                  <ServerCardNew server={server}/>
+                </FadeInContainer>
+              ))}
             </div>
             {/* Hub Layout */}
             <h1 className="text-white text-2xl font-bold">Survivor Information</h1>
@@ -223,10 +259,12 @@ export default function HubDashboard() {
                       <i className="fa-solid fa-ticket text-gray-500 dark:text-gray-200  mr-2" />
                       Dino Color Tokens : {data?.extra_data?.dino_tokens ? data?.extra_data?.dino_tokens : 0}
                     </p>
-                    <p className="text-md font-bold text-gray-500 dark:text-gray-200  sm:mb-0 mb-2">
-                      <i className="fa-solid fa-ticket text-gray-500 dark:text-gray-200  mr-2" />
-                      Renamer Tokens : {data?.extra_data?.player_rename_tokens ? data?.extra_data?.player_rename_tokens : 0}
-                    </p>
+                    <VisibilitySensor onChange={() => { console.log("Visible Tokens!") }}>
+                      <p className="text-md font-bold text-gray-500 dark:text-gray-200  sm:mb-0 mb-2">
+                        <i className="fa-solid fa-ticket text-gray-500 dark:text-gray-200  mr-2" />
+                        Renamer Tokens : {data?.extra_data?.player_rename_tokens ? data?.extra_data?.player_rename_tokens : 0}
+                      </p>
+                    </VisibilitySensor>
                     <p className="text-md font-bold text-gray-500 dark:text-gray-200  sm:mb-0 mb-2 mt-2">
                       <i className="fa-solid fa-shield-halved text-gray-500 dark:text-gray-200 mr-2" />
                       {data?.extra_data?.pvp_status ? "PVPVE Status : PvP" : "PVPVE Status : PvE"}

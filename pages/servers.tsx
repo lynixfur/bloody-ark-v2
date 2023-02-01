@@ -6,6 +6,35 @@ import ServerCard from "../components/ServerCard";
 import Footer from "../components/footer";
 import { env } from "process";
 
+/* Animations */
+import VisibilitySensor from "react-visibility-sensor";
+import { useSpring, animated } from "react-spring";
+import { useState } from "react";
+
+const FadeInDirection = ({ delay, isVisible, children }: any) => {
+  console.log(delay);
+  const props_test = useSpring({
+    delay: delay,
+    opacity: isVisible ? 1 : 0,
+    transform: isVisible ? "translateY(0px)" : "translateY(50px)",
+  });
+  return <animated.div style={props_test}>{children}</animated.div>;
+};
+
+export const FadeInContainer = ({ children, delay }: any) => {
+  const [isVisible, setVisibility]: any = useState(false);
+
+  const onChange = (visiblity: any) => {
+    visiblity && setVisibility(visiblity);
+  };
+
+  return (
+    <VisibilitySensor partialVisibility onChange={onChange}>
+      <FadeInDirection isVisible={isVisible} delay={delay}>{children}</FadeInDirection>
+    </VisibilitySensor>
+  );
+};
+
 function ServerList({ servers, highpop_servers }: any) {
   return (
     <>
@@ -77,7 +106,7 @@ function ServerList({ servers, highpop_servers }: any) {
                 </h1>
           <div className="grid mt-8  gap-8 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
             {servers.map((server: any) => (
-                <ServerCard key={server.id} server={server}/>
+                  <ServerCard key={server.id} server={server}/>
             ))}
           </div>
       </div>

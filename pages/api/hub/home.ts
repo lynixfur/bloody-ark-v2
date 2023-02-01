@@ -4,6 +4,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 /* Session Stuff */
 import { withIronSessionApiRoute } from "iron-session/next";
 import { sessionOptions } from "../../../lib/auth/session";
+import { connectToDatabase } from '@/lib/mongodb';
 
 
 const prisma = new PrismaClient()
@@ -11,6 +12,9 @@ const prisma = new PrismaClient()
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   
+  const { db } = await connectToDatabase();
+
+
     let user = req.session.user;
     if (!user) {
       return res
@@ -133,7 +137,8 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   });
 }
 
-
+  const quick_servers = await db.collection("servers").find({visible: true}).sort({ players: -1 }).limit(4).project({  name: 1, visible: 1, connection_url: 1, geolocation: 1, server_bg: 1, server_icon: 1, is_online: 1, players: 1  }).toArray();
+    
 
 
   /* Return All Required Data */
@@ -153,6 +158,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
           permissionsGroups:  tribe_permission_groups?.PermissionGroups,
           timedPermissionGroups:  tribe_permission_groups?.TimedPermissionGroups
       },
+      quick_servers: quick_servers,
       notifications: {
           join_requests: all_requests,
           invites: all_invites,

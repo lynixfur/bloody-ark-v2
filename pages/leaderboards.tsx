@@ -7,6 +7,33 @@ import { useState } from "react";
 import TribeLeaderboard from "@/components/leaderboards/TribeLeaderboard";
 import PlayerLeaderboard from "@/components/leaderboards/PlayerLeaderboard";
 
+/* Animations */
+import VisibilitySensor from "react-visibility-sensor";
+import { useSpring, animated } from "react-spring";
+const FadeInDirection = ({ delay, isVisible, children }: any) => {
+  console.log(delay);
+  const props_test = useSpring({
+    delay: delay,
+    opacity: isVisible ? 1 : 0,
+    transform: isVisible ? "translateY(0px)" : "translateY(50px)",
+  });
+  return <animated.div style={props_test}>{children}</animated.div>;
+};
+
+export const FadeInContainer = ({ children, delay }: any) => {
+  const [isVisible, setVisibility]: any = useState(false);
+
+  const onChange = (visiblity: any) => {
+    visiblity && setVisibility(visiblity);
+  };
+
+  return (
+    <VisibilitySensor partialVisibility onChange={onChange}>
+      <FadeInDirection isVisible={isVisible} delay={delay}>{children}</FadeInDirection>
+    </VisibilitySensor>
+  );
+};
+
 function Leaderboards() {
     /* Tabs */
     const [activeTab, setActiveTab] = useState(0);
@@ -63,10 +90,10 @@ function Leaderboards() {
 
                 <div className="p-5 sm:p-10">
                     {activeTab == 0 &&
-                        <TribeLeaderboard />
+                       <FadeInContainer delay={250}><TribeLeaderboard /></FadeInContainer> 
                     }
                     {activeTab == 1 &&
-                        <PlayerLeaderboard />
+                        <FadeInContainer delay={250}><PlayerLeaderboard /></FadeInContainer>
                     }
                 </div>
             </div>

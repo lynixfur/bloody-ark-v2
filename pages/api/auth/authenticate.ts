@@ -21,7 +21,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
       await req.session.save();
 
-      return res.redirect("/");
+      return res.redirect("/hub");
     } catch (error: any) {
       /*return res.json({
         message: new Error(error).message,
