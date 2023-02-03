@@ -53,13 +53,6 @@ function Leaderboards() {
                     name="keywords"
                     content="BloodyARK,ARK,Dinosaurs,PVPVE,Best ARK Server,BloodyHub,BloodyShop,Evolve or Die"
                 />
-                <link
-                    rel="stylesheet"
-                    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
-                    integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
-                    crossOrigin="anonymous"
-                    referrerPolicy="no-referrer"
-                />
             </Head>
             <Navbar darken={true} />
             <div className="pt-[72px] w-full">
