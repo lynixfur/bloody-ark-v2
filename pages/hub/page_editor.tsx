@@ -17,6 +17,7 @@ function PageEditor() {
     /* Select Page */
     const [isEditing, setIsEditing] = useState(true);
     const [errorStatus, setErrorStatus] = useState(false);
+    const [errorMsg, setErrorMsg] = useState('');
     const [filterPage, setFilterPage] = useState('');
 
     const { data, error }: any = useSWR(`/api/hub/page_editor?id=${filterPage}`, fetcher)
@@ -42,6 +43,7 @@ function PageEditor() {
             console.error("An error occured! Failed to Load Page Data.")
             setIsEditing(false);
             setErrorStatus(true);
+            setErrorMsg("Page ID : " + page_id);
         }
     }, [isSending]) // update the callback if the state changes
 
@@ -71,7 +73,7 @@ function PageEditor() {
 
                 {!isEditing && <div className="p-5">
                     <h1 className="text-white text-2xl font-bold mb-4">Available Pages</h1>
-                    {errorStatus && <div className="py-2 mb-4"><p className="text-base text-red-600 font-bold text-center"><i className="fa-solid fa-exclamation-triangle"></i> An error occured while loading the page content!</p></div>}
+                    {errorStatus && <div className="py-2 mb-4"><p className="text-base text-red-600 font-bold text-center"><i className="fa-solid fa-exclamation-triangle"></i> An error occured while loading the page content!<br/>{errorMsg}</p></div>}
 
                     <div className="flex flex-col space-y-3">
                         {data?.all_pages?.map((page_link: any) => (

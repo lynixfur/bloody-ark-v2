@@ -5,6 +5,8 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { withIronSessionApiRoute } from "iron-session/next";
 import { sessionOptions } from "../../../lib/auth/session";
 import { connectToDatabase } from '@/lib/mongodb';
+import getShopData from '@/lib/shadowmaneAPI/ark/getShopData';
+import { ShopPoints } from '@/lib/shadowmaneAPI/types/ShopPoints';
 
 
 const prisma = new PrismaClient()
@@ -84,10 +86,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
   const permission_array = player_permission_groups?.PermissionGroups.concat(player_permission_groups.TimedPermissionGroups)
 
-  const points = await prisma.arkshopplayers.findFirst({
-    where: { SteamId: BigInt(user.userId) },
-    select: { Points: true, TotalSpent: true }
-  })
+  let points: ShopPoints = getShopData(user);
 
   const pvp_status = await prisma.pvpve_tribes.findFirst({
     where: { TribeID: parseInt(w_player_data.TribeID) },

@@ -37,7 +37,7 @@ function Navbar(props: any) {
   return (
     <>
     {mobileMenu ? 
-    <nav id="nav" className="bg-bgray-bg border-b-2 border-gray-700 px-2 sm:px-4 py-2.5 fixed top-0 w-full z-20">
+    <nav id="nav" className="bg-bgray-bg border-b-2 border-gray-700 px-2 sm:px-4 py-2.5 fixed top-0 w-full z-50">
     <div className="container flex flex-wrap justify-between items-center mx-auto">
       <Link href="/" className="flex text-lg font-semibold tracking-widest uppercase rounded-lg text-white focus:outline-none focus:shadow-outline">
         <img alt="Bloody ARK Logo" className="h-10 mr-2" src="/logo.png" />
@@ -101,7 +101,7 @@ function Navbar(props: any) {
     </div>
   </nav>
     :<>
-    <nav className={navBg ? 'bg-bgray-bg border-b-2 border-gray-700 px-2 sm:px-4 py-2.5 fixed top-0 w-full z-20' : 'bg-transparent px-2 sm:px-4 py-2.5 fixed top-0 w-full z-20'}>
+    <nav className={navBg ? 'bg-bgray-bg border-b-2 border-gray-700 px-2 sm:px-4 py-2.5 fixed top-0 w-full z-50' : 'bg-transparent px-2 sm:px-4 py-2.5 fixed top-0 w-full z-20'}>
  
     <div className="container flex flex-wrap justify-between items-center mx-auto">
       <Link href="/" className="flex text-lg font-semibold tracking-widest uppercase rounded-lg text-white focus:outline-none focus:shadow-outline">
