@@ -35,13 +35,18 @@ function PageEditor() {
         setIsEditing(false);
         setSelectedPage({});
         setSelectedPageID({});
+
+        // Reset Status
+        setSuccessStatus(null);
     }, [])
 
-    const handleSave = useCallback(async ({ id, strId, title, pageIcon, pageContent }: any) => {
+    const handleSave = useCallback(async (id: any, strId: any, title: any, pageIcon: any, pageContent: any) => {
         // Remove Selected Page
         setIsEditing(false);
         setSelectedPage({});
         setSelectedPageID({});
+
+        console.log(id)
 
         // Reset Status
         setSuccessStatus(null);
@@ -58,7 +63,7 @@ function PageEditor() {
                 str_id: strId,
                 title: title,
                 page_icon: pageIcon,
-                page_content: pageContent
+                content: pageContent
             })
         })
 
