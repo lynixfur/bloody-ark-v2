@@ -71,8 +71,8 @@ const TribeLeaderboard = () => {
                         </div>
                     </div>
                 </Transition>
-    </div>*/}
-    <Dropdown/>
+    </div>
+    <Dropdown/>*/}
 
         </div>
 

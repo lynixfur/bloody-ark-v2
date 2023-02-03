@@ -66,7 +66,7 @@ const PlayerLeaderboard = () => {
                 onChange={handleOnChange}
                 placeholder="Search for Players" name="tribe_search" id="tribe_search" className="px-3 py-2 text-gray-300 bg-bgray-overlay w-1/2 border-gray-700 border rounded-full" />
 
-            <div className="relative">
+            {/*<div className="relative">
                 <button onClick={handleFilterDropdown} className="px-3 py-2 text-white bg-bgray-overlay font-bold rounded-full">
                     Sort By : ??? <i className="ml-1 fa-solid fa-angle-down" />
                 </button>
@@ -78,7 +78,7 @@ const PlayerLeaderboard = () => {
                         <button className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-100 hover:bg-bgray-secondary focus:outline-none focus:bg-mesa-gray transition duration-150 ease-in-out">Tamed Dino Kills</button>
                     </div>
                 </div>
-            </div>
+            </div>*/}
 
         </div>
         {/* Table */}

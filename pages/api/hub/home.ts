@@ -86,7 +86,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
   const permission_array = player_permission_groups?.PermissionGroups.concat(player_permission_groups.TimedPermissionGroups)
 
-  let points: ShopPoints = getShopData(user);
+  let points: any = getShopData(user);
 
   const pvp_status = await prisma.pvpve_tribes.findFirst({
     where: { TribeID: parseInt(w_player_data.TribeID) },
