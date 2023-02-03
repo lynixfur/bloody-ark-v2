@@ -21,7 +21,6 @@ function PageEditor() {
 
     useEffect(() => {
         if (data?.selected_page != undefined && data?.selected_page?.title != undefined) {
-            console.log(data?.selected_page);
             setSelectedPage(data?.selected_page);
             setIsEditing(true);
         }
@@ -47,8 +46,6 @@ function PageEditor() {
         setIsEditing(false);
         setSelectedPage({});
         setSelectedPageID({});
-
-        console.log(id)
 
         // Reset Status
         setSuccessStatus(null);

@@ -21,7 +21,6 @@ let fetcher = async () => {
 }
 
 const FadeInDirection = ({ delay, isVisible, children }: any) => {
-  console.log(delay);
   const props_test = useSpring({
     delay: delay,
     opacity: isVisible ? 1 : 0,
