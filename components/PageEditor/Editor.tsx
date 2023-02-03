@@ -3,7 +3,7 @@ import { useCallback, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
-const Editor = ({ page, handleBack }: any) => {
+const Editor = ({ page, handleBack, handleSave }: any) => {
 
     const [pageContent, setPageContent] = useState(page?.content);
 
@@ -47,7 +47,7 @@ const Editor = ({ page, handleBack }: any) => {
                     <input className="w-full bg-bgray-secondary text-gray-400 border border-bgray-border ml-3 w-1/2 my-auto focus:outline-none" value={page?.page_icon} />
                 </div>
                 <div className="flex justify-center mb-3 mt-5">
-                    <Link href="#" className="block py-2 pr-4 pl-3 text-white bg-red-600 rounded-full p-4 font-bold transition-colors"><i className="fas fa-folder mr-2"></i>Save Changes</Link>
+                    <button onClick={() => { handleSave(page?._id, page?.str_id, page?.title, page?.page_icon, page?.page_content) }} className="block py-2 pr-4 pl-3 text-white bg-red-600 rounded-full p-4 font-bold transition-colors"><i className="fas fa-folder mr-2"></i>Save Changes</button>
                 </div>
             </div>
         </>
