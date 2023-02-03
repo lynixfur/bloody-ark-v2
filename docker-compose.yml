@@ -1,0 +1,16 @@
+version: '3'
+services:
+  bloodyarkv2:
+    container_name: BloodyARK
+    build:
+      context: ./
+    env_file:
+      - ./.env
+    ports:
+      - 3000:3000
+  mongo:
+    container_name: MongoDB
+    build:
+      context: ./mongo
+    ports:
+      - 27017:27017
