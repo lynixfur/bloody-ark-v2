@@ -1,4 +1,5 @@
 import HubLayout from "@/components/HubLayout"
+import Editor from "@/components/PageEditor/Editor";
 import fetcher from "@/lib/fetcher";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
@@ -7,46 +8,53 @@ import remarkGfm from "remark-gfm";
 import useSWR from 'swr'
 
 function PageEditor() {
-    const [pageContent, setPageContent] = useState('');
+    
+    const [isEditing, setIsEditing] = useState(false); // Used
+    const [selectedPage, setSelectedPage] = useState({}); // Used
+    const [selectedPageID, setSelectedPageID] = useState({}); // Used
 
-    const handleOnChange = useCallback(({ target: { value } }: any) => {
-        setPageContent(value);
-    }, []);
+    const { data, error }: any = useSWR(`/api/hub/page_editor?id=${selectedPageID}`, fetcher)
 
-
-    /* Select Page */
-    const [isEditing, setIsEditing] = useState(true);
-    const [errorStatus, setErrorStatus] = useState(false);
-    const [errorMsg, setErrorMsg] = useState('');
-    const [filterPage, setFilterPage] = useState('');
-
-    const { data, error }: any = useSWR(`/api/hub/page_editor?id=${filterPage}`, fetcher)
-
-    // Sending Data
-    const [isSending, setIsSending] = useState(false)
-
-    /*useEffect(() => {
-        setPageContent(data?.selected_page?.content);
-    }, [data?.selected_page]);*/
+    useEffect(() => {
+        if(data?.selected_page != undefined && data?.selected_page?.title != undefined) {
+            console.log(data?.selected_page);
+            setSelectedPage(data?.selected_page);
+            setIsEditing(true);
+        }
+    }, [data]);
 
     const handleSelectPage = useCallback(async (page_id: string) => {
-        // Set to Editor Mode
-        setIsEditing(true);
+        setSelectedPageID(page_id);
+    }, [])
 
-        // Fetch The Data and Set it to Selected Page Data
-        setFilterPage(page_id);
-        setPageContent(data?.selected_page?.content);
+    const handleBack = useCallback(async () => {
+        // Remove Selected Page
+        setIsEditing(false);
+        setSelectedPage({});
+        setSelectedPageID({});
+    }, [])
 
-        if (data?.selected_page) {
+    const handleSave = useCallback(async ({page_id, title, page_icon, page_content}: any) => {
+        // Remove Selected Page
+        setIsEditing(false);
+        setSelectedPage({});
+        setSelectedPageID({});
 
-        } else {
-            console.error("An error occured! Failed to Load Page Data.")
-            setIsEditing(false);
-            setErrorStatus(true);
-            setErrorMsg("Page ID : " + page_id);
-        }
-    }, [isSending]) // update the callback if the state changes
+        // Send Data to Server
+        const res = await fetch('/api/hub/page_editor', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id: page_id,
+                title: title,
+                page_icon: page_icon,
+                page_content: page_content
+            })
+        })
 
+    }, [])
 
     return (
         <>
@@ -73,8 +81,6 @@ function PageEditor() {
 
                 {!isEditing && <div className="p-5">
                     <h1 className="text-white text-2xl font-bold mb-4">Available Pages</h1>
-                    {errorStatus && <div className="py-2 mb-4"><p className="text-base text-red-600 font-bold text-center"><i className="fa-solid fa-exclamation-triangle"></i> An error occured while loading the page content!<br/>{errorMsg}</p></div>}
-
                     <div className="flex flex-col space-y-3">
                         {data?.all_pages?.map((page_link: any) => (
                             <div key={page_link?._id} onClick={() => handleSelectPage(page_link?._id)} className="bg-bgray-secondary border border-bgray-border px-3 py-3 text-white hover:cursor-pointer">
@@ -84,6 +90,8 @@ function PageEditor() {
                         ))}
                     </div>
                 </div>}
+
+                {isEditing && <Editor page={selectedPage} handleBack={handleBack} handleSave={handleSave} />}
 
             </HubLayout>
         </>

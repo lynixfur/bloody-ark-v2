@@ -3,18 +3,19 @@ import { useCallback, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
-const Editor = ({ page }: any) => {
+const Editor = ({ page, handleBack }: any) => {
 
-    const [pageContent, setPageContent] = useState('');
+    const [pageContent, setPageContent] = useState(page?.content);
 
     const handleOnChange = useCallback(({ target: { value } }: any) => {
         setPageContent(value);
     }, []);
 
+
     return (
         <>
             <div className="p-5">
-                <div className="flex items-center mb-5"><button onClick={() => { console.log("Things here.") }} className="block py-2 pr-4 pl-3 text-black bg-white rounded-full p-4 font-bold transition-colors my-auto mr-2"><i className="fas fa-arrow-left mr-1"></i> Back</button> <h1 className="text-white text-2xl font-bold my-auto">Currently Editing - {page?.title}</h1></div>
+                <div className="flex items-center mb-5"><button onClick={() => { handleBack() }} className="block py-2 pr-4 pl-3 text-black bg-white rounded-full p-4 font-bold transition-colors my-auto mr-2"><i className="fas fa-arrow-left mr-1"></i> Back</button> <h1 className="text-white text-2xl font-bold my-auto">Currently Editing - {page?.title}</h1></div>
                 <div className="flex space-x-5">
                     <div className="w-1/2">
                         <p className="text-gray-400  font-semibold"><i className="fa-solid fa-pen-to-square mr-2"></i> Editor</p>
