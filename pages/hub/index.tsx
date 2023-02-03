@@ -182,12 +182,12 @@ export default function HubDashboard() {
               </div>
             </div>
           </div>
-          <div className="py-4 bg-blue-600" onClick={() => setPatchnotes(true)}><p className="text-base text-white font-bold text-center"><i className="fa-solid fa-star"></i> Welcome to the 2023 UI Update Preview! We hope you will enjoy all the new features and additions!</p></div>
-          <div className="py-4 bg-red-600"><p className="text-base text-white font-bold text-center"><i className="fa-solid fa-compass fa-spin"></i> Wipe Time! We&apos;re currently preparing for the next season of Bloody ARK, Season 5!</p></div>
+          <div className="py-4 bg-blue-600 hidden" onClick={() => setPatchnotes(true)}><p className="text-base text-white font-bold text-center"><i className="fa-solid fa-star"></i> Welcome to the 2023 UI Update Preview! We hope you will enjoy all the new features and additions!</p></div>
+          <div className="py-4 bg-red-600 hidden"><p className="text-base text-white font-bold text-center"><i className="fa-solid fa-compass fa-spin"></i> Wipe Time! We&apos;re currently preparing for the next season of Bloody ARK, Season 5!</p></div>
 
           <div className="hub_page px-3 sm:px-20 py-10">
             {/* Important Notifications + Dismiss */}
-            <div className="w-full bg-bgray-secondary rounded-xl px-5 py-3 mt-2 border-bgray-border border mb-2">
+            <div className="hidden w-full bg-bgray-secondary rounded-xl px-5 py-3 mt-2 border-bgray-border border mb-2">
               <h1 className="text-white text-xl"><i className="fa-solid fa-envelope"></i> You&apos;ve been invited to a Tribe!</h1>
               <p className="text-gray-400">This is a example notification for a preview.</p>
             </div>

@@ -15,6 +15,7 @@ function PageEditor() {
 
     const [sendingData, setSendingData] = useState(false);
     const [successStatus, setSuccessStatus] = useState(null);
+    const [statusMsg, setStatusMsg] = useState('');
 
     const { data, error }: any = useSWR(`/api/hub/page_editor?id=${selectedPageID}`, fetcher)
 
@@ -38,6 +39,7 @@ function PageEditor() {
 
         // Reset Status
         setSuccessStatus(null);
+        setStatusMsg('');
     }, [])
 
     const handleSave = useCallback(async (id: any, strId: any, title: any, pageIcon: any, pageContent: any) => {
@@ -50,6 +52,7 @@ function PageEditor() {
 
         // Reset Status
         setSuccessStatus(null);
+        setStatusMsg('');
 
         // Send Data to Server
         setSendingData(true);
@@ -71,6 +74,9 @@ function PageEditor() {
         if (res.ok) {
             setSendingData(false);
             setSuccessStatus(json.success);
+            if(json.message) {
+                setStatusMsg(json.message);
+            }
         }
 
 
@@ -106,7 +112,7 @@ function PageEditor() {
                         <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg> Saving Changes...</p>}
                     {successStatus == false &&
-                        <p className="my-5 text-red-600 font-semibold"><i className="fa-solid fa-triangle-exclamation mr-1"></i> Something went wrong, try again later!</p>
+                        <p className="my-5 text-red-600 font-semibold"><i className="fa-solid fa-triangle-exclamation mr-1"></i> {statusMsg ? statusMsg : 'Something went wrong, try again later!'}</p>
                     }
                     {successStatus == true &&
                         <p className="my-5 text-green-600 font-semibold"><i className="fa-solid fa-check mr-1"></i> Changes saved succesfully!</p>
