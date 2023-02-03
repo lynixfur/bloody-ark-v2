@@ -390,13 +390,14 @@ export default function HubSidebar() {
                   className="flex items-center p-2 text-base font-normal rounded-lg text-gray-400 hover:bg-bgray-bg transition-colors group"
                 >
                   <span className="ml-3">
-                    <i className="fa-solid fa-chart-simple my-auto mr-2" /> Analytics
+                    <i className="fa-solid fa-circle-exclamation my-auto mr-2"></i> Service Logs <span className="ml-2 bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">1</span>
+
                   </span>
                 </Link>
               </li>
               <li className="">
                 <Link
-                  href="/hub/a/page_editor"
+                  href="/hub/page_editor"
                   className="flex items-center p-2 text-base font-normal rounded-lg text-gray-400 hover:bg-bgray-bg transition-colors group"
                 >
                   <span className="ml-3">
@@ -416,7 +417,7 @@ export default function HubSidebar() {
               </li></>}
           </ul>
         </div>
-        <div className="hidden absolute bottom-0 left-0 justify-left py-1 px-4 space-x-4 w-full lg:flex bg z-20 border-r border-bgray-border">
+        <div className="hidden absolute bottom-0 left-0 justify-left py-1 px-4 space-x-4 w-full lg:flex bg z-20 border-r border-bgray-border mb-5">
           <Link
             href="#"
             data-tooltip-target="tooltip-settings"
@@ -424,13 +425,12 @@ export default function HubSidebar() {
           >
             <div className="flex">
               <img
-                className="h-12 w-12 rounded-full mr-3 border-2 border-gray-500"
+                className="h-10 w-10 rounded-full mr-3 shadow-lg"
                 src={user?.avatarUrl}
                 alt={user?.username}
               />
-              <div>
-                <p className="m-0">{user?.username}</p>
-                <p className="m-0">Permission Level {userSettings?.permission_level}</p>
+              <div className="my-auto">
+                <p className="m-0 font-semibold">{user?.username}</p>
               </div>
             </div>
           </Link>
