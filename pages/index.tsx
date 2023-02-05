@@ -6,6 +6,8 @@ import ReactMarkdown from 'react-markdown'
 import Footer from "../components/footer";
 import { env } from "process";
 import Link from "next/link";
+import TopTribe from "@/components/TopTribe";
+import SeasonCountdown from "@/components/SeasonCountdown";
 
 /* Animations */
 import VisibilitySensor from "react-visibility-sensor";
@@ -55,16 +57,18 @@ function Home({ homepage_options, player_count, news }: any) {
               tabIndex={0}
               className="focus:outline-none text-4xl lg:text-4xl font-extrabold text-center leading-10 text-gray-300 py-4 mb-10"
             >
-              %SECTION_NAME_INVALID%
+              Seasonal Information
             </h1>
             <div className="flex justify-center text-white">
-              <div className="flex w-full space-x-3">
+              <div className="flex w-full px-10">
 
-                <div className="w-1/2 text-center bg-bgray-secondary">
-                  %SECTION_WIPE_COUNTDOWN%
+                <div className="w-1/2 text-center" style={{ background: 'url(https://preview.redd.it/q82kow7rz7m91.jpg?auto=webp&s=552cb5a950dea21c862928a193765862fe32ae84)', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
+                  <div className="flex justify-center items-center w-full h-full bg-bgray-bg bg-opacity-80">
+                    <SeasonCountdown />
+                  </div>
                 </div>
                 <div className="w-1/2 text-center bg-bgray-secondary">
-                  %SECTION_SEASON_TOP_TRIBE%
+                  <TopTribe />
                 </div>
               </div>
             </div>
