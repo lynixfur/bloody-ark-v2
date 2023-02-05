@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import useSWR from "swr";
 import fetcher from "../../lib/fetcher";
+import FilterDropdown from "../dropdowns/FilterDropdown";
 
 const PlayerLeaderboard = () => {
 
@@ -21,23 +22,22 @@ const PlayerLeaderboard = () => {
         };
     }, [search]);
 
-    /* Cluster Dropdown */
-    const [clusterDropdown, setClusterDropdown] = useState(false);
-    const handleClusterDropdown = () => setClusterDropdown(!clusterDropdown);
-
-    /* Filter Dropdown */
-    const [filterDropdown, setFilterDropdown] = useState(false);
-    const handleFilterDropdown = () => setFilterDropdown(!filterDropdown);
-
     /* Pagination */
     const [filterPage, setFilterPage] = useState(0);
     const prevPage = () => { setFilterPage(filterPage - 1) };
     const nextPage = () => { setFilterPage(filterPage + 1) };
 
+    /* Filter */
+    const [filter, setFilter] = useState('Kills');
+
+    const handleFilter = (filter: string) => {
+        console.log(filter);
+        setFilter(filter);
+    }
 
     /* Get Data */
 
-    const { data, error }: any = useSWR(`/api/player_rankings?search=${debounceSearch}&page=${filterPage}`, fetcher)
+    const { data, error }: any = useSWR(`/api/v2/leaderboards/players?search=${debounceSearch}&page=${filterPage}&filter=${filter}`, fetcher)
 
     var ranking_players: any[] = [];
 
@@ -52,9 +52,9 @@ const PlayerLeaderboard = () => {
         ranking_players.push(player);
     })
 
-    ranking_players.sort(function (a, b) {
+    /*ranking_players.sort(function (a, b) {
         return parseFloat(b.kd) - parseFloat(a.kd);
-    });
+    });*/
 
     return (<>
         <h2 className="font-extrabold text-gray-300 uppercase text-xl mt-5">
@@ -66,19 +66,7 @@ const PlayerLeaderboard = () => {
                 onChange={handleOnChange}
                 placeholder="Search for Players" name="tribe_search" id="tribe_search" className="px-3 py-2 text-gray-300 bg-bgray-overlay w-1/2 border-gray-700 border rounded-full" />
 
-            {/*<div className="relative">
-                <button onClick={handleFilterDropdown} className="px-3 py-2 text-white bg-bgray-overlay font-bold rounded-full">
-                    Sort By : ??? <i className="ml-1 fa-solid fa-angle-down" />
-                </button>
-                <div className={filterDropdown ? 'absolute z-50 mt-3 w-48 shadow-lg origin-top-left left-0' : 'hidden z-50 mt-3 w-48 shadow-lg origin-top-left left-0'}>
-                    <div className="ring-1 ring-black ring-opacity-5 py-1 bg-bgray-overlay rounded-2xl">
-                        <button className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-100 hover:bg-bgray-secondary focus:outline-none focus:bg-mesa-gray transition duration-150 ease-in-out">Play Time</button>
-                        <button className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-100 hover:bg-bgray-secondary focus:outline-none focus:bg-mesa-gray transition duration-150 ease-in-out">Player Kills</button>
-                        <button className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-100 hover:bg-bgray-secondary focus:outline-none focus:bg-mesa-gray transition duration-150 ease-in-out">Player Deaths</button>
-                        <button className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-100 hover:bg-bgray-secondary focus:outline-none focus:bg-mesa-gray transition duration-150 ease-in-out">Tamed Dino Kills</button>
-                    </div>
-                </div>
-            </div>*/}
+            <FilterDropdown dropdownTitle={`Filter by : ${filter}`} dropdownItems={["Time Played", "Kills", "Deaths", "Tamed Dino Kills"]} callback={handleFilter} />
 
         </div>
         {/* Table */}

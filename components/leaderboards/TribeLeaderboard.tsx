@@ -3,8 +3,10 @@ import { useCallback, useEffect, useState } from "react";
 import useSWR from "swr";
 import fetcher from "../../lib/fetcher";
 import { Dropdown } from "../Dropdown"
+import FilterDropdown from '../dropdowns/FilterDropdown';
 
 const TribeLeaderboard = () => {
+
 
     /* Search Box */
     const [search, setSearch] = useState('');
@@ -23,21 +25,21 @@ const TribeLeaderboard = () => {
         };
     }, [search]);
 
-    /* Cluster Dropdown */
-    const [clusterDropdown, setClusterDropdown] = useState(false);
-    const handleClusterDropdown = () => setClusterDropdown(!clusterDropdown);
-
-    /* Filter Dropdown */
-    const [filterDropdown, setFilterDropdown] = useState(false);
-    const handleFilterDropdown = () => setFilterDropdown(!filterDropdown);
-
     /* Pagination */
     const [filterPage, setFilterPage] = useState(0);
     const prevPage = () => { setFilterPage(filterPage - 1) };
     const nextPage = () => { setFilterPage(filterPage + 1) };
 
+    /* Filter */
+    const [filter, setFilter] = useState('Tribe Damage');
+
+    const handleFilter = (filter: string) => {
+        console.log(filter);
+        setFilter(filter);
+    }
+
     /* Get Data */
-    const { data, error }: any = useSWR(`/api/tribe_rankings?search=${debounceSearch}&page=${filterPage}`, fetcher)
+    const { data, error }: any = useSWR(`/api/v2/leaderboards/tribes?search=${debounceSearch}&page=${filterPage}&filter=${filter}`, fetcher)
 
     return (<>
         <h2 className="font-extrabold text-gray-300 uppercase text-xl mt-5">
@@ -49,31 +51,8 @@ const TribeLeaderboard = () => {
                 value={search}
                 onChange={handleOnChange}
                 placeholder="Search for Tribes" name="tribe_search" id="tribe_search" className="px-3 py-2 text-gray-300 bg-bgray-overlay w-1/2 border-gray-700 border rounded-full" />
-
-            {/*<div className="relative">
-                <button onClick={() => {setFilterDropdown(!filterDropdown)}} className="px-3 py-2 text-white bg-bgray-overlay font-bold rounded-full">
-                    Sort By : {filterDropdown.toString()} <i className="ml-1 fa-solid fa-angle-down" />
-                </button>
-                <Transition
-                    show={filterDropdown}
-                    enter="transition ease-out duration-75"
-                    enterFrom="transform opacity-0 scale-95"
-                    enterTo="transform opacity-100 scale-100"
-                    leave="transition ease-in duration-150"
-                    leaveFrom="transform opacity-100 scale-100"
-                    leaveTo="transform opacity-0 scale-95">
-                    <div className={'absolute z-50 mt-3 w-48 shadow-lg origin-top-left left-0'}>
-                        <div className="ring-1 ring-black ring-opacity-5 py-1 bg-bgray-secondary border border-bgray-border rounded-2xl">
-                            <button className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-100 hover:bg-mesa-gray focus:outline-none focus:bg-mesa-gray transition duration-150 ease-in-out">Kills</button>
-                            <button className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-100 hover:bg-mesa-gray focus:outline-none focus:bg-mesa-gray transition duration-150 ease-in-out">Deaths</button>
-                            <button className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-100 hover:bg-mesa-gray focus:outline-none focus:bg-mesa-gray transition duration-150 ease-in-out">Tame Kills</button>
-                            <button className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-100 hover:bg-mesa-gray focus:outline-none focus:bg-mesa-gray transition duration-150 ease-in-out">Time Played</button>
-                        </div>
-                    </div>
-                </Transition>
-    </div>
-    <Dropdown/>*/}
-
+            
+            <FilterDropdown dropdownTitle={`Filter by : ${filter}`} dropdownItems={["Tribe Damage", "Kills", "Deaths", "Tame Kills", "Time Played"]} callback={handleFilter}/>
         </div>
 
         <div className="pb-12">
