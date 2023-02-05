@@ -22,9 +22,7 @@ const Editor = ({ page, handleBack, handleSave }: any) => {
                 <div className="flex space-x-5">
                     <div className="w-1/2">
                         <p className="text-gray-400  font-semibold"><i className="fa-solid fa-pen-to-square mr-2"></i> Editor</p>
-                        <textarea className="w-full bg-bgray-secondary text-gray-400 border border-bgray-border mt-5" value={pageContent} onChange={handleOnChange} rows={50} cols={50}>
-
-                        </textarea>
+                        <textarea className="w-full bg-bgray-secondary text-gray-400 border border-bgray-border mt-5" value={pageContent} onChange={handleOnChange} rows={50} cols={50}/>
                     </div>
                     <div className="w-1/2">
                         <p className="text-gray-400 font-semibold"><i className="fa-solid fa-image mr-2"></i> Preview</p>
