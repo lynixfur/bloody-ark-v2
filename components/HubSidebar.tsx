@@ -351,7 +351,7 @@ export default function HubSidebar() {
             </li>
             <li className="">
               <Link
-                href="#Portal"
+                href="https://portal.bloody-ark.com"
                 className="flex items-center p-2 text-base font-normal rounded-lg text-gray-400 hover:bg-bgray-bg transition-colors group"
               >
                 <span className="ml-3">
@@ -390,7 +390,10 @@ export default function HubSidebar() {
                   className="flex items-center p-2 text-base font-normal rounded-lg text-gray-400 hover:bg-bgray-bg transition-colors group"
                 >
                   <span className="ml-3">
-                    <i className="fa-solid fa-circle-exclamation my-auto mr-2"></i> Service Logs <span className="ml-2 bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">1</span>
+                    <i className="fa-solid fa-shield my-auto mr-1.5"></i> Logs & Security 
+                    <span className="ml-2 text-xs font-medium mr-2 px-2.5 py-0.5 rounded bg-orange-900 text-orange-300">
+                      16
+                    </span>
 
                   </span>
                 </Link>

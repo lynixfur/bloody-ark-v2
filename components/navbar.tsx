@@ -151,6 +151,7 @@ function Navbar(props: any) {
               <div className={hubDropdown ? 'absolute z-50 mt-3 w-48 rounded-md shadow-lg origin-top-right right-0' : 'hidden z-50 mt-3 w-48 rounded-md shadow-lg origin-top-right right-0'}>
                 <div className="rounded-md ring-1 ring-black ring-opacity-5 py-1 bg-bgray-secondary">
                     <Link className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-100 hover:bg-bgray-forward focus:outline-none focus:bg-bgray-forward transition duration-150 ease-in-out" href="/hub">Bloody Hub</Link>
+                    <Link className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-100 hover:bg-bgray-forward focus:outline-none focus:bg-bgray-forward transition duration-150 ease-in-out" href="https://portal.bloody-ark.com">Bloody Portal</Link>
                     <Link className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-100 hover:bg-bgray-forward focus:outline-none focus:bg-bgray-forward transition duration-150 ease-in-out" href="/api/auth/logout">Logout</Link>
                 </div>
               </div>
