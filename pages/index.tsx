@@ -62,7 +62,7 @@ function Home({ homepage_options, player_count, news }: any) {
             <div className="flex justify-center text-white">
               <div className="flex w-full px-10">
 
-                <div className="w-1/2 text-center" style={{ background: 'url(https://preview.redd.it/q82kow7rz7m91.jpg?auto=webp&s=552cb5a950dea21c862928a193765862fe32ae84)', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
+                <div className="w-1/2 text-center" style={{ background: 'url(https://cdn.discordapp.com/attachments/885607142051184700/1071915271515807835/website_bg-min.png)', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
                   <div className="flex justify-center items-center w-full h-full bg-bgray-bg bg-opacity-80">
                     <SeasonCountdown />
                   </div>
