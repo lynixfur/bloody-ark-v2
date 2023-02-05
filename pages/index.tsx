@@ -55,76 +55,19 @@ function Home({ homepage_options, player_count, news }: any) {
               tabIndex={0}
               className="focus:outline-none text-4xl lg:text-4xl font-extrabold text-center leading-10 text-gray-300 py-4 mb-10"
             >
-              Announcements
+              %SECTION_NAME_INVALID%
             </h1>
-            <FadeInContainer delay={1}>
-              <div className="lg:flex items-center justify-center w-full mt-7 p-6 lg:px-[250px]">
-                <div
-                  aria-label="card 6"
-                  tabIndex={0}
-                  className="focus:outline-none lg:w-full lg:mr-7 lg:mb-0 mb-7 bg-bgray-secondary p-6 shadow rounded-2xl"
-                >
-                  <div className="flex items-center border-b border-gray-700 pb-6">
-                    <img
-                      src={news[0]?.avatar_url}
-                      className="w-12 h-12 bg-gray-600 rounded-full flex flex-shrink-0 object-cover" />
-                    <div className="flex items-start justify-between w-full">
-                      <div className="pl-3 w-full">
-                        <p
-                          tabIndex={0}
-                          className="focus:outline-none text-xl font-medium leading-5 text-gray-100"
-                        >
-                          {news[0]?.username}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    className="px-2 overflow-y-auto"
-                    style={{ height: "200px" }}
-                  >
-                    <div className="text-gray-100 px-4 py-3" role="alert">
-                      <div className="mt-5 prose prose-invert">
-                        <ReactMarkdown>
-                          {news[0]?.content}
-                        </ReactMarkdown>
-                      </div>
-                    </div>
-                  </div>
+            <div className="flex justify-center text-white">
+              <div className="flex w-full space-x-3">
+
+                <div className="w-1/2 text-center bg-bgray-secondary">
+                  %SECTION_WIPE_COUNTDOWN%
                 </div>
-                <div
-                  aria-label="card 6"
-                  tabIndex={0}
-                  className="focus:outline-none lg:w-full lg:mb-0 mb-7 bg-bgray-secondary p-6 shadow rounded-2xl"
-                >
-                  <div className="flex items-center border-b border-gray-700 pb-6">
-                    <img
-                      src={news[1]?.avatar_url}
-                      className="w-12 h-12 bg-gray-600 rounded-full flex flex-shrink-0 object-cover" />
-                    <div className="flex items-start justify-between w-full">
-                      <div className="pl-3 w-full">
-                        <p
-                          tabIndex={0}
-                          className="focus:outline-none text-xl font-medium leading-5 text-gray-100"
-                        >
-                          {news[1]?.username}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    className="px-2 overflow-y-auto"
-                    style={{ height: "200px" }}
-                  >
-                    <div className="text-gray-100 px-4 py-3" role="alert">
-                      <div className="mt-5 prose prose-invert">
-                        <ReactMarkdown>{news[1]?.content}</ReactMarkdown>
-                      </div>
-                    </div>
-                  </div>
+                <div className="w-1/2 text-center bg-bgray-secondary">
+                  %SECTION_SEASON_TOP_TRIBE%
                 </div>
               </div>
-            </FadeInContainer>
+            </div>
           </div>
           <div className="relative h-[400px] overflow-hidden bg-bgray-secondary">
             <div className="absolute z-20 flex w-full h-full">
@@ -154,17 +97,17 @@ function Home({ homepage_options, player_count, news }: any) {
                 <div className="relative w-1/3"><svg fill="currentColor" viewBox="0 0 100 100" className="absolute inset-y-0 z-20 h-full text-bgray-secondary">
                   <polygon id="diagonal" points="0,0 100,0 50,100 0,100"></polygon>
                 </svg>
-                <svg fill="currentColor" viewBox="0 0 100 100" className="absolute inset-y-0 z-10 h-full ml-6 text-bgray-forward opacity-50">
+                  <svg fill="currentColor" viewBox="0 0 100 100" className="absolute inset-y-0 z-10 h-full ml-6 text-bgray-forward opacity-50">
                     <polygon points="0,0 100,0 50,100 0,100"></polygon>
                   </svg></div>
               </div>
             </div>
             <div className="absolute top-0 right-0 block w-9/12 h-full">
-            <FadeInContainer delay={500}>
-              <img alt="Bloody Hub" className="object-cover object-top min-w-full h-full" src="https://cdn.discordapp.com/attachments/885607142051184700/1070148603470938213/image.png" />
+              <FadeInContainer delay={500}>
+                <img alt="Bloody Hub" className="object-cover object-top min-w-full h-full" src="https://cdn.discordapp.com/attachments/885607142051184700/1070148603470938213/image.png" />
               </FadeInContainer>
-              </div>
-              
+            </div>
+
           </div>
           <div className="bg-bgray-secondary hidden">
             <FadeInContainer delay={1}><div className="lg:grid lg:grid-cols-2">

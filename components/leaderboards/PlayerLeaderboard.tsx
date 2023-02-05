@@ -261,13 +261,13 @@ const PlayerLeaderboard = () => {
             )}
             {data &&
                 <>
-                    <p className="text-gray-300">Page <strong>{data?.pagination?.current_page + 1}</strong> of <strong>{data?.pagination?.total_pages + 1}</strong></p>
+                    <p className="text-gray-300">Page <strong>{data?.pagination?.current_page + 1}</strong> of <strong>{data?.pagination?.total_pages}</strong></p>
                     <div className="flex space-x-2 mt-3">
-                        {data?.pagination?.prev ?
+                        {data?.pagination?.current_page > 0  ?
                             <button onClick={prevPage} className="inline-flex items-center px-3 py-1 font-bold leading-6 text-md shadow rounded-full text-gray-100  bg-bgray-overlay transition ease-in-out duration-150">  <i className="fa-solid fa-arrow-left m-1 mr-2 my-auto"></i> Previous</button>
                             : <></>
                         }
-                        {data?.pagination?.next ?
+                        {data?.pagination?.current_page < data?.pagination?.total_pages && data?.pagination?.current_page != data?.pagination?.total_pages ?
                             <button onClick={nextPage} className="inline-flex items-center px-3 py-1 font-bold leading-6 text-md shadow rounded-full text-gray-100 bg-bgray-overlay transition ease-in-out duration-150">  Next <i className="fa-solid fa-arrow-right m-1 ml-1 my-auto"></i></button>
                             : <></>
                         }
