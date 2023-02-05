@@ -107,7 +107,7 @@ function PageEditor() {
                         <i className="fa-solid fa-shield"></i> Security Vurnerabilities
                     </h1>
                     <div className="my-5 mx-3">
-                        <p className="text-green-600 font-semibold"><i className="fa-solid fa-check mr-1"></i>You're all set, no Security Vurnerabilities were found in the Bloody Hub!</p>
+                        <p className="text-green-600 font-semibold"><i className="fa-solid fa-check mr-1"></i>You&apos;re all set, no Security Vurnerabilities were found in the Bloody Hub!</p>
                     </div>
                     <h1 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-gray-200">
                         <i className="fa-solid fa-file-lines"></i> Logs
