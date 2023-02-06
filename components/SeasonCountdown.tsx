@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import moment from "moment";
 
 function SeasonCountdown() {
-    const countDownDate = new Date("Mar 2, 2023 19:00:00 GMT+1:00").getTime();
+    const countDownDate = new Date("Apr 2, 2023 19:00:00 GMT+1:00").getTime();
 
     const [countDown, setCountDown] = useState(
         countDownDate - new Date().getTime()
@@ -45,10 +45,10 @@ function SeasonCountdown() {
                 tabIndex={0}
                 className="focus:outline-none text-2xl font-bold text-center leading-10 text-gray-300"
             >
-                Season 5 Wipe Countdown
+                Top Tribes
             </h1>
-            <p className="text-center text-white text-3xl font-bold">{countDownData.days} Days {countDownData.hours} Hours {countDownData.minutes} Minutes {countDownData.seconds} Seconds</p>
-            <p className="text-center text-gray-400 text-xl mt-2">{moment(countDownDate).format('MMMM Do YYYY, h:mm:ss a')}</p>
+            <p className="text-center text-white text-3xl font-bold">See who is the Alpha Tribe this Season!</p>
+            {/*<p className="text-center text-gray-400 text-xl mt-2">{moment(countDownDate).format('MMMM Do YYYY, h:mm:ss a')}</p>*/}
         </div>
     );
 }
