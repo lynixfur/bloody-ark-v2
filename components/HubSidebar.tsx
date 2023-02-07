@@ -262,7 +262,7 @@ export default function HubSidebar() {
         aria-label="Sidenav"
       >
         <div className="overflow-y-auto py-5 px-3 h-full bg-bgray-secondary border-r border-bgray-border">
-          <ul className="space-y-2">
+          <ul className="space-y-2 pb-16">
             <li className="mb-5">
               <div className="ml-4">
                 <Link
@@ -290,7 +290,7 @@ export default function HubSidebar() {
             </li>
             <li className="">
               <Link
-                href="#WebShop"
+                href="/hub/webshop"
                 className="flex items-center p-2 text-base font-normal rounded-lg text-gray-400 hover:bg-bgray-bg transition-colors group"
               >
                 <span className="ml-3">
@@ -300,7 +300,7 @@ export default function HubSidebar() {
             </li>
             <li className="">
               <Link
-                href="#WebShop"
+                href="/hub/roulette"
                 className="flex items-center p-2 text-base font-normal rounded-lg text-gray-400 hover:bg-bgray-bg transition-colors group"
               >
                 <span className="ml-3">
@@ -376,11 +376,11 @@ export default function HubSidebar() {
               </li>
               <li className="">
                 <Link
-                  href="#ServerManager"
+                  href="/hub/live_map"
                   className="flex items-center p-2 text-base font-normal rounded-lg text-gray-400 hover:bg-bgray-bg transition-colors group"
                 >
                   <span className="ml-3">
-                    <i className="fa-solid fa-newspaper my-auto mr-2" /> Announcements
+                    <i className="fa-solid fa-map my-auto mr-2" /> Live Map
                   </span>
                 </Link>
               </li>
@@ -420,7 +420,7 @@ export default function HubSidebar() {
               </li></>}
           </ul>
         </div>
-        <div className="hidden absolute bottom-0 left-0 justify-left py-1 px-4 space-x-4 w-full lg:flex bg z-20 border-r border-bgray-border mb-5">
+        <div className="hidden absolute bottom-0 left-0 justify-left py-1 px-4 space-x-4 w-full lg:flex bg z-20 border-r border-bgray-border bg-bgray-secondary border-t">
           <Link
             href="#"
             data-tooltip-target="tooltip-settings"
