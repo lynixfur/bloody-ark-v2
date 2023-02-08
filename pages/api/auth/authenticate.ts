@@ -19,6 +19,27 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
         avatarUrl: steamUser.avatar.large,
       };
 
+      // Connect to Database
+      const { db } = await connectToDatabase();
+
+      // Check if User exists
+       let user_cache: any = await db
+          .collection("users")
+          .findOne({ steam_id: req.session.user.userId }, {projection: { _id: 0, permission_level: 1 }});
+      
+      if(user_cache) {
+        console.log("[Cache] User already has userdata stored in Cache!")
+      } else {
+        console.log("[Cache] Creating Userdata...")
+        await db.collection("users").insertOne({
+          username: steamUser.username,
+          steam_id: steamUser.steamid,
+          avatar_url: steamUser.avatar,
+          permission_level: 0
+        })
+      }
+
+
       await req.session.save();
 
       return res.redirect("/hub");

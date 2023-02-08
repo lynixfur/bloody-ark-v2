@@ -138,7 +138,34 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
   const quick_servers = await db.collection("servers").find({visible: true}).sort({ players: -1 }).limit(4).project({  name: 1, visible: 1, connection_url: 1, geolocation: 1, server_bg: 1, server_icon: 1, is_online: 1, players: 1  }).toArray();
     
+  /* Quick Information */
+  const player_performance_data = await prisma.advancedachievements_playerdata.findFirst({
+    where: { SteamID: BigInt(user.userId) },
+    select: {
+      SteamID: false,
+      PlayerName: false,
+      TribeName: false,
+      TribeID: false,
+      PlayTime: true,
+      PlayerKills: true,
+      DinoKills: true,
+      WildDinoKills: true,
+      DinosTamed: true,
+      DeathByPlayer: true,
+      DeathByDino: true,
+      DeathByWildDino: true, 
+    }
+  });
 
+  const safe_performance_data = JSON.parse(JSON.stringify(player_performance_data, (key, value) => typeof value === 'bigint' ? value.toString() : value ));
+  
+  const servers = await db.collection("servers").find({}).project({ is_online: 1, players: 1, arkservers_api_key: 1 }).toArray();
+    
+  var global_count = 0;
+
+  servers.forEach(async (server: any) => {
+      global_count += parseInt(server.players);
+  })
 
   /* Return All Required Data */
   res.status(200).json({
@@ -164,6 +191,11 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
           chat_msgs: {
             error: "Unsupported by Shadowmane API v2.0, Please wait for ShadowmaneAPI v2.1"
           }
+      },
+      quick_info: {
+        kills: safe_performance_data?.PlayerKills,
+        time: safe_performance_data?.PlayTime,
+        players: global_count
       },
       extra_data: {
         points: points?.Points,

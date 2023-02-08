@@ -49,7 +49,7 @@ export default function HubDashboard() {
                 <title>Bloody ARK Hub</title>
             </Head>
             <Layout>
-                <div className="w-full">
+                <div className="w-full hidden">
                     <div className="h-full w-full" style={{ background: 'url(https://preview.redd.it/q82kow7rz7m91.jpg?auto=webp&s=552cb5a950dea21c862928a193765862fe32ae84)', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
                         <div className="w-full h-full bg-bgray-bg bg-opacity-70">
                             <div className="flex h-full px-3 py-4 sm:p-10 md:p-0">

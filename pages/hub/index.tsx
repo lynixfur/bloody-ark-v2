@@ -145,19 +145,19 @@ export default function HubDashboard() {
 
                                 <div className="h-24 w-[170px] bg-bgray-secondary bg-opacity-90 border-bgray-border border rounded-2xl py-3">
                                   <p className="text-center text-4xl text-gray-400"><i className="fa-solid fa-clock"></i></p>
-                                  <p className="text-center text-gray-400 mt-2">90 hrs</p>
+                                  <p className="text-center text-gray-400 mt-2">{data?.quick_info?.time ? (parseInt(data?.quick_info?.time) / 60).toFixed(2) : 0}  hrs</p>
                                 </div>
 
 
                                 <div className="h-24 w-[170px] bg-bgray-secondary bg-opacity-90 border-bgray-border border rounded-2xl py-3">
                                   <p className="text-center text-4xl text-gray-400"><i className="fa-solid fa-user"></i></p>
-                                  <p className="text-center text-gray-400 mt-2">0 Players Online</p>
+                                  <p className="text-center text-gray-400 mt-2">{data?.quick_info?.players ? data?.quick_info?.players : 0} Players Online</p>
                                 </div>
 
 
                                 <div className="h-24 w-[170px] bg-bgray-secondary bg-opacity-90 border-bgray-border border rounded-2xl py-3">
                                   <p className="text-center text-4xl text-gray-400"><i className="fa-solid fa-khanda"></i></p>
-                                  <p className="text-center text-gray-400 mt-2">593 Kills</p>
+                                  <p className="text-center text-gray-400 mt-2">{data?.quick_info?.kills ? data?.quick_info?.kills : 0} Kills</p>
                                 </div>
 
                               </div>
@@ -177,16 +177,49 @@ export default function HubDashboard() {
 
           <div className="hub_page px-3 sm:px-20 py-10">
             {/* Important Notifications + Dismiss */}
-            <div className="hidden w-full bg-bgray-secondary rounded-xl px-5 py-3 mt-2 border-bgray-border border mb-2">
-              <h1 className="text-white text-xl"><i className="fa-solid fa-envelope"></i> You&apos;ve been invited to a Tribe!</h1>
-              <p className="text-gray-400">This is a example notification for a preview.</p>
-            </div>
+            {data?.notifications?.join_requests?.map((request: any) => {
+              return (
+                <div key={request} className="w-full bg-bgray-secondary rounded-xl px-5 py-3 mt-2 border-bgray-border border mb-2">
+                  <h1 className="text-white text-xl"><i className="fa-solid fa-envelope"></i> Join Request by {request?.survivor?.playername}</h1>
+                  <p className="text-gray-400">A player named{" "}
+                    <strong>
+                      {request?.survivor?.playername}
+                    </strong>{" "}
+                    has requested to join your tribe. Please type in-game{" "}
+                    <strong>
+                      /tribe acceptreq &apos;{request?.survivor?.playername}&apos;
+                    </strong>{" "}
+                    to invite them.</p>
+                </div>)
+            })}
+
+            {data?.notifications?.invites?.map((invite: any) => {
+              return (
+                <div key={invite} className="w-full bg-bgray-secondary rounded-xl px-5 py-3 mt-2 border-bgray-border border mb-2">
+                  <h1 className="text-white text-xl"><i className="fa-solid fa-envelope"></i> Tribe Invite from {invite.tribe.tribename}</h1>
+                  <p className="text-gray-400">You have been invited to the tribe of{" "}
+                    <strong>
+                      {invite.tribe.tribename}
+                    </strong>{" "}
+                    on the map of
+                    {" "}<strong>
+                      {invite.tribe.map}
+                    </strong>{" "}
+                    . Please type in-game
+                    {" "}<strong>
+                      /tribe acceptinvite &apos;{invite.tribe.tribename}&apos;
+                    </strong>{" "}
+                    to join.</p>
+                </div>)
+            })}
+
+
 
             <h1 className="text-white text-2xl font-bold">Quick Server Access</h1>
             <div className="grid  mt-4 gap-8 grid-cols-1 md:grid-cols-3 xl:grid-cols-4 mb-5">
               {data?.quick_servers?.map((server: any, i: any) => (
                 <FadeInContainer key={server?.name} delay={200 * i}>
-                  <ServerCardNew server={server}/>
+                  <ServerCardNew server={server} />
                 </FadeInContainer>
               ))}
             </div>

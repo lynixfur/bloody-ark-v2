@@ -6,16 +6,12 @@ import Layout from '../../../components/HubLayout'
 import useSWR from 'swr'
 import { env } from "process";
 import Link from "next/link";
+import fetcher from "@/lib/fetcher";
 
-let fetcher = async () => {
-  const response = await fetch(`/api/hub/tribe_manager/find`);
-  const data = await response.json()
-  return data
-}
 
 export default function HubDashboard() {
   /* Fetch Data */
-  const { data, error } = useSWR('find', fetcher)
+  const { data, error }: any = useSWR('/api/v2/tribe_manager/find', fetcher)
 
   if (error) return <Layout><div className="p-5 text-xl text-white">An error occured while loading data!</div></Layout>
   if (!data) return <Layout><div className="p-5 text-xl text-white">Loading...</div></Layout>
@@ -75,7 +71,7 @@ export default function HubDashboard() {
   </div>
   <div className="pb-12 px-16 mt-10">
 
-  {data?.map((tribe: any) => {
+  {data?.tribes?.map((tribe: any) => {
     return (
     <div key={tribe?.tribename} className="px-4 bg-white w-full rounded-lg shadow-md sm:p-8 dark:bg-bgray-secondary mb-5">
       <div className="flow-root w-full">
@@ -93,12 +89,9 @@ export default function HubDashboard() {
                   <i className="fa-solid fa-earth-americas" /> {tribe?.map} | <span> Owner : {tribe?.ownername} <br /> Created At : {moment(tribe?.creation_date).format('MMMM Do YYYY, h:mm:ss a')}</span>
                 </p>
               </div>
-              {true === true 
-              ? <a href={`/api/hub/tribe_manager/request_join_tribe?tribe_id=${tribe?.tribeid}`} className="inline-flex bg-bred-2 rounded-full py-1 px-4 items-center text-base font-bold text-gray-100 dark:text-white">
+              <a href={`/api/hub/tribe_manager/request_join_tribe?tribe_id=${tribe?.tribeid}`} className="hidden inline-flex bg-bred-2 rounded-full py-1 px-4 items-center text-base font-bold text-gray-100 dark:text-white">
                 Request to Join
               </a>
-              : <></>
-              }
             </div>
           </li>
         </ul>
