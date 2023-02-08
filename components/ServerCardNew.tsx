@@ -19,7 +19,7 @@ const ServerCardNew = ({ server }: any) => {
                         </div>
                     </div>
                     <br />
-                    <p className="text-white"><i className="fa-solid fa-user"></i> <span>0 Survivors Online</span><i className="fa-solid fa-wifi text-green-600 ml-2"></i></p>
+                    <p className="text-white"><i className="fa-solid fa-user"></i> <span>{server?.players} Survivors Online</span><i className="fa-solid fa-wifi text-green-600 ml-2"></i></p>
                 </div>
             </div>
         </>

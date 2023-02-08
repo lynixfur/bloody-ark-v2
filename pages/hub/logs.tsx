@@ -7,77 +7,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import useSWR from 'swr'
 
-function PageEditor() {
-
-    const [isEditing, setIsEditing] = useState(false);
-    const [selectedPage, setSelectedPage] = useState({});
-    const [selectedPageID, setSelectedPageID] = useState({});
-
-    const [sendingData, setSendingData] = useState(false);
-    const [successStatus, setSuccessStatus] = useState(null);
-    const [statusMsg, setStatusMsg] = useState('');
-
-    const { data, error }: any = useSWR(`/api/hub/page_editor?id=${selectedPageID}`, fetcher)
-
-    useEffect(() => {
-        if (data?.selected_page != undefined && data?.selected_page?.title != undefined) {
-            setSelectedPage(data?.selected_page);
-            setIsEditing(true);
-        }
-    }, [data]);
-
-    const handleSelectPage = useCallback(async (page_id: string) => {
-        setSelectedPageID(page_id);
-    }, [])
-
-    const handleBack = useCallback(async () => {
-        // Remove Selected Page
-        setIsEditing(false);
-        setSelectedPage({});
-        setSelectedPageID({});
-
-        // Reset Status
-        setSuccessStatus(null);
-        setStatusMsg('');
-    }, [])
-
-    const handleSave = useCallback(async (id: any, strId: any, title: any, pageIcon: any, pageContent: any) => {
-        // Remove Selected Page
-        setIsEditing(false);
-        setSelectedPage({});
-        setSelectedPageID({});
-
-        // Reset Status
-        setSuccessStatus(null);
-        setStatusMsg('');
-
-        // Send Data to Server
-        setSendingData(true);
-        const res = await fetch('/api/hub/page_editor', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                id: id,
-                str_id: strId,
-                title: title,
-                page_icon: pageIcon,
-                content: pageContent
-            })
-        })
-
-        const json = await res.json()
-        if (res.ok) {
-            setSendingData(false);
-            setSuccessStatus(json.success);
-            if(json.message) {
-                setStatusMsg(json.message);
-            }
-        }
-
-
-    }, [])
+function Logs() {
 
     return (
         <>
@@ -113,10 +43,10 @@ function PageEditor() {
                         <i className="fa-solid fa-file-lines"></i> Logs
                     </h1>
                     <div className="mx-3 my-5">
-                        <p className="flex items-center text-gray-400 font-semibold ml-1"><svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <p className="flex items-center text-gray-400 font-semibold ml-1">{/*svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg> Loading Application Logs...</p>
+    </svg>*/} No Logs Found.</p>
                     </div>
                 </div>
             </HubLayout>
@@ -124,4 +54,4 @@ function PageEditor() {
     )
 }
 
-export default PageEditor
+export default Logs
