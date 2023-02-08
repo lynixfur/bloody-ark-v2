@@ -3,7 +3,7 @@
 import useSWR from 'swr'
 import fetcher from "@/lib/fetcher";
 
-const TribePlayer = ({ member }: any) => {
+const TribePlayer = ({ member, no_quick_actions, show_steam_id }: any) => {
     const { data, error }: any = useSWR(`/api/v2/usercache?steam_id=${member.SteamID}`, fetcher)
 
     return (
@@ -20,7 +20,7 @@ const TribePlayer = ({ member }: any) => {
                         />}
 
                         <p className="text-base leading-none text-gray-700 dark:text-gray-400 mr-2">
-                            {member.CharacterName}
+                            {member.playername}
                         </p>
                     </div>
                 </div>
@@ -33,7 +33,16 @@ const TribePlayer = ({ member }: any) => {
                     </p>
                 </div>
             </td>
+            {show_steam_id && 
             <td className="pl-5">
+                <div className="flex items-center">
+                            <p className="leading-none text-gray-400 ml-2">
+                                {member.SteamID}
+                            </p>
+                </div>
+            </td>
+            }
+            {!no_quick_actions && <td className="pl-5">
                 <div className="flex items-center">
                     {data?.profile_url &&
                         <a href={data?.profile_url}>
@@ -43,7 +52,7 @@ const TribePlayer = ({ member }: any) => {
                         </a>}
                     {!data?.profile_url && <p className="leading-none text-red-600 ml-2"><i className="fa-solid fa-triangle-exclamation"></i> No Quick Actions Available for Player</p>}
                 </div>
-            </td>
+            </td>}
         </tr>
     )
 }

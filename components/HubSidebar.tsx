@@ -324,7 +324,7 @@ export default function HubSidebar() {
                 className="flex items-center p-2 text-base font-normal rounded-lg text-gray-400 hover:bg-bgray-bg transition-colors group"
               >
                 <span className="ml-3">
-                  <i className="fa-solid fa-users my-auto mr-2" /> Tribe Manager
+                  <i className="fa-solid fa-users my-auto mr-2" /> Tribe Manager ❌
                 </span>
               </Link>
             </li>
@@ -376,21 +376,21 @@ export default function HubSidebar() {
             </li>
               <li className="">
                 <Link
-                  href="#ServerManager"
+                  href="/hub/player_search"
                   className="flex items-center p-2 text-base font-normal rounded-lg text-gray-400 hover:bg-bgray-bg transition-colors group"
                 >
                   <span className="ml-3">
-                    <i className="fa-solid fa-magnifying-glass my-auto mr-2" /> Player Search ❌
+                    <i className="fa-solid fa-magnifying-glass my-auto mr-2" /> Player Search
                   </span>
                 </Link>
               </li>
               <li className="">
                 <Link
-                  href="#ServerManager"
-                  className="flex items-center p-2 text-base font-normal rounded-lg text-gray-400 hover:bg-bgray-bg transition-colors group"
+                  href="/hub/server_manager"
+                  className="hidden flex items-center p-2 text-base font-normal rounded-lg text-gray-400 hover:bg-bgray-bg transition-colors group"
                 >
                   <span className="ml-3">
-                    <i className="fa-solid fa-server my-auto mr-2" /> Server Manager ❌
+                    <i className="fa-solid fa-server my-auto mr-2" /> Server Manager
                   </span>
                 </Link>
               </li>
@@ -407,7 +407,7 @@ export default function HubSidebar() {
               <li className="">
                 <Link
                   href="/hub/logs"
-                  className="flex items-center p-2 text-base font-normal rounded-lg text-gray-400 hover:bg-bgray-bg transition-colors group"
+                  className="hidden flex items-center p-2 text-base font-normal rounded-lg text-gray-400 hover:bg-bgray-bg transition-colors group"
                 >
                   <span className="ml-3">
                     <i className="fa-solid fa-shield my-auto mr-1.5"></i> Logs & Security 

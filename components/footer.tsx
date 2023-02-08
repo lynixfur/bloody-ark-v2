@@ -134,7 +134,7 @@ export default function Footer() {
       <div className="bg-bgray-overlay">
         <div className="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
           <p className="text-white text-sm text-center sm:text-left">
-            Copyright © 2022 BloodyARK. All Rights Reserved.
+            Copyright © 2023 BloodyARK. All Rights Reserved.
           </p>
           <span className="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start">
             <Link  href="https://discord.gg/bloody" className="text-gray-200">
