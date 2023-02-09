@@ -386,6 +386,16 @@ export default function HubSidebar() {
               </li>
               <li className="">
                 <Link
+                  href="/hub/page_editor"
+                  className="flex items-center p-2 text-base font-normal rounded-lg text-gray-400 hover:bg-bgray-bg transition-colors group"
+                >
+                  <span className="ml-3">
+                    <i className="fa-solid fa-file my-auto mr-2" /> Page Editor
+                  </span>
+                </Link>
+              </li>
+              <li className="">
+                <Link
                   href="/hub/server_manager"
                   className="hidden flex items-center p-2 text-base font-normal rounded-lg text-gray-400 hover:bg-bgray-bg transition-colors group"
                 >
@@ -420,18 +430,8 @@ export default function HubSidebar() {
               </li>
               <li className="">
                 <Link
-                  href="/hub/page_editor"
-                  className="flex items-center p-2 text-base font-normal rounded-lg text-gray-400 hover:bg-bgray-bg transition-colors group"
-                >
-                  <span className="ml-3">
-                    <i className="fa-solid fa-file my-auto mr-2" /> Page Editor
-                  </span>
-                </Link>
-              </li>
-              <li className="">
-                <Link
                   href="#SiteSettings"
-                  className="flex items-center p-2 text-base font-normal rounded-lg text-gray-400 hover:bg-bgray-bg transition-colors group"
+                  className="hidden flex items-center p-2 text-base font-normal rounded-lg text-gray-400 hover:bg-bgray-bg transition-colors group"
                 >
                   <span className="ml-3">
                     <i className="fa-solid fa-gear my-auto mr-2" /> Site Settings ❌

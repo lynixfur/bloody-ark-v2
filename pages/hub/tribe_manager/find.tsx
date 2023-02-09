@@ -7,6 +7,7 @@ import useSWR from 'swr'
 import { env } from "process";
 import Link from "next/link";
 import fetcher from "@/lib/fetcher";
+import TribeMgrRequestJoin from "@/components/TribeMgrRequestJoin";
 
 
 export default function HubDashboard() {
@@ -89,9 +90,7 @@ export default function HubDashboard() {
                   <i className="fa-solid fa-earth-americas" /> {tribe?.map} | <span> Owner : {tribe?.ownername} <br /> Created At : {moment(tribe?.creation_date).format('MMMM Do YYYY, h:mm:ss a')}</span>
                 </p>
               </div>
-              <a href={`/api/hub/tribe_manager/request_join_tribe?tribe_id=${tribe?.tribeid}`} className="hidden inline-flex bg-bred-2 rounded-full py-1 px-4 items-center text-base font-bold text-gray-100 dark:text-white">
-                Request to Join
-              </a>
+              <TribeMgrRequestJoin tribeid={tribe?.tribeid} />
             </div>
           </li>
         </ul>

@@ -13,6 +13,7 @@ import { Transition } from '@headlessui/react'
 /* Animations */
 import VisibilitySensor from "react-visibility-sensor";
 import { useSpring, animated } from "react-spring";
+import Notification from "@/components/Notification";
 
 let fetcher = async () => {
   const response = await fetch(`/api/hub/home`);
@@ -179,38 +180,14 @@ export default function HubDashboard() {
             {/* Important Notifications + Dismiss */}
             {data?.notifications?.join_requests?.map((request: any) => {
               return (
-                <div key={request} className="w-full bg-bgray-secondary rounded-xl px-5 py-3 mt-2 border-bgray-border border mb-2">
-                  <h1 className="text-white text-xl"><i className="fa-solid fa-envelope"></i> Join Request by {request?.survivor?.playername}</h1>
-                  <p className="text-gray-400">A player named{" "}
-                    <strong>
-                      {request?.survivor?.playername}
-                    </strong>{" "}
-                    has requested to join your tribe. Please type in-game{" "}
-                    <strong>
-                      /tribe acceptreq &apos;{request?.survivor?.playername}&apos;
-                    </strong>{" "}
-                    to invite them.</p>
-                </div>)
+                <Notification key={request} request_data={request} invite_data={null} />
+              )
             })}
 
             {data?.notifications?.invites?.map((invite: any) => {
               return (
-                <div key={invite} className="w-full bg-bgray-secondary rounded-xl px-5 py-3 mt-2 border-bgray-border border mb-2">
-                  <h1 className="text-white text-xl"><i className="fa-solid fa-envelope"></i> Tribe Invite from {invite.tribe.tribename}</h1>
-                  <p className="text-gray-400">You have been invited to the tribe of{" "}
-                    <strong>
-                      {invite.tribe.tribename}
-                    </strong>{" "}
-                    on the map of
-                    {" "}<strong>
-                      {invite.tribe.map}
-                    </strong>{" "}
-                    . Please type in-game
-                    {" "}<strong>
-                      /tribe acceptinvite &apos;{invite.tribe.tribename}&apos;
-                    </strong>{" "}
-                    to join.</p>
-                </div>)
+                <Notification key={invite} is_invite={true} request_data={null} invite_data={invite} />
+              )
             })}
 
 
