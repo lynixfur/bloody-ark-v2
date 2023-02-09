@@ -5,6 +5,7 @@ import { connectToDatabase } from '@/lib/mongodb'
 import { withIronSessionApiRoute } from "iron-session/next";
 import { sessionOptions } from "@/lib/auth/session";
 import { env } from "process";
+import moment from "moment";
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
 
@@ -28,6 +29,8 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
         }
     });
 
+    let endDate = moment().format('YYYY-MM-DDTHH:mm:ssZ');
+
     const dino_auctions = await knex("dinoauction_dinos")
     .innerJoin("player_data", "dinoauction_dinos.owner_steamid", "player_data.steamid")
     .select("player_data.playername as owner")
@@ -42,6 +45,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     .select("current_bid_name")
     .select("auction_end_time")
     .where("sold", 0)
+    .where("auction_end_time", "<", endDate)
 
     /* Return All Required Data */
     res.status(200).json({

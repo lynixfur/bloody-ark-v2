@@ -108,7 +108,7 @@ export default function HubDashboard() {
                     className="w-full h-72 bg-no-repeat bg-cover "
                     style={{
                       backgroundImage:
-                        "url(https://cdn.discordapp.com/attachments/885607142051184700/988959762857201714/unknown.png)",
+                        "url(https://cdn.discordapp.com/attachments/885607142051184700/1073175247433498675/242ab4_f5ea2042db2a4159a20b9a4a1d9e0427mv2.png)",
                       backgroundPosition: "center",
                     }}
                   />
