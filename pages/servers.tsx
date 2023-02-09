@@ -5,8 +5,6 @@ import HomeHeader from "../components/headers/homeHeader";
 import ServerCard from "../components/ServerCard";
 import Footer from "../components/footer";
 import { env } from "process";
-
-/* Animations */
 import VisibilitySensor from "react-visibility-sensor";
 import { useSpring, animated } from "react-spring";
 import { useState } from "react";
