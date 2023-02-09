@@ -49,7 +49,7 @@ function SeasonCountdown() {
         <div className="p-5">
             <h1
                 tabIndex={0}
-                className="focus:outline-none text-4xl font-bold text-center leading-10 text-white"
+                className="focus:outline-none text-4xl font-bold text-center hidden leading-10 text-white"
             >
                 Introducing the new Tribe Manager!
             </h1>

@@ -121,7 +121,7 @@ export default function HubDashboard() {
         {/* Content */}
         <div>
           <div className="w-full">
-            <div className="h-full w-full" style={{ background: 'url(https://preview.redd.it/q82kow7rz7m91.jpg?auto=webp&s=552cb5a950dea21c862928a193765862fe32ae84)', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
+            <div className="h-full w-full" style={{ background: 'url(https://cdn.discordapp.com/attachments/885607142051184700/1071915271515807835/website_bg-min.png)', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
               <div className="w-full h-full bg-black bg-opacity-80">
                 <div className="flex h-full px-3 py-4 sm:p-5 md:p-0">
                   <div className="my-auto flex justify-center w-full">

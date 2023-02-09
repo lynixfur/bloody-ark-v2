@@ -62,7 +62,7 @@ function Home({ homepage_options, player_count, news }: any) {
             <div className="flex justify-center text-white">
               <div className="flex w-full px-10">
 
-                <div className="w-1/2 text-center" style={{ background: 'url(https://cdn.discordapp.com/attachments/885607142051184700/1071915271515807835/website_bg-min.png)', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
+                <div className="w-1/2 text-center" style={{ background: 'url()', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
                   <div className="flex justify-center items-center w-full h-full bg-bgray-bg bg-opacity-80">
                     <SeasonCountdown />
                   </div>
@@ -77,7 +77,7 @@ function Home({ homepage_options, player_count, news }: any) {
             <div className="absolute z-20 flex w-full h-full">
               <div className="relative z-20 w-5/6 px-14 py-8 text-white md:py-10 md:w-1/2">
                 <h2 className="text-4xl font-bold ">Meet The New Bloody Hub</h2>
-                <h1 className="my-5 font-bold text-green-500"><i className="fa fa-solid fa-star text-green-500"></i> 2023 UI Update Now Available!</h1>
+                <h1 className="my-5 font-bold text-green-500 hidden"><i className="fa fa-solid fa-star text-green-500"></i> 2023 UI Update Now Available!</h1>
                 <p className="text-gray-300 mt-5">
                   Experienece a whole new web platform to monitor your
                   survivors, tribe and stats! Find your tames, view base stats
