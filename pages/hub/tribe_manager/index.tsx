@@ -161,25 +161,25 @@ export default function HubDashboard() {
                   </div>
                   {data?.tribe_data?.IsListed ? (
                     <div className="flex justify-center my-3">
-                      <a
+                      <Link
                         href="/api/v2/tribe_manager/set_tribe_requests?value=0"
                         data-modal-toggle="add-user-modal"
                         className="w-1/2 text-white bg-bred-2 hover:bg-red-700 focus:ring-4 focus:ring-cyan-200 font-bold inline-flex items-center justify-center rounded-lg text-sm px-3 py-2 text-center sm:w-auto"
                       >
                         <i className="fa-solid fa-lock mr-2" />
                         Close Tribe Request
-                      </a>
+                      </Link>
                     </div>
                   ) : (
                     <div className="flex justify-center my-3">
-                      <a
+                      <Link
                         href="/api/v2/tribe_manager/set_tribe_requests?value=1"
                         data-modal-toggle="add-user-modal"
                         className="w-1/2 text-white bg-bred-2 hover:bg-red-700 focus:ring-4 focus:ring-cyan-200 font-bold inline-flex items-center justify-center rounded-lg text-sm px-3 py-2 text-center sm:w-auto"
                       >
                         <i className="fa-solid fa-unlock mr-2" />
                         Open Tribe Request {JSON.stringify(data?.tribe)}
-                      </a>
+                      </Link>
                     </div>
                   )}
                 </div>
