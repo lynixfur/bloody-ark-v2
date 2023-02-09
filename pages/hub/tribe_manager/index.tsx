@@ -7,6 +7,7 @@ import useSWR from 'swr';
 import Link from "next/link";
 import Error from "@/components/errors/Error"
 import TribePlayer from "@/components/TribePlayer";
+import TribeMgrPlayerFinder from "@/components/TribeMgrPlayerFinder";
 
 let fetcher = async () => {
   const response = await fetch(`/api/v2/tribe_manager`);
@@ -160,25 +161,25 @@ export default function HubDashboard() {
                   </div>
                   {data?.tribe_data?.IsListed ? (
                     <div className="flex justify-center my-3">
-                      <Link
+                      <a
                         href="/api/v2/tribe_manager/set_tribe_requests?value=0"
                         data-modal-toggle="add-user-modal"
                         className="w-1/2 text-white bg-bred-2 hover:bg-red-700 focus:ring-4 focus:ring-cyan-200 font-bold inline-flex items-center justify-center rounded-lg text-sm px-3 py-2 text-center sm:w-auto"
                       >
                         <i className="fa-solid fa-lock mr-2" />
                         Close Tribe Request
-                      </Link>
+                      </a>
                     </div>
                   ) : (
                     <div className="flex justify-center my-3">
-                      <Link
+                      <a
                         href="/api/v2/tribe_manager/set_tribe_requests?value=1"
                         data-modal-toggle="add-user-modal"
                         className="w-1/2 text-white bg-bred-2 hover:bg-red-700 focus:ring-4 focus:ring-cyan-200 font-bold inline-flex items-center justify-center rounded-lg text-sm px-3 py-2 text-center sm:w-auto"
                       >
                         <i className="fa-solid fa-unlock mr-2" />
                         Open Tribe Request {JSON.stringify(data?.tribe)}
-                      </Link>
+                      </a>
                     </div>
                   )}
                 </div>
@@ -187,7 +188,7 @@ export default function HubDashboard() {
                     <p className="font-bold text-xl text-gray-800 dark:text-gray-200 mb-2 mt-10">
                       Invite Player
                     </p>
-                    <p className="text-white">%BloodyARK.Hub.FindPlayer%</p>
+                    <TribeMgrPlayerFinder/>
                     <div className="flex hidden">
                       <form
                         method="GET"
@@ -276,13 +277,13 @@ export default function HubDashboard() {
                     </p>
                   </div>
                   <div className="my-auto flex justify-center mt-5">
-                    <Link
+                    <a
                       href="/tribe-manager/find"
                       className="text-white bg-bred-2 hover:bg-red-700 focus:ring-4 focus:ring-cyan-200 font-bold rounded-lg text-sm px-3 py-2"
                     >
                       <i className="fa-solid fa-magnifying-glass mr-2" />
                       Tribe Finder
-                    </Link>
+                    </a>
                   </div>
                 </div>
               </div>

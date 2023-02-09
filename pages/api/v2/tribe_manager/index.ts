@@ -50,11 +50,12 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     }
 
     const tribe_members = await knex.table('wtribes_playerdata')
-    .select('SteamID')
-    .select('CharacterName')
-    .select('isOwnerInTribe AS IsOwnerInTribe')
-    .select('isAdminInTribe AS IsAdminInTribe')
-    .where('TribeID', tribe_data.TribeID)
+    .innerJoin('player_data', 'wtribes_playerdata.SteamID', 'player_data.steamid')
+    .select('wtribes_playerdata.SteamID')
+    .select('player_data.playername')
+    .select('wtribes_playerdata.isOwnerInTribe AS IsOwnerInTribe')
+    .select('wtribes_playerdata.isAdminInTribe AS IsAdminInTribe')
+    .where('TribeID', tribe_data?.TribeID)
 
     const owner = await knex.table('player_data')
     .select('steamid AS SteamID')

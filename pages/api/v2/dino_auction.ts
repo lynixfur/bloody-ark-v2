@@ -29,14 +29,19 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     });
 
     const dino_auctions = await knex("dinoauction_dinos")
+    .innerJoin("player_data", "dinoauction_dinos.owner_steamid", "player_data.steamid")
+    .select("player_data.playername as owner")
     .select("owner_steamid")
     .select("dino_name")
     .select("dino_description")
+    .select("id")
     .select("starting_price")
     .select("buy_now_price")
     .select("current_bid")
     .select("current_bid_owner")
     .select("current_bid_name")
+    .select("auction_end_time")
+    .where("sold", 0)
 
     /* Return All Required Data */
     res.status(200).json({

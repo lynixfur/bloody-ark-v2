@@ -23,11 +23,11 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
         .findOne({ steam_id: user.userId }, { projection: { _id: 0, permission_level: 1 } });
 
     if (user_cache) {
-        if (user_cache.permission_level != 2) {
+        /*if (user_cache.permission_level != 2) {
             return res
                 .status(200)
                 .json({ api_version: 2, success: false, message: "Invalid Permissions!" });
-        }
+        }*/
     } else {
         return res
             .status(200)
@@ -100,17 +100,27 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
 
     /* Return All Required Data */
-    res.status(200).json({
-        api_version: 2, player_data: player_data, user_cache: searched_user_cache,
-        tribe_data: {
-            TribeID: tribe_data?.TribeID,
-            OwnerName: owner?.PlayerName,
-            OwnerSteamID: tribe_data?.OwnerSteamID,
-            TribeName: tribe_data?.TribeName,
-            Members: tribe_members,
-            IsListed: internal_tribe_data?.isListed
-        }
-    })
+    if (user_cache.permission_level != 2) {
+        res.status(200).json({
+            api_version: 2, player_data: player_data, user_cache: searched_user_cache,
+            tribe_data: {
+                TribeID: tribe_data?.TribeID,
+                OwnerName: owner?.PlayerName,
+                OwnerSteamID: tribe_data?.OwnerSteamID,
+                TribeName: tribe_data?.TribeName,
+                Members: tribe_members,
+                IsListed: internal_tribe_data?.isListed
+            }
+        })
+    } else {
+        res.status(200).json({
+            api_version: 2, player_data: player_data, user_cache: searched_user_cache,
+            tribe_data: {
+                TribeID: tribe_data?.TribeID,
+                TribeName: tribe_data?.TribeName,
+            }
+        })
+    }
 }
 
 export default withIronSessionApiRoute(handler, sessionOptions);

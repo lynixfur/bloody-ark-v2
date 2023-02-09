@@ -324,17 +324,17 @@ export default function HubSidebar() {
                 className="flex items-center p-2 text-base font-normal rounded-lg text-gray-400 hover:bg-bgray-bg transition-colors group"
               >
                 <span className="ml-3">
-                  <i className="fa-solid fa-users my-auto mr-2" /> Tribe Manager ❌
+                  <i className="fa-solid fa-users my-auto mr-2" /> Tribe Manager
                 </span>
               </Link>
             </li>
             <li>
               <Link
-                href="/hub/dino_trading"
+                href="/hub/dino_auction"
                 className="flex items-center p-2 text-base font-normal rounded-lg text-gray-400 hover:bg-bgray-bg transition-colors group"
               >
                 <span className="ml-3">
-                  <i className="fa-solid fa-dog my-auto mr-2" /> Dino Trading ❌
+                  <i className="fa-solid fa-dog my-auto mr-2" /> Dino Trading
                 </span>
               </Link>
             </li>
