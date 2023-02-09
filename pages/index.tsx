@@ -62,7 +62,7 @@ function Home({ homepage_options, player_count, news }: any) {
             <div className="flex justify-center text-white">
               <div className="flex w-full px-10">
 
-                <div className="w-1/2 text-center" style={{ background: 'url()', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
+                <div className="w-1/2 text-center" style={{ background: 'url(https://pbs.twimg.com/media/DA_vM4TXUAAGWjW.jpg:large)', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
                   <div className="flex justify-center items-center w-full h-full bg-bgray-bg bg-opacity-80">
                     <SeasonCountdown />
                   </div>
