@@ -14,6 +14,7 @@ import { Transition } from '@headlessui/react'
 import VisibilitySensor from "react-visibility-sensor";
 import { useSpring, animated } from "react-spring";
 import Notification from "@/components/Notification";
+import MiniTribeMgr from "@/components/MiniTribeMgr";
 
 let fetcher = async () => {
   const response = await fetch(`/api/hub/home`);
@@ -284,37 +285,11 @@ export default function HubDashboard() {
                   <h1 className="text-2xl font-bold dark:text-gray-50">
                     <i className="fa-solid fa-users"></i> Tribe Information
                   </h1>
+
                   {data?.tribe?.tribeId
 
                     ?
-                    <><img
-                      src={"https://ui-avatars.com/api/?name=" + data?.tribe?.tribeName + "&color=9ca3af&background=272a35&size=512"}
-                      className="h-32 w-32 mt-4 rounded-lg shadow-md "
-                    />
-                      <p className="text-md text-gray-500 dark:text-gray-300 sm:mb-0 mb-5 mt-5">
-                        Tribe Name : {data?.tribe?.tribeName}
-                      </p>
-                      <p className="text-md text-gray-500 dark:text-gray-300  sm:mb-0 mb-5 mt-1">
-                        Tribe Owner : {data?.tribe?.tribeOwner}
-                      </p>
-                      <p className="text-md text-gray-500 dark:text-gray-300  sm:mb-0 mb-2 mt-1">
-                        Tribe Location : {data?.tribe?.tribeLocation}
-                      </p>
-                      <p className="text-md text-gray-500 dark:text-gray-300  sm:mb-0 mb-2 mt-1">
-                        Creation Date : {moment(data?.tribe?.tribeCreationDate).format('MMMM Do YYYY, h:mm:ss a')}
-                      </p>
-                      <p className="text-md text-gray-500 dark:text-gray-300 sm:mb-0 mb-5 mt-1">
-                        Tribe Members Count : {data?.tribe?.tribeMembers.length}
-                      </p>
-                      <h1 className="text-2xl font-bold dark:text-gray-50 mt-5 mb-5">
-                        <i className="fa-solid fa-users"></i> Tribe Members
-                      </h1>
-                      {data?.tribe?.tribeMembers?.map((member: any) => {
-                        return (<p key={member.CharacterName} className="text-md text-gray-500 dark:text-gray-300  sm:mb-0 mb-5 mt-1">
-                          {member.CharacterName}
-                        </p>)
-                      })}
-                    </>
+                    <MiniTribeMgr />
                     :
                     <div
                       className="text-gray-100 px-4 py-3  mt-10"

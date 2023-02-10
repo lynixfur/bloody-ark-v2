@@ -78,7 +78,7 @@ function Home({ homepage_options, player_count, news }: any) {
               <div className="relative z-20 w-5/6 px-14 py-8 text-white md:py-10 md:w-1/2">
                 <h2 className="text-4xl font-bold ">Meet The New Bloody Hub</h2>
                 <h1 className="my-5 font-bold text-green-500 hidden"><i className="fa fa-solid fa-star text-green-500"></i> 2023 UI Update Now Available!</h1>
-                <p className="text-gray-300 mt-5">
+                <p className="text-gray-400 mt-5 w-[500px]">
                   Experienece a whole new web platform to monitor your
                   survivors, tribe and stats! Find your tames, view base stats
                   and keep track of their food status. Get notified of pending

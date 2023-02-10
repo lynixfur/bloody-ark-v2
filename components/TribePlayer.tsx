@@ -3,12 +3,12 @@
 import useSWR from 'swr'
 import fetcher from "@/lib/fetcher";
 
-const TribePlayer = ({ member, no_quick_actions, show_steam_id }: any) => {
+const TribePlayer = ({ member, no_quick_actions, show_steam_id, bg }: any) => {
     const { data, error }: any = useSWR(`/api/v2/usercache?steam_id=${member.SteamID}`, fetcher)
 
     return (
         <tr
-            className="focus:outline-none h-12 border-t border-b-[2px] border-bgray-bg bg-bgray-secondary"
+         className={`focus:outline-none h-12 border-y-[4px] ${bg ? "border-bgray-secondary bg-bgray-bg" : "bg-bgray-secondary border-bgray-bg"}`}
         >
             <td>
                 <div className="flex items-center pl-5">

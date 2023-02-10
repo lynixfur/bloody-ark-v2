@@ -291,7 +291,7 @@ export default function HubSidebar() {
             <li className="">
               <Link
                 href="/hub/webshop"
-                className="flex items-center p-2 text-base font-normal rounded-lg text-gray-400 hover:bg-bgray-bg transition-colors group"
+                className="flex items-center p-2 text-base font-normal rounded-lg text-gray-400 hover:bg-bgray-bg transition-colors group hidden"
               >
                 <span className="ml-3">
                   <i className="fa-solid fa-shopping-cart my-auto mr-2" /> Web Shop

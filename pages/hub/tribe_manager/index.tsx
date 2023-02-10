@@ -146,8 +146,8 @@ export default function HubDashboard() {
                         className="font-semibold text-md dark:text-gray-400 leading-tight"
                         v-if="$page.props.player_data.isInTribe"
                       >
-                        {data?.tribe_data?.IsListed == 0 && <><i className="fa-solid fa-lock" /> Private</>} 
-                        {data?.tribe_data?.IsListed == 1 && <><i className="fa-solid fa-unlock" /> Public</>} 
+                        {data?.tribe_data?.IsListed == 0 && <><i className="fa-solid fa-lock" /> Private</>}
+                        {data?.tribe_data?.IsListed == 1 && <><i className="fa-solid fa-unlock" /> Public</>}
                       </p>
                       <div className="bg-gray-700 dark:bg-blue-200 rounded-full h-1 w-1" />
                       <p
@@ -186,9 +186,24 @@ export default function HubDashboard() {
                 <div className="pb-12 px-16">
                   <div>
                     <p className="font-bold text-xl text-gray-800 dark:text-gray-200 mb-2 mt-10">
+                      Tribe Manager Commands
+                    </p>
+                    <p className="text-white">
+                      /tribe - Shows all commands for Tribe Request<br/>
+                      /tribe openrequest - Opens a join request for you tribe<br/>
+                      /tribe list - Shows all tribes with open requests<br/>
+                      /tribe info PlayerName or PlayerID - Shows player server info<br/>
+                      /tribe requests TribeName or TribeID - Requests to join a tribe<br/>
+                      /tribe invite PlayerName or PlayerID - invites a player to join your tribe<br/>
+                      /tribe showrequests - Shows join requests to join your tribe<br/>
+                      /tribe acceptreq PlayerName or PlayerID - Accept join request (Only tribe owner or admins)<br/>
+                      /tribe showinvites - Shows all invites for your tribe<br/>
+                      /tribe closerequest - Closes join request for your tribe
+                    </p>
+                    <p className="font-bold text-xl text-gray-800 dark:text-gray-200 mb-2 mt-10">
                       Invite Player
                     </p>
-                    <TribeMgrPlayerFinder/>
+                    <TribeMgrPlayerFinder />
                     <div className="flex hidden">
                       <form
                         method="GET"
@@ -247,7 +262,7 @@ export default function HubDashboard() {
                             </tr>
                             {data?.tribe_data?.Members?.map((member: any) => {
                               return (
-                              <TribePlayer key={member} member={member}/>
+                                <TribePlayer key={member} member={member} />
                               )
                             })}
                           </tbody>

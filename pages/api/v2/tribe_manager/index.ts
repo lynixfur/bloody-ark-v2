@@ -41,6 +41,13 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     .where('wtribes_tribedata.TribeID', player_data.TribeID)
     .first()
 
+    const diff_tribe_data = await knex.table('tribe_data')
+    .select('tribeid')
+    .select('map')
+    .select('creation_date')
+    .where('tribeid', player_data.TribeID)
+    .first()
+
     if(!tribe_data) {
         return  res.status(200).json({
             api_version: 2,
@@ -68,17 +75,23 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     .where('tribeid', tribe_data.TribeID)
     .first()
 
+    const listed_tribes = await knex.table('tribe_data')
+    .where('isListed', true)
+
 
     res.status(200).json({
         api_version: 2,
         player_data: player_data,
+        listed_tribes: listed_tribes,
         tribe_data: {
             TribeID: tribe_data?.TribeID,
             OwnerName: owner?.PlayerName,
             OwnerSteamID: tribe_data?.OwnerSteamID,
             TribeName: tribe_data?.TribeName,
             Members: tribe_members,
-            IsListed: internal_tribe_data.isListed
+            IsListed: internal_tribe_data.isListed,
+            Map: diff_tribe_data.map,
+            CreationDate: diff_tribe_data.creation_date,
         }
     });
 }
