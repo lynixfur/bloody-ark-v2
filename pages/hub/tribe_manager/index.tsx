@@ -292,13 +292,13 @@ export default function HubDashboard() {
                     </p>
                   </div>
                   <div className="my-auto flex justify-center mt-5">
-                    <a
+                    <Link
                       href="/hub/tribe_manager/find"
                       className="text-white bg-bred-2 hover:bg-red-700 focus:ring-4 focus:ring-cyan-200 font-bold rounded-lg text-sm px-3 py-2"
                     >
                       <i className="fa-solid fa-magnifying-glass mr-2" />
                       Tribe Finder
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
