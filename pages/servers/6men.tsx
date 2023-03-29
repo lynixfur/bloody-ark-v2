@@ -1,9 +1,9 @@
 import Head from "next/head";
 import Image from "next/image";
-import Navbar from "../components/navbar";
-import HomeHeader from "../components/headers/homeHeader";
-import ServerCard from "../components/ServerCard";
-import Footer from "../components/footer";
+import Navbar from "../../components/navbar";
+import HomeHeader from "../../components/headers/homeHeader";
+import ServerCard from "../../components/ServerCard";
+import Footer from "../../components/footer";
 import { env } from "process";
 import VisibilitySensor from "react-visibility-sensor";
 import { useSpring, animated } from "react-spring";
@@ -36,7 +36,7 @@ function ServerList({ servers, highpop_servers }: any) {
   return (
     <>
       <Head>
-        <title>Bloody ARK - Servers</title>
+        <title>Bloody ARK - 6men Servers</title>
         <meta name="description" content="Find all of our ARK: Survival Evolved Servers here!"/>
         <meta name="keywords" content="BloodyARK,ARK,Dinosaurs,PVPVE,Best ARK Server,BloodyHub,BloodyShop,Evolve or Die"/>
       </Head>
@@ -52,7 +52,7 @@ function ServerList({ servers, highpop_servers }: any) {
             <div className="container flex flex-col items-center py-12 sm:py-24">
               <div className="w-full mt-5 justify-center items-center flex-col mb-5 sm:mb-10">
                 <h1 className="text-4xl lg:text-5xl xl:text-6xl text-center text-gray-50 font-black leading-7 md:leading-10">
-                  <span><i className="fa-solid fa-hard-drive" /> <br />Server List</span>
+                  <span><i className="fa-solid fa-hard-drive" /> <br />6men - Server List</span>
                 </h1>
               </div>
             </div>
@@ -109,7 +109,7 @@ function ServerList({ servers, highpop_servers }: any) {
 
 export async function getServerSideProps() {
   const servers_res = await fetch(
-    `${env.DOMAIN}/api/servers`
+    `${env.DOMAIN}/api/servers/6men`
   );
 
   const highpop_res = await fetch(

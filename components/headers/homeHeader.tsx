@@ -4,7 +4,7 @@ export default function HomeHeader({text, players}: any) {
       className="h-full"
       style={{
         background:
-          "url(https://cdn.discordapp.com/attachments/885607142051184700/1056018778221183066/bloodybg.jpg)",
+          "url(https://cdn.discordapp.com/attachments/1004120426861039648/1090204374766207018/SLY9_Duo_women.png)",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",

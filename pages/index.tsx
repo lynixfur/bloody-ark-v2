@@ -288,7 +288,7 @@ function Home({ homepage_options, player_count, news }: any) {
           className="w-full bg-cover bg-left-top my-20"
           style={{
             height: "55rem",
-            backgroundImage: "url(https://cdn.discordapp.com/attachments/885607142051184700/1068998835277402112/SLY7_OSD_poster_text.jpg)",
+            backgroundImage: "url(https://cdn.discordapp.com/attachments/885607142051184700/1087488932750577724/SLY8_Gen2_mid.png)",
           }}
         >
           <div className="flex items-center justify-center h-full w-full bg-black bg-opacity-50">
