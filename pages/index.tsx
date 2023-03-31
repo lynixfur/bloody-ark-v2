@@ -37,7 +37,7 @@ export const FadeInContainer = ({ children, delay }: any) => {
   );
 };
 
-function Home({ homepage_options, player_count, news }: any) {
+function Home({ homepage_options, player_count, news, site_settings }: any) {
   return (
     <div className="">
       <Head>
@@ -48,7 +48,7 @@ function Home({ homepage_options, player_count, news }: any) {
 
       <div className="flex flex-col h-screen">
         <Navbar />
-        <HomeHeader text="The perfect Ark: Survival Evolved experience. This server was established in 2017 and is still running strong as one of the biggest unofficial ark communities." players={player_count.players} />
+        <HomeHeader background={site_settings?.header_bg} seasonNumber={site_settings?.season_number} seasonWipe={site_settings?.wipe_banner} text="The perfect Ark: Survival Evolved experience. This server was established in 2017 and is still running strong as one of the biggest unofficial ark communities." players={player_count.players} />
       </div>
       <main className="">
         <div>
@@ -288,7 +288,7 @@ function Home({ homepage_options, player_count, news }: any) {
           className="w-full bg-cover bg-left-top my-20"
           style={{
             height: "55rem",
-            backgroundImage: "url(https://cdn.discordapp.com/attachments/885607142051184700/1087488932750577724/SLY8_Gen2_mid.png)",
+            backgroundImage: "url(" + site_settings.section_bg + ")",
           }}
         >
           <div className="flex items-center justify-center h-full w-full bg-black bg-opacity-50">
@@ -323,15 +323,22 @@ export async function getServerSideProps() {
     `${env.DOMAIN}/api/player_count`
   );
 
+  const site_settings = await fetch(
+    `${env.DOMAIN}/api/site_settings`
+  );
+
   const player_count = await res_player_count.json();
 
   const res_news = await fetch(`${env.DOMAIN}/api/news`);
   const news_data = await res_news.json();
+  const data = await site_settings.json();
+
 
   return {
     props: {
       player_count,
-      news: news_data
+      news: news_data,
+      site_settings: data,
     },
   };
 }

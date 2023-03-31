@@ -1,5 +1,5 @@
 import HubLayout from "@/components/HubLayout"
-import Editor from "@/components/PageEditor/Editor";
+import Editor from "@/components/Editors/Editor";
 import TribePlayer from "@/components/TribePlayer";
 import fetcher from "@/lib/fetcher";
 import Link from "next/link";

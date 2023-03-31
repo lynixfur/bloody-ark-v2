@@ -397,7 +397,7 @@ export default function HubSidebar() {
               <li className="">
                 <Link
                   href="/hub/server_manager"
-                  className="hidden flex items-center p-2 text-base font-normal rounded-lg text-gray-400 hover:bg-bgray-bg transition-colors group"
+                  className="flex items-center p-2 text-base font-normal rounded-lg text-gray-400 hover:bg-bgray-bg transition-colors group"
                 >
                   <span className="ml-3">
                     <i className="fa-solid fa-server my-auto mr-2" /> Server Manager
@@ -430,11 +430,11 @@ export default function HubSidebar() {
               </li>
               <li className="">
                 <Link
-                  href="#SiteSettings"
-                  className="hidden flex items-center p-2 text-base font-normal rounded-lg text-gray-400 hover:bg-bgray-bg transition-colors group"
+                  href="/hub/site_settings"
+                  className="flex items-center p-2 text-base font-normal rounded-lg text-gray-400 hover:bg-bgray-bg transition-colors group"
                 >
                   <span className="ml-3">
-                    <i className="fa-solid fa-gear my-auto mr-2" /> Site Settings ❌
+                    <i className="fa-solid fa-gear my-auto mr-2" /> Site Settings
                   </span>
                 </Link>
               </li></>}

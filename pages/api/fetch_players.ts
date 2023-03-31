@@ -11,14 +11,33 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             const res = await fetch(`https://ark-servers.net/api/?object=servers&element=detail&key=${server.arkservers_api_key}`);
             const data = await res.json();
     
+            let online = false;
+
+            switch(data.is_online) {
+                case '1':
+                    online = true;
+                    break;
+                case '0':
+                    online = false;
+                    break;
+                default:
+                    online = false;
+                    break;
+            }
+
             await db.collection("servers").updateOne({ _id: server._id },
             {
-                $set: { is_online: data.is_online, players: parseInt(data.players), password: data.password, private: data.private }
+                $set: { is_online: online, players: parseInt(data.players), password: data.password, private: data.private }
             });
     
             console.log(`Players : ${data.players} , Online ${data.is_online}`);
         } catch(e) {
             console.log('ShadowmaneAPI Error Caught: ' + e)
+
+            await db.collection("servers").updateOne({ _id: server._id },
+            {
+                $set: { is_online: false, players: 0 }
+            });
         }
     })
 

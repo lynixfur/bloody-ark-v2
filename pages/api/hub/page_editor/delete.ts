@@ -36,34 +36,14 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
         // Send Data
         try {
-            await db.collection("pages").updateOne({_id: new ObjectId(body?.id?.toString())}, {$set: {
-                title: body?.title, 
-                str_id: body?.str_id,
-                page_icon: body?.page_icon, 
-                content: body?.content, 
-                cluster_parent: body?.cluster_parent,
-                bg_image: body?.bg_image,
-            }});
+            await db.collection("pages").deleteOne({_id: new ObjectId(body?.id?.toString())});
         } catch {
-            console.log("Error updating page");
+            console.log(body?.id?.toString());
             return res.status(200).json({ success: false });
         }
 
         // Return Status
         return res.status(200).json({ success: true });
-    }
-
-    if (req.method === 'GET') {
-        let page_data: any
-
-        try {
-            page_data = await db.collection("pages").findOne({_id: new ObjectId(id?.toString())});
-        } catch {
-            page_data = {}
-        }
-        const page_list = await db.collection("pages").find({}).project({ str_id: 1, page_icon: 1, title: 1, cluster_parent: 1 }).toArray();
-    
-        res.status(200).json({selected_page: page_data, all_pages: page_list})
     }
 }
 

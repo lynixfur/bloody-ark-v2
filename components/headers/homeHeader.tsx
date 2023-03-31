@@ -1,10 +1,10 @@
-export default function HomeHeader({text, players}: any) {
+export default function HomeHeader({text, players, background, seasonWipe, seasonNumber}: any) {
+
   return (<>
     <div
       className="h-full"
       style={{
-        background:
-          "url(https://cdn.discordapp.com/attachments/1004120426861039648/1090204374766207018/SLY9_Duo_women.png)",
+        background: "url(" + background + ")",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
@@ -49,7 +49,8 @@ export default function HomeHeader({text, players}: any) {
         </div>
       </div>
     </div>
-    <div className="py-4 bg-red-600 hidden"><p className="text-base text-white font-bold text-center"><i className="fa-solid fa-compass fa-spin"></i> Wipe Time! We&apos;re currently preparing for the next season of Bloody ARK, Season 5!</p></div>
+    {seasonWipe &&
+    <div className="py-4 bg-red-600"><p className="text-base text-white font-bold text-center"><i className="fa-solid fa-compass fa-spin"></i> Wipe Time! We&apos;re currently preparing for the next season of Bloody ARK, Season {seasonNumber}!</p></div>}
 </>
   );
 }
