@@ -56,7 +56,7 @@ const Editor = ({ page, handleBack, handleSave, handleCreate, isCreating }: any)
                 <br />
                 <div className="flex items-center">
                     <p className="text-gray-400  font-semibold my-auto">Page STR ID (String ID)</p>
-                    <input name="str_id" className="w-full bg-bgray-secondary text-gray-400 border border-bgray-border ml-3 w-1/2 my-auto focus:outline-none" value={pageMetadata.str_id} onChange={handleChangeMetadata}/>
+                    <input name="str_id" className="w-full bg-bgray-secondary text-gray-400 border border-bgray-border ml-3 w-1/2 my-auto focus:outline-none" value={pageMetadata.str_id} onChange={handleChangeMetadata} required/>
                 </div>
                 <div className="flex items-center">
                     <p className="text-gray-400  font-semibold my-auto my-5">Page Cluster (Which ark cluster is this apart Of)</p>
@@ -68,15 +68,15 @@ const Editor = ({ page, handleBack, handleSave, handleCreate, isCreating }: any)
                 </div>
                 <div className="flex mt-3">
                     <p className="text-gray-400  font-semibold">Page Title</p>
-                    <input name="title" className="w-full bg-bgray-secondary text-gray-400 border border-bgray-border ml-3 w-1/2 my-auto focus:outline-none" value={pageMetadata.title} onChange={handleChangeMetadata}/>
+                    <input name="title" className="w-full bg-bgray-secondary text-gray-400 border border-bgray-border ml-3 w-1/2 my-auto focus:outline-none" value={pageMetadata.title} onChange={handleChangeMetadata} required/>
                 </div>
                 <div className="flex mt-3">
                     <p className="text-gray-400  font-semibold">Page Icon</p>
-                    <input name="icon" className="w-full bg-bgray-secondary text-gray-400 border border-bgray-border ml-3 w-1/2 my-auto focus:outline-none" value={pageMetadata.icon} onChange={handleChangeMetadata} />
+                    <input name="icon" className="w-full bg-bgray-secondary text-gray-400 border border-bgray-border ml-3 w-1/2 my-auto focus:outline-none" value={pageMetadata.icon} onChange={handleChangeMetadata} required/>
                 </div>
                 <div className="flex mt-3">
                     <p className="text-gray-400  font-semibold">Background URL (Header)</p>
-                    <input name="bg" className="w-full bg-bgray-secondary text-gray-400 border border-bgray-border ml-3 w-1/2 my-auto focus:outline-none" value={pageMetadata.bg} onChange={handleChangeMetadata} />
+                    <input name="bg" className="w-full bg-bgray-secondary text-gray-400 border border-bgray-border ml-3 w-1/2 my-auto focus:outline-none" value={pageMetadata.bg} onChange={handleChangeMetadata} required/>
                 </div>
                 <div className="flex justify-center mb-3 mt-5">
                     {isCreating == false ? (

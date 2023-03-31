@@ -1,6 +1,6 @@
 import fetcher from "@/lib/fetcher";
 import Link from "next/link";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import useSWR from 'swr'
@@ -17,13 +17,33 @@ const ServerEditor = ({ server, handleBack, handleSave, handleCreate, isCreating
         arkservers_api_key: server?.arkservers_api_key,
         server_icon: server?.server_icon,
         server_bg: server?.server_bg,
-        server_cluster: server?.server_cluster,
+        cluster: {
+            id: server?.cluster?.id,
+        },
         visible: server?.visible
     });
 
+    const [cluster, setCluster] = useState(server?.cluster?.id);
+
+    const parseBoolean = (value: any) => {
+        if(value === 'true') {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     const handleChangeServerInfo = (event: any) => {
-        setServerInfo({ ...serverInfo, [event.target.name]: event.target.value });
+        if(event.target.name === 'visible') {
+            setServerInfo({ ...serverInfo, [event.target.name]: parseBoolean(event.target.value) });
+        } else {
+            setServerInfo({ ...serverInfo, [event.target.name]: event.target.value });
+        }
     };
+
+    useEffect(() => {
+        console.log("Cluster: ", cluster)
+    }, [cluster])
 
 
     return (
@@ -39,15 +59,15 @@ const ServerEditor = ({ server, handleBack, handleSave, handleCreate, isCreating
                 <div className="space-y-3">
                     <div className="grid grid-cols-3 items-center">
                         <p className="text-gray-400  font-semibold my-auto">Server Name</p>
-                        <input name="name" value={serverInfo.name} onChange={handleChangeServerInfo} className="col-span-2  w-full bg-bgray-secondary text-gray-400 border border-bgray-border ml-3 w-1/2 my-auto focus:outline-none py-1 px-2" />
+                        <input name="name" required value={serverInfo.name} onChange={handleChangeServerInfo} className="col-span-2  w-full bg-bgray-secondary text-gray-400 border border-bgray-border ml-3 w-1/2 my-auto focus:outline-none py-1 px-2" />
                     </div>
                     <div className="grid grid-cols-3 items-center">
                         <p className="text-gray-400  font-semibold my-auto">Server Connection URL (Ex: steam://connect/server.com:27015)</p>
-                        <input name="connection_url" value={serverInfo.connection_url} onChange={handleChangeServerInfo} className="col-span-2  w-full bg-bgray-secondary text-gray-400 border border-bgray-border ml-3 w-1/2 my-auto focus:outline-none py-1 px-2" />
+                        <input name="connection_url" required value={serverInfo.connection_url} onChange={handleChangeServerInfo} className="col-span-2  w-full bg-bgray-secondary text-gray-400 border border-bgray-border ml-3 w-1/2 my-auto focus:outline-none py-1 px-2" />
                     </div>
                     <div className="grid grid-cols-3 items-center">
                         <p className="text-gray-400  font-semibold my-auto">ARK Server API Key</p>
-                        <input name="arkservers_api_key" value={serverInfo.arkservers_api_key} onChange={handleChangeServerInfo} className="col-span-2  w-full bg-bgray-secondary text-gray-400 border border-bgray-border ml-3 w-1/2 my-auto focus:outline-none py-1 px-2" />
+                        <input name="arkservers_api_key" required value={serverInfo.arkservers_api_key} onChange={handleChangeServerInfo} className="col-span-2  w-full bg-bgray-secondary text-gray-400 border border-bgray-border ml-3 w-1/2 my-auto focus:outline-none py-1 px-2" />
                     </div>
                     <div className="grid grid-cols-3">
                         <p className="text-gray-400  font-semibold my-auto">Server Icon</p>
@@ -64,19 +84,19 @@ const ServerEditor = ({ server, handleBack, handleSave, handleCreate, isCreating
                                 <option value="/icons/valguero.webp">Valguero</option>
                                 <option value="/icons/thecenter.png">The Center</option>
                                 <option value="/icons/ragnarok.webp">Ragnarok</option>
-                                <option value="/icons/scorchedearth.png">Scorched Earth</option>
+                                <option value="/icons/scorchedearth.webp">Scorched Earth</option>
                                 <option value="/icons/theisland.webp">The Island</option>
                             </select>
                         </div>
                     </div>
                     <div className="grid grid-cols-3 items-center">
                         <p className="text-gray-400  font-semibold my-auto">Background URL</p>
-                        <input name="server_bg" value={serverInfo.server_bg} className="col-span-2  w-full bg-bgray-secondary text-gray-400 border border-bgray-border ml-3 w-1/2 my-auto focus:outline-none py-1 px-2" />
+                        <input name="server_bg" required value={serverInfo.server_bg} onChange={handleChangeServerInfo} className="col-span-2  w-full bg-bgray-secondary text-gray-400 border border-bgray-border ml-3 w-1/2 my-auto focus:outline-none py-1 px-2" />
                     </div>
                     <div className="grid grid-cols-3">
                         <p className="text-gray-400  font-semibold my-auto">Server Visible</p>
                         <div className="flex">
-                            <select name="server_joining" id="" className="bg-bgray-secondary text-gray-400 border border-bgray-border ml-3 py-1 w-1/2 my-auto focus:outline-none">
+                            <select name="visible" value={serverInfo.visible} onChange={handleChangeServerInfo} className="bg-bgray-secondary text-gray-400 border border-bgray-border ml-3 py-1 w-1/2 my-auto focus:outline-none">
                                 <option value="true">Yes</option>
                                 <option value="false">No</option>
                             </select>
@@ -85,9 +105,9 @@ const ServerEditor = ({ server, handleBack, handleSave, handleCreate, isCreating
                     <div className="grid grid-cols-3">
                         <p className="text-gray-400  font-semibold my-auto">Parent Cluster</p>
                         <div className="flex">
-                            <select name="server_joining" id="" className="bg-bgray-secondary text-gray-400 border border-bgray-border ml-3 py-1 w-1/2 my-auto focus:outline-none">
+                            <select name="cluster" value={cluster} onChange={(event) => setCluster(event.target.value)} className="bg-bgray-secondary text-gray-400 border border-bgray-border ml-3 py-1 w-1/2 my-auto focus:outline-none">
                                 {data?.map( (key: any) => 
-                                        <option key={key.id} value={key.str_id}>{key.cluster_name}</option> )
+                                        <option key={key._id} value={key.str_id}>{key.cluster_name}</option> )
                                 }
                             </select>
                         </div>
@@ -96,6 +116,32 @@ const ServerEditor = ({ server, handleBack, handleSave, handleCreate, isCreating
                     <div className="w-1/2 border border-gray-500 rounded-3xl"><ServerCard server={serverInfo} siteSettings={{wipe_banner:true}}/></div><br/>
 
                 </div>
+                {isCreating == false ? (
+                    <button onClick={() => { 
+                        handleSave(
+                            server._id,
+                            serverInfo.name ? serverInfo.name : "",
+                            serverInfo.connection_url ? serverInfo.connection_url : "",
+                            serverInfo.arkservers_api_key ? serverInfo.arkservers_api_key : "",
+                            serverInfo.server_icon ? serverInfo.server_icon : "",
+                            serverInfo.server_bg ? serverInfo.server_bg : "",
+                            cluster ? cluster : "",
+                            "",
+                            serverInfo.visible ? serverInfo.visible : false,
+                        ) }} className="block py-2 pr-4 pl-3 text-white bg-red-600 rounded-full p-4 font-bold transition-colors"><i className="fas fa-floppy-disk mr-2"></i>Save Changes</button>
+                    ) : (
+                    <button onClick={() => {
+                        handleCreate(
+                            serverInfo.name ? serverInfo.name : "",
+                            serverInfo.connection_url ? serverInfo.connection_url : "",
+                            serverInfo.arkservers_api_key ? serverInfo.arkservers_api_key : "",
+                            serverInfo.server_icon ? serverInfo.server_icon : "",
+                            serverInfo.server_bg ? serverInfo.server_bg : "",
+                            cluster ? cluster : "",
+                            "",
+                            serverInfo.visible ? serverInfo.visible : false,
+                        ) }} className="block py-2 pr-4 pl-3 text-white bg-red-600 rounded-full p-4 font-bold transition-colors"><i className="fas fa-plus mr-2"></i>Create Server</button>
+                    )}
             </div>
         </>
     )
