@@ -1,19 +1,7 @@
 import { Prisma, PrismaClient } from '@prisma/client'
 import { NextApiRequest, NextApiResponse } from 'next';
 import { env } from 'process';
-
-/* New Beta Feature */
-const knex = require('knex')({
-  client: 'mysql',
-  connection: {
-    host : env.MYSQL_HOST,
-    port : env.MYSQL_PORT,
-    user : env.MYSQL_USER,
-    password : env.MYSQL_PASSWORD,
-    database : env.MYSQL_DATABASE
-  }
-});
-
+import { connectToDatabase } from '@/lib/mongodb'
 
 const prisma = new PrismaClient()
 
@@ -26,6 +14,28 @@ type CurrentPage = string;
 type Search = any;
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
+  const { cluster } = req.query;
+
+  /* Fetch Data From MongoDB */
+  const { db } = await connectToDatabase();
+  const cluster_data = await db.collection("clusters").findOne({ str_id: cluster});
+
+  if(!cluster_data) {
+    let error: any = { error: "Cluster Not Found!" };
+    res.status(404).json(error);
+  }
+
+  /* New Beta Feature */
+  const knex = require('knex')({
+    client: 'mysql',
+    connection: {
+      host : cluster_data.database_url,
+      port : cluster_data.database_port,
+      user : cluster_data.database_username,
+      password : cluster_data.database_password,
+      database : cluster_data.database_db
+    }
+  });
 
   //const search = req.query.search ? req.query.search : ""
   const filter = req.query.filter ? req.query.filter : ""

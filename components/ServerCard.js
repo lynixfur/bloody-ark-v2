@@ -28,6 +28,7 @@ export default function ServerCard(props) {
                     <span>{props?.siteSettings?.wipe_banner ? '0' : props?.server?.players} Survivors</span>
                     {props?.server?.is_online == true && props?.siteSettings?.wipe_banner == false && <i className="fa-solid fa-circle text-green-500 animate-pulse my-auto ml-2" />}
                     {props?.server?.is_online == false || props?.siteSettings?.wipe_banner && <i className="fa-solid fa-circle text-red-500 animate-pulse my-auto ml-2" />}
+                    {props?.server?.is_online == false&& <i className="fa-solid fa-circle text-red-500 animate-pulse my-auto ml-2" />}
                   </div>
                 </button>
               </div>}

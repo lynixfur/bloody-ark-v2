@@ -19,7 +19,7 @@ function PageEditor() {
     const [creatingServer, setCreatingServer] = useState(false);
 
     const [sendingData, setSendingData] = useState(false);
-    const [successStatus, setSuccessStatus] = useState(null);
+    const [successStatus, setSuccessStatus]: any = useState(null);
     const [statusMsg, setStatusMsg] = useState('');
 
     const [deleteServer, setDeleteServer]: any = useState({});
@@ -124,6 +124,19 @@ function PageEditor() {
         // Reset Status
         setSuccessStatus(null);
         setStatusMsg('');
+
+        if(name == ""
+            || connection_url == ""
+            || arkservers_api_key == ""
+            || server_icon == "" 
+            || server_bg == ""
+            || cluster_id == ""
+            || visible == null
+        ) {
+            setSuccessStatus(false);
+            setStatusMsg('You are missing some required fields to create the server!');
+            return;
+        }
 
         // Send Data to Server
         setSendingData(true);

@@ -1,5 +1,6 @@
 import { PrismaClient, Prisma } from '@prisma/client'
 import { NextApiRequest, NextApiResponse } from 'next';
+import { connectToDatabase } from '@/lib/mongodb'
 
 const prisma = new PrismaClient()
 
@@ -14,6 +15,28 @@ type Search = any;
 type SortBy = any;
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
+  const { cluster } = req.query;
+
+  /* Fetch Data From MongoDB */
+  const { db } = await connectToDatabase();
+  const cluster_data = await db.collection("clusters").findOne({ str_id: cluster});
+
+  if(!cluster_data) {
+    let error: any = { error: "Cluster Not Found!" };
+    res.status(404).json(error);
+  }
+
+  /* New Beta Feature */
+  const knex = require('knex')({
+      client: 'mysql',
+      connection: {
+        host : cluster_data.database_url,
+        port : cluster_data.database_port,
+        user : cluster_data.database_username,
+        password : cluster_data.database_password,
+        database : cluster_data.database_db
+      }
+  });
 
   const search = req.query.search ? req.query.search : ""
   const filter = req.query.filter ? req.query.filter : ""
@@ -42,7 +65,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
       break;
   }
 
-  const ranking_data = await prisma.advancedachievements_playerdata.findMany({
+  const ranking_data = await knex.table('advancedachievements_playerdata')
+  .select('PlayerName', 'TribeName', 'TribeID', 'PlayTime', 'PlayerKills', 'DinoKills', 'WildDinoKills', 'DinosTamed', 'DeathByPlayer', 'DeathByDino', 'DeathByWildDino')
+  .whereLike('PlayerName', `%${search}%`)
+  .orderBy(safeFilter, 'desc')
+  .limit(15)
+  .offset(15 * (req.query.page as Page ? req.query.page as Page : 0));
+  /*const ranking_data = await prisma.advancedachievements_playerdata.findMany({
     orderBy: safeFilter,
     skip: 15 * (req.query.page as Page ? req.query.page as Page : 0), // Page ID
     take: 15,
@@ -65,7 +94,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
       DeathByDino: true,
       DeathByWildDino: true, 
     },
-  });
+  });*/
   //const result = await prisma.$queryRaw`SELECT * FROM advancedachievements_playerdata WHERE PlayerName like "%${search}%"`
   
   const safe_ranking_data = JSON.parse(JSON.stringify(ranking_data, (key, value) =>
