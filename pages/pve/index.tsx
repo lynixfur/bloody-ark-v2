@@ -110,12 +110,12 @@ function Home({ homepage_options, player_count, news, site_settings }: any) {
               </h2>
               <div className="flex justify-center w-full mt-5">
                 <Link
-                  href="https://discord.gg/bloody"
+                  href="https://discord.gg/mQKtJJK6ya"
                   className="h-[70px] w-72 relative"
                 >
                   <img
                     className="object-cover shadow-xl rounded-full"
-                    src="https://discordapp.com/api/guilds/356693332623228928/widget.png?style=banner2&w=1080&q=75" />
+                    src="https://discordapp.com/api/guilds/972455200889667625/widget.png?style=banner2&w=1080&q=75" />
                 </Link>
               </div>
             </div>

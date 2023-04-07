@@ -61,7 +61,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link className="text-white hover:text-red-300" href="/info/vote">
+                <Link className="text-white hover:text-red-300" href="/info/6man/vote">
                   <i className="fa-solid fa-check-to-slot mr-2" /> Vote Rewards
                 </Link>
               </li>

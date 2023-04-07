@@ -162,7 +162,7 @@ function Home({ homepage_options, player_count, news, site_settings }: any) {
                 <div className="mt-2 mb-2 flex justify-between w-full">
                   <div className="p-5 w-full">
                     <Link
-                      href="/info/rates"
+                      href="/info/6man/rates"
                       className="transition-colors duration-300 flex items-center w-full py-2.5 px-3 mt-2 rounded text-forward hover:bg-bgray-overlay"
                     >
                       <i className="fa-solid fa-chart-area m-1 my-auto text-xl text-gray-500" />
@@ -171,7 +171,7 @@ function Home({ homepage_options, player_count, news, site_settings }: any) {
                       </span>
                     </Link>
                     <Link
-                      href="/info/pvp-system"
+                      href="/info/6man/pvp-system"
                       className="transition-colors duration-300 flex items-center w-full py-2.5 px-3 mt-2 rounded hover:bg-bgray-overlay hover:text-gray-300"
                     >
                       <i className="fa-solid fa-shield m-1 my-auto text-xl text-gray-500" />
@@ -180,7 +180,7 @@ function Home({ homepage_options, player_count, news, site_settings }: any) {
                       </span>
                     </Link>
                     <Link
-                      href="/info/settings"
+                      href="/info/6man/settings"
                       className="transition-colors duration-300 flex items-center w-full py-2.5 px-3 mt-2 rounded hover:bg-bgray-overlay hover:text-gray-300"
                     >
                       <i className="fa-solid fa-gear m-1 my-auto text-xl text-gray-500" />
