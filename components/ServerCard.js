@@ -10,8 +10,8 @@ export default function ServerCard(props) {
           <div className="flex-auto ml-3 justify-evenly py-2">
             <div className="flex flex-wrap ">
               <h2 className="flex-auto text-lg font-medium text-gray-50">{props?.server?.name}</h2>
-              <div className="w-full flex-none text-sm text-gray-400 font-bold ">
-                {props?.server?.geolocation == "NA" ? "United States" : "Europe" }
+              <div className="w-full flex text-sm text-gray-400 font-bold mt-2">
+              <span className="bg-blue-900 text-blue-300 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">ARK 1</span> {props?.server?.geolocation == "NA" ? "United States" : "Europe" }
               </div>
             </div>
             <p className="mt-3" />

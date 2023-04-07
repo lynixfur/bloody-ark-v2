@@ -14,26 +14,16 @@ type CurrentPage = string;
 type Search = any;
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
-  const { cluster } = req.query;
-
-  /* Fetch Data From MongoDB */
-  const { db } = await connectToDatabase();
-  const cluster_data = await db.collection("clusters").findOne({ str_id: cluster});
-
-  if(!cluster_data) {
-    let error: any = { error: "Cluster Not Found!" };
-    res.status(404).json(error);
-  }
 
   /* New Beta Feature */
   const knex = require('knex')({
     client: 'mysql',
     connection: {
-      host : cluster_data.database_url,
-      port : cluster_data.database_port,
-      user : cluster_data.database_username,
-      password : cluster_data.database_password,
-      database : cluster_data.database_db
+      host : 'sqlduo.bloody-ark.com',
+      port : 3306,
+      user : 'bloodyhub',
+      password : 'KImbwj%1uuH3DZ1s',
+      database : 'arkdbduo'
     }
   });
 
@@ -61,31 +51,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 
   const current_page = Number(req.query?.page ? req.query?.page : 0);
 
-  /*const ranking_data = await knex.table('advancedachievements_playerdata')
-  .select('advancedachievements_playerdata.TribeID', 'advancedachievements_tribedata.TribeName', 'advancedachievements_tribedata.DamageScore')
-  .innerJoin('advancedachievements_tribedata', 'advancedachievements_playerdata.TribeID', 'advancedachievements_tribedata.TribeID')
-  .sum('PlayerKills as Kills')
-  .sum('DeathByPlayer as Deaths')
-  .sum('DinoKills as DinoKills')
-  .sum('PlayTime as PlayTime')
-  .whereLike('advancedachievements_tribedata.TribeName', `%${search}%`)
-  .groupBy('advancedachievements_playerdata.TribeID')
-  .orderBy(safeFilter, 'desc')
-  .limit(20)
-  .offset(20 * current_page)*/
-
   const ranking_data = await knex.table('advancedachievements_tribedata')
   .select('advancedachievements_tribedata.TribeID', 'advancedachievements_tribedata.TribeName', 'advancedachievements_tribedata.DamageScore')
-  .leftJoin('advancedachievements_playerdata', 'advancedachievements_playerdata.TribeID', 'advancedachievements_tribedata.TribeID')
-  .sum('PlayerKills as Kills')
-  .sum('DeathByPlayer as Deaths')
-  .sum('DinoKills as DinoKills')
-  .sum('PlayTime as PlayTime')
-  .whereLike('advancedachievements_tribedata.TribeName', search)
-  .groupBy('advancedachievements_tribedata.TribeID')
-  .orderBy(safeFilter, 'desc')
-  .limit(20)
-  .offset(20 * current_page)
 
   const safe_ranking_data = JSON.parse(JSON.stringify(ranking_data, (key, value) =>
   typeof value === 'bigint'

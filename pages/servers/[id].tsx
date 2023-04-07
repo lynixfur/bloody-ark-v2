@@ -85,11 +85,12 @@ function ServerList({servers, highpop_servers, site_settings}: any) {
                         <h1 className="text-4xl px-4 py-2 text-left text-gray-50 font-black leading-7 md:leading-10 hidden">
                             <span><i className="fa-solid fa-star" /> Favorites </span>
                         </h1>
-                        <p className="text-gray-300 px-4 py-2 mb-16 text-left hidden">You currently have no favorites</p>
-                        <h1 className="text-4xl px-4 py-2 text-left text-gray-50 font-black leading-7 md:leading-10">
+                        <p className="text-gray-300 px-4 py-2 mb-16 text-left hidden">You currently have no favorites in your account!</p>
+                        <h1 className="text-4xl px-4 py-2 text-left text-gray-50 font-black leading-7 md:leading-10 hidden">
                             <span><i className="fa-solid fa-chart-area"></i> Most Popular </span>
                         </h1>
-                        <div className="grid mt-8  gap-8 grid-cols-1 md:grid-cols-2 xl:grid-cols-2 mb-5">
+                        <p className="text-gray-300 px-4 py-2 mb-16 text-left hidden">You are not allowed to see Most Popular Servers. (Missing Permission SERVER_HIGHPOP_VIEW)</p>
+                        <div className="hidden grid mt-8  gap-8 grid-cols-1 md:grid-cols-2 xl:grid-cols-2 mb-5">
                             <ServerCard server={highpop_servers[0]} siteSettings={site_settings}/>
                             <ServerCard server={highpop_servers[1]} siteSettings={site_settings}/>
                         </div>

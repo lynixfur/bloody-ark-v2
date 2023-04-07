@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 import { Transition } from '@headlessui/react'
 
-const FilterDropdown = ({ dropdownTitle, dropdownItems, callback }: any) => {
+const FilterDropdown = ({ dropdownTitle, dropdownItems, callback, isClusterDropdown }: any) => {
 
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const container = useRef<HTMLDivElement>(null);
@@ -33,8 +33,8 @@ const FilterDropdown = ({ dropdownTitle, dropdownItems, callback }: any) => {
         return () => document.removeEventListener("keyup", handleEscape);
     }, [isOpen]);
 
-    const selectItem = (item: string) => {
-        callback(item);
+    const selectItem = (item: string, name: string) => {
+        callback(item, name);
         setIsOpen(false);
     }
 
@@ -53,15 +53,18 @@ const FilterDropdown = ({ dropdownTitle, dropdownItems, callback }: any) => {
                 leaveTo="transform opacity-0 scale-95"
                 className="absolute left-0 w-56 mt-2 origin-top-left rounded-md shadow-lg z-10"
             >
-                    <div className="ring-1 ring-black ring-opacity-5 bg-bgray-forward rounded-2xl shadow">
-                        {dropdownItems.map((item: any, i: number) => (
-                            <>
-                                {i == 0 && <button key={item} onClick={() => { selectItem(item) }} className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-100 rounded-t-2xl hover:bg-bgray-secondary focus:outline-none focus:bg-bgray-secondary transition duration-150 ease-in-out">{item}</button>}
-                                {i == (dropdownItems.length - 1) && <button key={item} onClick={() => { selectItem(item) }} className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-100 rounded-b-2xl hover:bg-bgray-secondary focus:outline-none focus:bg-bgray-secondary transition duration-150 ease-in-out">{item}</button>}
-                                {i != 0 && i != (dropdownItems.length - 1) && <button key={item} onClick={() => { selectItem(item) }} className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-100 hover:bg-bgray-secondary focus:outline-none focus:bg-bgray-secondary transition duration-150 ease-in-out">{item}</button>}
-                            </>
-                        ))}
-                    </div>
+                <div className="ring-1 ring-black ring-opacity-5 bg-bgray-forward shadow">
+                    {dropdownItems?.map((item: any) => (
+                        <>
+                            {!isClusterDropdown &&
+                                <button key={item} onClick={() => { selectItem(item, item) }} className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-100 hover:bg-bgray-secondary focus:outline-none focus:bg-bgray-secondary transition duration-150 ease-in-out">{item}</button>
+                            }
+                            {isClusterDropdown &&
+                                <button key={item.str_id} onClick={() => { selectItem(item.str_id, item.cluster_name) }} className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-100 hover:bg-bgray-secondary focus:outline-none focus:bg-bgray-secondary transition duration-150 ease-in-out">{item.cluster_name}</button>
+                            }
+                        </>
+                    ))}
+                </div>
             </Transition>
         </div>
     )

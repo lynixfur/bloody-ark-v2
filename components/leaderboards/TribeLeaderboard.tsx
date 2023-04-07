@@ -39,26 +39,16 @@ const TribeLeaderboard = () => {
     }
 
     /* Cluster Filter */
-    const [clusterUrl, setClusterUrl] = useState(`/api/ark/6men/tribe_rankings`);
-    const [clusterFilter, setClusterFilter] = useState(0);
+    const [clusterUrl, setClusterUrl] = useState(`/api/ark/6man/tribe_rankings`);
+    const [clusterFilter, setClusterFilter] = useState({ name: "6 Man", filter: "6man" });
 
-    const handleClusterFilter = (filter: string) => {
-        console.log(filter);
-        if(filter == "6 Men") {
-            setClusterFilter(0);
-        } else {
-            setClusterFilter(1);
-        }
+    const handleClusterFilter = (filter: string, name: string) => {
+        setClusterFilter({ name: name, filter: filter });
     }
 
     useEffect(() => {
         const timerId = setTimeout(() => {
-            if (clusterFilter == 1) {
-                setClusterUrl(`/api/ark/2men/tribe_rankings`)
-            } else {
-                setClusterUrl(`/api/ark/6men/tribe_rankings`)
-            }
-            console.log(clusterUrl)
+            setClusterUrl(`/api/ark/${clusterFilter.filter}/tribe_rankings`)
         }, 250);
 
         return () => {
@@ -69,21 +59,19 @@ const TribeLeaderboard = () => {
 
     /* Get Data */
     const { data, error }: any = useSWR(`${clusterUrl}?search=${debounceSearch}&page=${filterPage}&filter=${filter}`, fetcher)
+    const { data: clusters, error: clusterError }: any = useSWR(`/api/clusters`, fetcher)
 
     return (<>
         <h2 className="font-extrabold text-gray-300 uppercase text-xl mt-5">
             Tribe Leaderboards
         </h2>
-        {clusterFilter == 1 && 
-         <div className=" bg-blue-700 border border-blue-600 text-blue-200 py-1 relative px-4 rounded my-5" role="alert"><strong className="font-bold"> This cluster is coming soon! Stay tuned. </strong></div>
-        }
         {/* Filters */}
         <div className="my-2 flex space-x-4 items-center">
             <input
                 value={search}
                 onChange={handleOnChange}
                 placeholder="Search for Tribes" name="tribe_search" id="tribe_search" className="px-3 py-2 text-gray-300 bg-bgray-overlay w-1/2 border-gray-700 border rounded-full" />
-            <FilterDropdown dropdownTitle={`${clusterFilter == 0 ? '6' : '2'} Men`} dropdownItems={["6 Men", "2 Men"]} callback={handleClusterFilter}/>
+            <FilterDropdown isClusterDropdown={true} dropdownTitle={clusterFilter.name} dropdownItems={clusters} callback={handleClusterFilter}/>
             <FilterDropdown dropdownTitle={`Filter by : ${filter}`} dropdownItems={["Tribe Damage", "Kills", "Deaths", "Tame Kills", "Time Played"]} callback={handleFilter}/>
         </div>
 

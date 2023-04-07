@@ -59,7 +59,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 
   const current_page = Number(req.query?.page ? req.query?.page : 0);
 
-  const ranking_data = await knex.table('advancedachievements_playerdata')
+  /*const ranking_data = await knex.table('advancedachievements_playerdata')
   .select('advancedachievements_playerdata.TribeID', 'advancedachievements_tribedata.TribeName', 'advancedachievements_tribedata.DamageScore')
   .innerJoin('advancedachievements_tribedata', 'advancedachievements_playerdata.TribeID', 'advancedachievements_tribedata.TribeID')
   .sum('PlayerKills as Kills')
@@ -68,6 +68,19 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
   .sum('PlayTime as PlayTime')
   .whereLike('advancedachievements_tribedata.TribeName', `%${search}%`)
   .groupBy('advancedachievements_playerdata.TribeID')
+  .orderBy(safeFilter, 'desc')
+  .limit(20)
+  .offset(20 * current_page)*/
+  
+  const ranking_data = await knex.table('advancedachievements_tribedata')
+  .select('advancedachievements_tribedata.TribeID', 'advancedachievements_tribedata.TribeName', 'advancedachievements_tribedata.DamageScore')
+  .leftJoin('advancedachievements_playerdata', 'advancedachievements_playerdata.TribeID', 'advancedachievements_tribedata.TribeID')
+  .sum('PlayerKills as Kills')
+  .sum('DeathByPlayer as Deaths')
+  .sum('DinoKills as DinoKills')
+  .sum('PlayTime as PlayTime')
+  .whereLike('advancedachievements_tribedata.TribeName', search)
+  .groupBy('advancedachievements_tribedata.TribeID')
   .orderBy(safeFilter, 'desc')
   .limit(20)
   .offset(20 * current_page)

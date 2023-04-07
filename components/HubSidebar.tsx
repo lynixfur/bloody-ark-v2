@@ -430,6 +430,16 @@ export default function HubSidebar() {
               </li>
               <li className="">
                 <Link
+                  href="/hub/user_management"
+                  className="flex items-center p-2 text-base font-normal rounded-lg text-gray-400 hover:bg-bgray-bg transition-colors group"
+                >
+                  <span className="ml-3">
+                    <i className="fa-solid fa-user my-auto mr-2" /> User Management
+                  </span>
+                </Link>
+              </li>
+              <li className="">
+                <Link
                   href="/hub/site_settings"
                   className="flex items-center p-2 text-base font-normal rounded-lg text-gray-400 hover:bg-bgray-bg transition-colors group"
                 >

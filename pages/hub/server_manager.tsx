@@ -259,14 +259,18 @@ function PageEditor() {
                     {successStatus == true &&
                         <p className="my-5 text-green-600 font-semibold"><i className="fa-solid fa-check mr-1"></i> Changes saved succesfully!</p>
                     }
+                    <p className="my-5 text-blue-600 font-semibold"><i className="fa-solid fa-info mr-1"></i> Your servers now have the ability to choose between ARK 1, ARK 1.5 (ARK Ascended) and ARK 2</p>
                     <div className="flex flex-col space-y-3">
                         {data?.map((server: any) => (
                             <div key={server?._id} className="w-full bg-bgray-secondary border border-bgray-border px-3 py-3 text-white hover:cursor-pointer">
-                                <div className="w-full grid grid-cols-4">
+                                <div className="w-full grid grid-cols-5">
                                     <span onClick={() => handleSelectPage(server?._id)}  className="ml-2 text-md font-bold flex-1"> <i className="fas fa-server m-1 my-auto text-xl text-gray-500"></i> {server?.name}
                                         {server?.visible == true && <i className="text-gray-500 ml-2 fa-solid fa-eye"></i>}
                                         {server?.visible == false && <i className="text-red-500 ml-2 fa-solid fa-eye-slash"></i>}
                                     </span>
+                                    <div className="flex justify-center">
+                                    <div className="bg-blue-900 text-blue-300 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">ARK 1</div>
+                                    </div>
                                     <span className="ml-2 text-md flex-1 text-gray-500">{server?.connection_url?.replace("steam://connect/","")} 
                                     
                                         {server?.is_online == true && <i className="ml-2 text-green-500 fa-solid fa-circle animate-pulse"></i>}

@@ -85,6 +85,7 @@ function Navbar(props: any) {
                         {data ? data.map((cluster: any) => (
                           <Link key={cluster.id} className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-100 hover:bg-mesa-gray focus:outline-none focus:bg-mesa-gray transition duration-150 ease-in-out" href={`/servers/${cluster.str_id}`} onClick={() => {setServerDropdown(false)}}>{cluster.cluster_name}</Link>
                         )) : null}
+                        <Link href="https://discord.gg/kUpdDXYZ25" className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-100 hover:bg-mesa-gray focus:outline-none focus:bg-mesa-gray transition duration-150 ease-in-out"><i className="fa fa-solid fa-server" /> Bloody PVE</Link>
                       </div>
                     </div>
                   </div>
@@ -97,9 +98,6 @@ function Navbar(props: any) {
                 </li>
                 <li>
                   <Link href="/support" className="block py-2 pr-4 pl-3 text-white rounded hover:text-mesa-orange md:p-0 font-bold transition-colors"><i className="fa fa-solid fa-comment" /> Support</Link>
-                </li>
-                <li>
-                    <Link href="https://discord.gg/kUpdDXYZ25" className="block py-2 pr-4 pl-3 text-white rounded hover:text-mesa-orange md:p-0 font-bold transition-colors"><i className="fa fa-solid fa-server" /> Bloody PVE</Link>
                 </li>
                 <li>
                   <Link href="https://discord.gg/bloody" className="block py-2 pr-4 pl-3 text-white rounded hover:text-mesa-orange md:p-0 font-bold transition-colors"><i className="fa-brands fa-discord" /></Link>
@@ -155,7 +153,7 @@ function Navbar(props: any) {
                     <div className="relative">
                       <button onClick={handleInfoDropdown} className="block py-2 pr-4 pl-3 text-white rounded hover:text-mesa-orange md:p-0 font-bold transition-colors"><i className="fa-solid fa-book"></i> Info</button>
                       <div className={infoDropdown ? 'absolute z-50 mt-3 w-48 shadow-lg origin-top-left left-0 rounded-2xl' : 'hidden z-50 mt-3 w-48 shadow-lg origin-top-left left-0 rounded-2xl'}>
-                        <div className="ring-1 ring-black ring-opacity-5 py-1 bg-bgray-bg rounded-2xl">
+                        <div className="ring-1 ring-black ring-opacity-5 py-1 bg-bgray-dropdown rounded-2xl">
                           {data ? data.map((cluster: any) => (
                             <Link key={cluster.id} className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-100 hover:bg-mesa-gray focus:outline-none focus:bg-mesa-gray transition duration-150 ease-in-out" href={`/info/${cluster.str_id}/pvp-system`} onClick={() => {setInfoDropdown(false)}}>{cluster.cluster_name}</Link>
                           )) : null}
@@ -169,8 +167,9 @@ function Navbar(props: any) {
                       <div className={serverDropdown ? 'absolute z-50 mt-3 w-48 shadow-lg origin-top-left left-0 rounded-2xl' : 'hidden z-50 mt-3 w-48 shadow-lg origin-top-left left-0 rounded-2xl'}>
                         <div className="ring-1 ring-black ring-opacity-5 py-1 bg-bgray-dropdown rounded-2xl">
                           {data ? data.map((cluster: any) => (
-                            <Link key={cluster.id} className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-100 hover:bg-mesa-gray focus:outline-none focus:bg-mesa-gray transition duration-150 ease-in-out" href={`/servers/${cluster.str_id}`} onClick={() => {setServerDropdown(false)}}>{cluster.cluster_name}</Link>
+                            <Link key={cluster.id} className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-100 hover:bg-mesa-gray focus:outline-none focus:bg-mesa-gray transition duration-150 ease-in-out" href={`/servers/${cluster.str_id}`} onClick={() => {setServerDropdown(false)}}><i className="fa fa-solid fa-server" />  {cluster.cluster_name}</Link>
                           )) : null}
+                          <Link href="https://discord.gg/kUpdDXYZ25" className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-100 hover:bg-mesa-gray focus:outline-none focus:bg-mesa-gray transition duration-150 ease-in-out"><i className="fa fa-solid fa-server" /> Bloody PVE</Link>
                         </div>
                       </div>
                     </div>
@@ -183,9 +182,6 @@ function Navbar(props: any) {
                   </li>
                   <li>
                     <Link href="/support" className="block py-2 pr-4 pl-3 text-white rounded hover:text-mesa-orange md:p-0 font-bold transition-colors"><i className="fa fa-solid fa-comment" /> Support</Link>
-                  </li>
-                  <li>
-                    <Link href="https://discord.gg/kUpdDXYZ25" className="block py-2 pr-4 pl-3 text-white rounded hover:text-mesa-orange md:p-0 font-bold transition-colors"><i className="fa fa-solid fa-server" /> Bloody PVE</Link>
                   </li>
                   <li>
                     <Link href="https://discord.gg/bloody" className="block py-2 pr-4 pl-3 text-white rounded hover:text-mesa-orange md:p-0 font-bold transition-colors"><i className="fa-brands fa-discord" /></Link>

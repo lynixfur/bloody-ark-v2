@@ -1,4 +1,4 @@
-export default function HomeHeader({text, players, background, seasonWipe, seasonNumber}: any) {
+export default function HomeHeader({text, players, background, seasonWipe, seasonNumber, globalNotice}: any) {
 
   return (<>
     <div
@@ -49,6 +49,9 @@ export default function HomeHeader({text, players, background, seasonWipe, seaso
         </div>
       </div>
     </div>
+    {globalNotice &&
+    <div className="py-4 bg-red-600"><p className="text-base text-white font-bold text-center"><i className="fa-solid fa-triangle-exclamation"></i> {globalNotice}</p></div>}
+    }
     {seasonWipe &&
     <div className="py-4 bg-red-600"><p className="text-base text-white font-bold text-center"><i className="fa-solid fa-compass fa-spin"></i> Wipe Time! We&apos;re currently preparing for the next season of Bloody ARK, Season {seasonNumber}!</p></div>}
 </>

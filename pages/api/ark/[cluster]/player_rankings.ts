@@ -44,31 +44,23 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
   let safeFilter = {}
   switch(filter) {
     case "Time Played":
-      safeFilter = {
-        PlayTime: "desc"
-      }
+      safeFilter = "PlayTime"
       break;
     case "Kills":
-      safeFilter = {
-        PlayerKills: "desc"
-      }
+      safeFilter = "PlayerKills"
       break;
     case "Deaths":
-      safeFilter = {
-        DeathByPlayer: "desc"
-      }
+      safeFilter = "DeathByPlayer"
       break;
     case "Tamed Dino Kills":
-      safeFilter = {
-        DinoKills: "desc"
-      }
+      safeFilter = "DinoKills"
       break;
   }
 
   const ranking_data = await knex.table('advancedachievements_playerdata')
   .select('PlayerName', 'TribeName', 'TribeID', 'PlayTime', 'PlayerKills', 'DinoKills', 'WildDinoKills', 'DinosTamed', 'DeathByPlayer', 'DeathByDino', 'DeathByWildDino')
   .whereLike('PlayerName', `%${search}%`)
-  .orderBy(safeFilter, 'desc')
+  //.orderBy(safeFilter, 'desc')
   .limit(15)
   .offset(15 * (req.query.page as Page ? req.query.page as Page : 0));
   /*const ranking_data = await prisma.advancedachievements_playerdata.findMany({
@@ -104,16 +96,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     ));
 
     const current_page = (req.query.page ? req.query.page : 0);
-    const pages = await prisma.advancedachievements_playerdata.count({});
+    const pages = 1000;
     var next_page = null;
     var prev_page = null;
   
-    if(current_page < Math.round(pages / 20)) {
-      next_page = `https://bloody.gg/api/ark/6men/player_rankings?page=${parseInt(current_page as CurrentPage) + 1}&search=${search}`;
+    if(Number(current_page) < Math.round(pages / 20)) {
+      next_page = `https://bloody.gg/api/ark/${cluster}/player_rankings?page=${parseInt(current_page as CurrentPage) + 1}&search=${search}`;
     }
   
-    if(current_page > 0) {
-      prev_page = `https://bloody.gg/api/ark/6men/player_rankings?page=${parseInt(current_page as CurrentPage) - 1}&search=${search}`;
+    if(Number(current_page) > 0) {
+      prev_page = `https://bloody.gg/api/ark/${cluster}/player_rankings?page=${parseInt(current_page as CurrentPage) - 1}&search=${search}`;
     }
 
   /* Return All Required Data */

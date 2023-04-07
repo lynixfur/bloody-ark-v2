@@ -125,6 +125,16 @@ const ServerEditor = ({ server, handleBack, handleSave, handleCreate, isCreating
                         </div>
                     </div>
                     <div className="grid grid-cols-3">
+                        <p className="text-gray-400  font-semibold my-auto">Game  <span className="bg-red-900 text-red-300 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">New!</span></p>
+                        <div className="flex">
+                            <select name="ark" className="bg-bgray-secondary text-gray-400 border border-bgray-border ml-3 py-1 w-1/2 my-auto focus:outline-none">
+                                <option value="1">ARK 1</option>
+                                <option value="1.5">ARK 1.5 (ARK Ascended)</option>
+                                <option value="2">ARK 2</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div className="grid grid-cols-3">
                         <p className="text-gray-400  font-semibold my-auto">Parent Cluster</p>
                         <div className="flex">
                             <select name="cluster" value={cluster} onChange={(event) => setCluster(event.target.value)} className="bg-bgray-secondary text-gray-400 border border-bgray-border ml-3 py-1 w-1/2 my-auto focus:outline-none">
