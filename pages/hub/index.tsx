@@ -6,6 +6,7 @@ import useUser from "../../lib/hooks/useUser";
 import useSWR from 'swr'
 import Link from "next/link";
 import Error from "@/components/errors/Error"
+import Loader from "@/components/Loader";
 import ServerCardNew from "@/components/ServerCardNew";
 import { useState } from "react";
 import { Transition } from '@headlessui/react'
@@ -54,7 +55,7 @@ export default function HubDashboard() {
   const { data, error } = useSWR('find', fetcher)
 
   if (error) return <Layout><Error msg={"Failed to load Tribe Manager \n" + error.toString()} /></Layout>
-  if (!data) return <Layout><div className="p-5 text-xl text-white">Loading...</div></Layout>
+  if (!data) return <Layout><Loader/></Layout>
 
   return (
     <>

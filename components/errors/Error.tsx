@@ -15,10 +15,8 @@ const Error = (props: any) => {
                                         <i className="fa-solid fa-exclamation-triangle text-red-600 text-5xl animate-pulse"></i>
                                     </div>
                                     <div>
-                                        <p className="text-2xl text-center text-red-600 uppercase font-bold">
-                                            AN ERROR OCCURED
-                                        </p>
-                                        <p className="font-fontstars text-gray-400 text-center mt-1">{props?.msg}<br/>{props?.status}</p>
+                                        <p className="font-bold text-2xl text-center dark:text-gray-100">No Data Available</p>
+                                        <p className="text-lg text-gray-400 mt-2 text-center">We currently have no data to display this page.<br/>Please check back later.</p>
                                     </div>
                                 </div>
                             </div>
