@@ -138,6 +138,10 @@ function PageEditor() {
                             <input name="header_bg" className="col-span-2 w-full bg-bgray-secondary text-gray-400 border border-bgray-border ml-3 w-1/2 my-auto focus:outline-none py-1 px-2" value={settings.header_bg} onChange={handleChangeSettings}/>
                         </div>
                         <div className="grid grid-cols-3">
+                        <p className="text-gray-400  font-semibold">(PvE) Header Background URL</p>
+                            <input name="header_bg" className="col-span-2 w-full bg-bgray-secondary text-gray-400 border border-bgray-border ml-3 w-1/2 my-auto focus:outline-none py-1 px-2" value={settings.header_bg} onChange={handleChangeSettings}/>
+                        </div>
+                        <div className="grid grid-cols-3">
                             <p className="text-gray-400  font-semibold">Season Background URL</p>
                             <input name="section_bg" className="col-span-2  w-full bg-bgray-secondary text-gray-400 border border-bgray-border ml-3 w-1/2 my-auto focus:outline-none py-1 px-2" value={settings.section_bg} onChange={handleChangeSettings} />
                         </div>

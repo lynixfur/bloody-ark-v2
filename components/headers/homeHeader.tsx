@@ -1,4 +1,4 @@
-export default function HomeHeader({text, players, background, seasonWipe, seasonNumber, globalNotice}: any) {
+export default function HomeHeader({ text, players, background, seasonWipe, seasonNumber, globalNotice, pve }: any) {
 
   return (<>
     <div
@@ -34,14 +34,14 @@ export default function HomeHeader({text, players, background, seasonWipe, seaso
                       Access Hub
                     </a>
                   </span>
-                  <button className="mb-2 md:mb-0 bg-bgray-secondary ring-1 ring-bgray-forward px-4 py-2 shadow-sm tracking-wider text-gray-300 rounded-full inline-flex items-center space-x-2 font-bold">
+                  {!pve && <button className="mb-2 md:mb-0 bg-bgray-secondary ring-1 ring-bgray-forward px-4 py-2 shadow-sm tracking-wider text-gray-300 rounded-full inline-flex items-center space-x-2 font-bold">
                     <div className="flex">
                       <span className="ml-1">
                         {players} Survivors
                       </span>
                       <i className="fa-solid fa-circle text-green-500 animate-pulse my-auto ml-2" />
                     </div>
-                  </button>
+                  </button>}
                 </div>
               </div>
             </div>
@@ -50,9 +50,12 @@ export default function HomeHeader({text, players, background, seasonWipe, seaso
       </div>
     </div>
     {globalNotice &&
-    <div className="py-4 bg-red-600"><p className="text-base text-white font-bold text-center"><i className="fa-solid fa-triangle-exclamation"></i> {globalNotice}</p></div>}
-    {seasonWipe &&
-    <div className="py-4 bg-red-600"><p className="text-base text-white font-bold text-center"><i className="fa-solid fa-compass fa-spin"></i> Wipe Time! We&apos;re currently preparing for the next season of Bloody ARK, Season {seasonNumber}!</p></div>}
-</>
+      <div className="py-4 bg-red-600"><p className="text-base text-white font-bold text-center"><i className="fa-solid fa-triangle-exclamation"></i> {globalNotice}</p></div>}
+    {!pve &&
+      <>
+        {seasonWipe &&
+          <div className="py-4 bg-red-600"><p className="text-base text-white font-bold text-center"><i className="fa-solid fa-compass fa-spin"></i> Wipe Time! We&apos;re currently preparing for the next season of Bloody ARK, Season {seasonNumber}!</p></div>}</>
+    }
+  </>
   );
 }
