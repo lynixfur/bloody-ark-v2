@@ -47,18 +47,18 @@ const TopTribe = ({clusterId}: any) => {
                 
                 {data?.ranking_data?.length > 0 && <div>
                     <p className="ml-1 text-3xl" style={{ color: '#ffd700' }}><i className="fa-solid fa-trophy"></i></p>
-                    <p className="text-center font-semibold text-3xl">{data?.ranking_data[0]?.TribeName}</p>
+                    <p className="text-center font-semibold text-3xl">{data?.ranking_data[0]?.TribeName.replace(/\bhttps?:\/\/\S+/gi, '[HIDDEN]')}</p>
                     <p className="text-center text-xl text-gray-400">Score : {data?.ranking_data[0]?.DamageScore}</p>
                 </div>}
                 {data?.ranking_data?.length > 1 && <div>
                     <p className="ml-1 text-3xl" style={{ color: '#C0C0C0' }}><i className="fa-solid fa-trophy"></i></p>
-                    <p className="text-center font-semibold text-3xl">{data?.ranking_data[1]?.TribeName}</p>
+                    <p className="text-center font-semibold text-3xl">{data?.ranking_data[1]?.TribeName.replace(/\bhttps?:\/\/\S+/gi, '[HIDDEN]')}</p>
                     <p className="text-center text-xl text-gray-400">Score : {data?.ranking_data[1]?.DamageScore}</p>
                 </div>}
                 </div>
                 {data?.ranking_data?.length > 2 && <div>
                     <p className="ml-1 text-3xl" style={{ color: '#977b29' }}><i className="fa-solid fa-trophy"></i></p>
-                    <p className="text-center font-semibold text-3xl">{data?.ranking_data[2]?.TribeName}</p>
+                    <p className="text-center font-semibold text-3xl">{data?.ranking_data[2]?.TribeName.replace(/\bhttps?:\/\/\S+/gi, '[HIDDEN]')}</p>
                     <p className="text-center text-xl text-gray-400">Score : {data?.ranking_data[2]?.DamageScore}</p>
                 </div>}
             </div>
