@@ -87,7 +87,7 @@ const PlayerLeaderboard = () => {
             <input value={search}
                 onChange={handleOnChange}
                 placeholder="Search for Players" name="tribe_search" id="tribe_search" className="px-3 py-2 text-gray-300 bg-bgray-overlay w-1/2 border-gray-700 border rounded-full" />
-            <FilterDropdown isClusterDropdown={true} dropdownTitle={clusterFilter.name} dropdownItems={clusters} callback={handleClusterFilter}/>
+            <FilterDropdown isClusterDropdown={true} dropdownTitle={clusterFilter.name} dropdownItems={clusters?.filter((cluster: any) => cluster.cluster_type !== "pve")} callback={handleClusterFilter}/>
             <FilterDropdown dropdownTitle={`Filter by : ${filter}`} dropdownItems={["Time Played", "Kills", "Deaths", "Tamed Dino Kills"]} callback={handleFilter} />
 
         </div>
