@@ -192,14 +192,14 @@ const PlayerLeaderboard = () => {
                                                         <td className="pl-5">
                                                             <div className="flex items-center">
                                                                 <p className="text-base leading-none text-white font-bold">
-                                                                    {player?.PlayerName.replace(/\bhttps?:\/\/\S+/gi, '[HIDDEN]')}
+                                                                    {player?.PlayerName.replace(/\b\w+(\.\w+)+/gi, '[HIDDEN]')}
                                                                 </p>
                                                             </div>
                                                         </td>
                                                         <td className="pl-5">
                                                             <div className="flex items-center">
                                                                 <p className="text-base leading-none text-white font-bold">
-                                                                    {player?.TribeName.replace(/\bhttps?:\/\/\S+/gi, '[HIDDEN]')}
+                                                                    {player?.TribeName.replace(/\b\w+(\.\w+)+/gi, '[HIDDEN]')}
                                                                 </p>
                                                             </div>
                                                         </td>

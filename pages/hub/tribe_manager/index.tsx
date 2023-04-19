@@ -29,7 +29,7 @@ export default function HubDashboard() {
       </Head>
       <Layout>
         <div className="w-full">
-          {data?.tribe_data ? (
+          {data?.tribe_data?.CreationDate ? (
             <>
               <div>
                 <div className="p-4 bg-white dark:bg-bgray-secondary dark:border-gray-700 items-center justify-between border-b border-gray-200 flex">

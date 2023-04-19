@@ -34,6 +34,19 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     .where('player_data.steamid', user.userId.toString())
     .first()
 
+    const listed_tribes = await knex.table('tribe_data')
+    .where('isListed', true)
+
+    // if tribe is non existant return 
+    if(!player_data?.TribeID) {
+        return res.status(200).json({
+            api_version: 2,
+            player_data: player_data,
+            listed_tribes: listed_tribes,
+            tribe_data: {}
+        });
+    }
+
     const tribe_data = await knex.table('wtribes_tribedata')
     .select('TribeID')
     .select('OwnerSteamID')
@@ -74,10 +87,6 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     .select('isListed')
     .where('tribeid', tribe_data.TribeID)
     .first()
-
-    const listed_tribes = await knex.table('tribe_data')
-    .where('isListed', true)
-
 
     res.status(200).json({
         api_version: 2,

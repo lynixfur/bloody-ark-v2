@@ -174,7 +174,7 @@ const TribeLeaderboard = () => {
                                                     <td className="pl-5">
                                                         <div className="flex items-center">
                                                             <p className="text-base leading-none text-white font-bold">
-                                                                {tribe?.TribeName.replace(/\bhttps?:\/\/\S+/gi, '[HIDDEN]')}
+                                                                {tribe?.TribeName.replace(/\b\w+(\.\w+)+/gi, '[HIDDEN]')}
                                                             </p>
                                                         </div>
                                                     </td>
