@@ -41,8 +41,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
   const search = req.query.search ? req.query.search : ""
   const filter = req.query.filter ? req.query.filter : ""
 
-  let safeFilter = {}
-  switch(filter) {
+  let safeFilter = "PlayerKills"
+ switch(filter) {
     case "Time Played":
       safeFilter = "PlayTime"
       break;
@@ -60,7 +60,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
   const ranking_data = await knex.table('advancedachievements_playerdata')
   .select('PlayerName', 'TribeName', 'TribeID', 'PlayTime', 'PlayerKills', 'DinoKills', 'WildDinoKills', 'DinosTamed', 'DeathByPlayer', 'DeathByDino', 'DeathByWildDino')
   .whereLike('PlayerName', `%${search}%`)
-  //.orderBy(safeFilter, 'desc')
+  .orderBy(safeFilter, 'desc')
   .limit(15)
   .offset(15 * (req.query.page as Page ? req.query.page as Page : 0));
   /*const ranking_data = await prisma.advancedachievements_playerdata.findMany({
