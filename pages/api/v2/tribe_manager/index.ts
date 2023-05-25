@@ -71,14 +71,20 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
     const tribe_members = await knex.table('wtribes_playerdata')
     .innerJoin('player_data', 'wtribes_playerdata.SteamID', 'player_data.steamid')
-    .select('wtribes_playerdata.SteamID')
+    //.select('wtribes_playerdata.SteamID')
     .select('player_data.playername')
     .select('wtribes_playerdata.isOwnerInTribe AS IsOwnerInTribe')
     .select('wtribes_playerdata.isAdminInTribe AS IsAdminInTribe')
     .where('TribeID', tribe_data?.TribeID)
 
+    /* This may be insecure and leaks SteamIDs of all Tribe Members this allows us to spy on the players. 
+        Severity: 10/10
+        Fix: Hide SteamIDs 
+        Fix Planned On: 2023-05-25
+    */
+    
     const owner = await knex.table('player_data')
-    .select('steamid AS SteamID')
+    //.select('steamid AS SteamID')
     .select('player_data.playername AS PlayerName')
     .where('steamid', tribe_data.OwnerSteamID)
     .first()

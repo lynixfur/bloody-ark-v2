@@ -19,4 +19,11 @@ export default function App({ Component, pageProps }: AppProps) {
   }, [])
 
   return <Component {...pageProps} />
+  /*return <>
+    <div className="p-5 text-white">
+      <h1 className="text-4xl mb-2">Upgrade in Progress...</h1>
+      <p>Sorry for the inconvenience, we're currently upgrading our backend to support more features.<br/>
+      Old API Version: 2.1.X {'->'} New API Version: 3.0.1</p>
+    </div>
+  </>*/
 }
