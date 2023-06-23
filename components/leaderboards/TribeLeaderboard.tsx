@@ -76,7 +76,7 @@ const TribeLeaderboard = () => {
         </div>
 
         <div className="pb-12">
-            {data ? (
+            {data?.ranking_data?.length > 0 ? (
                 <div className="mt-4 w-full grid grid-cols-1 md:grid-cols-1 xl:grid-cols-1 gap-4">
                     <div>
                         <div className="mb-10">
@@ -236,7 +236,7 @@ const TribeLeaderboard = () => {
                 </div>
             ) : (
                 <>
-                    {error ?
+                    {data?.msg ?
                         <div className="text-gray-700 px-4 py-3 mt-10" role="alert">
                             <div>
                                 <div className="text-gray-700 px-4 py-3 mt-10" role="alert">
@@ -248,7 +248,8 @@ const TribeLeaderboard = () => {
                                             <p className="text-2xl text-center text-red-600 uppercase font-bold">
                                                 AN ERROR OCCURED
                                             </p>
-                                            <p className="font-fontstars text-gray-500 text-center mt-1">We had encountered an error while loading.</p>
+                                            <p className="font-fontstars text-gray-500 text-center mt-1">We had encountered an error while loading.<br/>
+                                            {data?.msg}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -257,12 +258,12 @@ const TribeLeaderboard = () => {
                         </div>
                         : <div className="text-red-600 px-4 py-3 mt-10" role="alert">
                             <div className="my-auto flex justify-center mb-5">
-                                <i className="fa-solid fa-spinner text-mesa-orange text-5xl animate-spin"></i>
+                                <i className="fa-solid fa-circle-notch ext-mesa-orange text-5xl animate-spin"></i>
                             </div>
                         </div>}
                 </>
             )}
-            {data &&
+            {data?.ranking_data?.length > 0 &&
                 <>
                     <p className="text-gray-300">Page <strong>{data?.pagination?.current_page + 1}</strong> of <strong>{data?.pagination?.total_pages}</strong></p>
                     <div className="flex space-x-2 mt-3">

@@ -283,7 +283,7 @@ export default function HubSidebar() {
               <p className="font-bold text-gray-400">Cluster Selection</p>
             </li>
             <div className="px-4">
-              <SidebarClusterDropdown dropdownItems={["6 Man Cluster","2 Man Cluster","Bloody PVE"]} dropdownTitle="6 Man Cluster"/>
+              <SidebarClusterDropdown dropdownItems={["6 Man Cluster"]} dropdownTitle="6 Man Cluster"/>
             </div>
             <hr className="border-gray-600 mx-4"/>
             <li>
@@ -374,29 +374,6 @@ export default function HubSidebar() {
               >
                 <span className="ml-3">
                   <i className="fa-solid fa-cube my-auto mr-2" /> Bloody Portal
-                </span>
-              </Link>
-            </li>
-            <li className="px-4 mt-10">
-              <p className="font-bold text-gray-400">Cluster Features <span className="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300">Beta</span></p>
-              </li>
-            <li>
-              <Link
-                href="/hub/beta/tribe_manager"
-                className="flex items-center p-2 text-base font-normal rounded-lg text-gray-400 hover:bg-bgray-bg transition-colors group"
-              >
-                <span className="ml-3">
-                  <i className="fa-solid fa-home my-auto mr-2" /> Dashboard v3
-                </span>
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/hub/beta/tribe_manager"
-                className="flex items-center p-2 text-base font-normal rounded-lg text-gray-400 hover:bg-bgray-bg transition-colors group"
-              >
-                <span className="ml-3">
-                  <i className="fa-solid fa-users my-auto mr-2" /> Tribe Manager v3
                 </span>
               </Link>
             </li>

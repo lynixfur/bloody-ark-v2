@@ -25,7 +25,7 @@ const PlayerLeaderboard = () => {
             clearTimeout(timerId);
         };
     }, [search]);
-    
+
     /* Pagination */
     const [filterPage, setFilterPage] = useState(0);
     const prevPage = () => { setFilterPage(filterPage - 1) };
@@ -39,23 +39,23 @@ const PlayerLeaderboard = () => {
         setFilter(filter);
     }
 
-        /* Cluster Filter */
-        const [clusterUrl, setClusterUrl] = useState(`/api/ark/6man/player_rankings`);
-        const [clusterFilter, setClusterFilter] = useState({ name: "6 Man", filter: "6man" });
-    
-        const handleClusterFilter = (filter: string, name: string) => {
-            setClusterFilter({ name: name, filter: filter });
-        }
-    
-        useEffect(() => {
-            const timerId = setTimeout(() => {
-                setClusterUrl(`/api/ark/${clusterFilter.filter}/player_rankings`)
-            }, 250);
-    
-            return () => {
-                clearTimeout(timerId);
-            };
-        }, [clusterFilter]);
+    /* Cluster Filter */
+    const [clusterUrl, setClusterUrl] = useState(`/api/ark/6man/player_rankings`);
+    const [clusterFilter, setClusterFilter] = useState({ name: "6 Man", filter: "6man" });
+
+    const handleClusterFilter = (filter: string, name: string) => {
+        setClusterFilter({ name: name, filter: filter });
+    }
+
+    useEffect(() => {
+        const timerId = setTimeout(() => {
+            setClusterUrl(`/api/ark/${clusterFilter.filter}/player_rankings`)
+        }, 250);
+
+        return () => {
+            clearTimeout(timerId);
+        };
+    }, [clusterFilter]);
 
     /* Get Data */
 
@@ -63,7 +63,7 @@ const PlayerLeaderboard = () => {
 
     var ranking_players: any[] = [];
 
-    data?.ranking_data.forEach((player: any) => {
+    data?.ranking_data?.forEach((player: any) => {
         // Add KD Value
         if (parseInt(player?.DeathByPlayer) === 0) {
             player.kd = parseInt(player?.PlayerKills).toFixed(1); // This line prevents Infinity KD Issue
@@ -87,13 +87,13 @@ const PlayerLeaderboard = () => {
             <input value={search}
                 onChange={handleOnChange}
                 placeholder="Search for Players" name="tribe_search" id="tribe_search" className="px-3 py-2 text-gray-300 bg-bgray-overlay w-1/2 border-gray-700 border rounded-full" />
-            <FilterDropdown isClusterDropdown={true} dropdownTitle={clusterFilter.name} dropdownItems={clusters?.filter((cluster: any) => cluster.cluster_type !== "pve")} callback={handleClusterFilter}/>
+            <FilterDropdown isClusterDropdown={true} dropdownTitle={clusterFilter.name} dropdownItems={clusters?.filter((cluster: any) => cluster.cluster_type !== "pve")} callback={handleClusterFilter} />
             <FilterDropdown dropdownTitle={`Filter by : ${filter}`} dropdownItems={["Time Played", "Kills", "Deaths", "Tamed Dino Kills"]} callback={handleFilter} />
 
         </div>
         {/* Table */}
         <div className="pb-12">
-            {data ? (
+            {data?.ranking_data?.length > 0 ? (
                 <>
                     <div className="mt-4 w-full grid grid-cols-1 md:grid-cols-1 xl:grid-cols-1 gap-4">
                         <div>
@@ -255,7 +255,7 @@ const PlayerLeaderboard = () => {
                 </>
             ) : (
                 <>
-                    {error ?
+                    {data?.msg ?
                         <div className="text-gray-700 px-4 py-3 mt-10" role="alert">
                             <div>
                                 <div className="text-gray-700 px-4 py-3 mt-10" role="alert">
@@ -267,7 +267,8 @@ const PlayerLeaderboard = () => {
                                             <p className="text-2xl text-center text-red-600 uppercase font-bold">
                                                 AN ERROR OCCURED
                                             </p>
-                                            <p className="font-fontstars text-gray-500 text-center mt-1">We had encountered an error while loading.</p>
+                                            <p className="font-fontstars text-gray-500 text-center mt-1">We had encountered an error while loading.<br />
+                                                {data?.msg}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -276,16 +277,16 @@ const PlayerLeaderboard = () => {
                         </div>
                         : <div className="text-red-600 px-4 py-3 mt-10" role="alert">
                             <div className="my-auto flex justify-center mb-5">
-                                <i className="fa-solid fa-spinner text-mesa-orange text-5xl animate-spin"></i>
+                                <i className="fa-solid fa-circle-notch ext-mesa-orange text-5xl animate-spin"></i>
                             </div>
                         </div>}
                 </>
             )}
-            {data &&
+            {data?.ranking_data?.length > 0 &&
                 <>
                     <p className="text-gray-300">Page <strong>{data?.pagination?.current_page + 1}</strong> of <strong>{data?.pagination?.total_pages}</strong></p>
                     <div className="flex space-x-2 mt-3">
-                        {data?.pagination?.current_page > 0  ?
+                        {data?.pagination?.current_page > 0 ?
                             <button onClick={prevPage} className="inline-flex items-center px-3 py-1 font-bold leading-6 text-md shadow rounded-full text-gray-100  bg-bgray-overlay transition ease-in-out duration-150">  <i className="fa-solid fa-arrow-left m-1 mr-2 my-auto"></i> Previous</button>
                             : <></>
                         }
