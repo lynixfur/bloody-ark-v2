@@ -35,7 +35,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-  ],
+, "pages/api/servers/disabled.2men.ts.disabled"  ],
   "exclude": [
     "node_modules"
   ]
