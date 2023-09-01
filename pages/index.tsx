@@ -66,7 +66,7 @@ function Home({ homepage_options, player_count, news, site_settings }: any) {
                   <TopTribe clusterId={"6man"}/>
                 </div>
                 <div className="w-1/2 text-center bg-bgray-secondary">
-                  <TopTribe clusterId={"2man"}/>
+                  <TopTribe clusterId={"3man"}/>
                 </div>
               </div>
             </div>

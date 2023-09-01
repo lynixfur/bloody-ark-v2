@@ -169,7 +169,7 @@ function Navbar(props: any) {
                           {data ? data.filter((cluster: any) => cluster.cluster_type !== "pve").map((cluster: any) => (
                             <Link key={cluster.id} className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-100 hover:bg-mesa-gray focus:outline-none focus:bg-mesa-gray transition duration-150 ease-in-out" href={`/servers/${cluster.str_id}`} onClick={() => {setServerDropdown(false)}}>{cluster.cluster_name}</Link>
                           )) : null}
-                          <Link href="/pve" className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-100 hover:bg-mesa-gray focus:outline-none focus:bg-mesa-gray transition duration-150 ease-in-out">Bloody PVE</Link>
+                          <Link href="/pve" className="hidden block w-full px-4 py-2 text-left text-sm leading-5 text-gray-100 hover:bg-mesa-gray focus:outline-none focus:bg-mesa-gray transition duration-150 ease-in-out">Bloody PVE</Link>
                         </div>
                       </div>
                     </div>
