@@ -21,7 +21,7 @@
     "@types/react-dom": "18.0.10",
     "autoprefixer": "^10.4.13",
     "date-fns-tz": "^2.0.0",
-    "eslint": "8.31.0",
+    "eslint": "8.47.0",
     "iron-session": "^6.3.1",
     "knex": "^2.4.2",
     "moment": "^2.29.4",
