@@ -58,11 +58,17 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       DeathByWildDino: true, 
     }
   });
+  
+  let tribe_performance = null;
 
-  const tribe_performance = await prisma.advancedachievements_tribedata.findFirst({ 
-    where: { TribeID: parseInt(w_player_data.TribeID) },
-    select: { TribeName: true, DamageScore: true}
-  });
+  if(w_player_data?.TribeID) {
+    tribe_performance = await prisma.advancedachievements_tribedata.findFirst({ 
+      where: { TribeID: parseInt(w_player_data.TribeID) },
+      select: { TribeName: true, DamageScore: true}
+    });
+  } else {
+    tribe_performance = {};
+  }
 
   const player_score_data = await prisma.advancedachievements_playerdata_custom.findFirst({
     where: { steam_id: BigInt(user.userId) },

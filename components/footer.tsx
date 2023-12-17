@@ -105,14 +105,6 @@ export default function Footer() {
                   Service
                 </Link>
               </li>
-              <li>
-                <Link
-                  className="text-white hover:text-red-300"
-                  href="https://hub.bloody-ark.com/"
-                >
-                  <i className="fa-solid fa-layer-group mr-2" /> Bloody Hub
-                </Link>
-              </li>
             </nav>
           </div>
           <div className="lg:w-1/4 md:w-1/2 w-full px-4">

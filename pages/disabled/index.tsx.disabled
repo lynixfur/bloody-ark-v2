@@ -1,9 +1,9 @@
 import Head from "next/head";
 import Image from "next/image";
-import Navbar from "../components/navbar";
-import HomeHeader from "../components/headers/homeHeader";
+import Navbar from "../../components/navbar";
+import HomeHeader from "../../components/headers/homeHeader";
 import ReactMarkdown from 'react-markdown'
-import Footer from "../components/footer";
+import Footer from "../../components/footer";
 import { env } from "process";
 import Link from "next/link";
 import TopTribe from "@/components/TopTribe";

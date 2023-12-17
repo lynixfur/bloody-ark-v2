@@ -3,6 +3,7 @@ import axios from "axios";
 import Layout from "../../components/HubLayout";
 import useUser from "../../lib/hooks/useUser";
 import useSWR from 'swr'
+import Error from "@/components/errors/Error";
 
 let fetcher = async () => {
   const response = await fetch(`/api/hub/performance`);
@@ -17,7 +18,7 @@ export default function Performance() {
   /* Fetch Data */
   const { data, error } = useSWR('find', fetcher)
 
-  if (error) return <Layout><div className="p-5 text-xl text-white">An error occured while loading data!</div></Layout>
+  if (error) return <Layout><Error msg={"Failed to load Performance"} status={error.toString()} /></Layout>
   if (!data) return <Layout><div className="p-5 text-xl text-white">Loading...</div></Layout>
 
 

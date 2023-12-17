@@ -1,8 +1,8 @@
 import Head from "next/head";
 import Image from "next/image";
-import Navbar from "../components/navbar";
-import HomeHeader from "../components/headers/homeHeader";
-import Footer from "../components/footer";
+import Navbar from "../../components/navbar";
+import HomeHeader from "../../components/headers/homeHeader";
+import Footer from "../../components/footer";
 
 function Support() {
   return (
