@@ -27,7 +27,7 @@
     "moment": "^2.29.4",
     "mongodb": "^4.13.0",
     "mysql": "^2.18.1",
-    "next": "^13.4.19",
+    "next": "^13.5.6",
     "node-steam-openid": "^1.0.1",
     "passport-steam": "^1.0.17",
     "postcss": "^8.4.21",
