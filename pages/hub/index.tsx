@@ -194,15 +194,13 @@ export default function HubDashboard() {
 
 
 
-            <h1 className="text-white text-2xl font-bold">Quick Server Access</h1>
-            <div className="grid  mt-4 gap-8 grid-cols-1 md:grid-cols-3 xl:grid-cols-4 mb-5">
-              {data?.quick_servers?.map((server: any, i: any) => (
-                <FadeInContainer key={server?.name} delay={200 * i}>
-                  <ServerCardNew server={server} />
-                </FadeInContainer>
-              ))}
+            <h1 className="text-white text-2xl font-bold text-red-600 mb-5"><i className="fa-solid fa-exclamation-triangle animate-pulse"></i> This hub is not for ARK: Survival Ascended only ARK: Survival Evolved!</h1>
+            {/* Ark Asceneded Button */}
+            <div className="flex space-x-3"><Link href="https://bloody.gg/hub" className="block py-2 pr-4 pl-3 text-white bg-red-600 p-4 font-bold transition-colors w-[300px] rounded-md mb-10"><i className="fas fa-arrow-right mr-2"></i>Visit Bloody Hub Ascended</Link>
+            <Link href="https://bloody.gg/" className="block py-2 pr-4 pl-3 text-white bg-gray-800 p-4 font-bold transition-colors w-[300px] rounded-md mb-10"><i className="fas fa-arrow-right mr-2"></i>Go back to Website</Link>
             </div>
             {/* Hub Layout */}
+
             <h1 className="text-white text-2xl font-bold">Survivor Information</h1>
             <div className="mt-4 w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-4">
               <div className="bg-white dark:bg-bgray-secondary shadow rounded-lg border-bgray-border border">

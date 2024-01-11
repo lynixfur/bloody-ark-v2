@@ -279,12 +279,6 @@ export default function HubSidebar() {
                 </Link>
               </div>
             </li>
-            <li className="px-4">
-              <p className="font-bold text-gray-400">Cluster Selection</p>
-            </li>
-            <div className="px-4">
-              <SidebarClusterDropdown dropdownItems={["6 Man Cluster"]} dropdownTitle="6 Man Cluster"/>
-            </div>
             <hr className="border-gray-600 mx-4"/>
             <li>
               <Link
@@ -318,11 +312,11 @@ export default function HubSidebar() {
             </li>
             <li>
               <Link
-                href="/hub/servers"
+                href="https://bloody.gg/servers"
                 className="flex items-center p-2 text-base font-normal rounded-lg text-gray-400 hover:bg-bgray-bg transition-colors group"
               >
                 <span className="ml-3">
-                  <i className="fa-solid fa-server my-auto mr-2" /> Servers
+                  <i className="fa-solid fa-server my-auto mr-2" /> Servers <span className="ml-3 bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300">External</span>
                 </span>
               </Link>
             </li>
@@ -391,7 +385,7 @@ export default function HubSidebar() {
                   </span>
                 </Link>
               </li>
-              <li className="">
+              <li className="hidden">
                 <Link
                   href="/hub/page_editor"
                   className="flex items-center p-2 text-base font-normal rounded-lg text-gray-400 hover:bg-bgray-bg transition-colors group"
@@ -401,7 +395,7 @@ export default function HubSidebar() {
                   </span>
                 </Link>
               </li>
-              <li className="">
+              <li className="hidden">
                 <Link
                   href="/hub/server_manager"
                   className="flex items-center p-2 text-base font-normal rounded-lg text-gray-400 hover:bg-bgray-bg transition-colors group"
@@ -421,7 +415,7 @@ export default function HubSidebar() {
                   </span>
                 </Link>
               </li>
-              <li className="">
+              <li className="hidden">
                 <Link
                   href="/hub/logs"
                   className="hidden flex items-center p-2 text-base font-normal rounded-lg text-gray-400 hover:bg-bgray-bg transition-colors group"
@@ -445,7 +439,7 @@ export default function HubSidebar() {
                   </span>
                 </Link>
               </li>
-              <li className="">
+              <li className="hidden">
                 <Link
                   href="/hub/site_settings"
                   className="flex items-center p-2 text-base font-normal rounded-lg text-gray-400 hover:bg-bgray-bg transition-colors group"

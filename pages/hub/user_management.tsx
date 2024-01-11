@@ -136,6 +136,11 @@ function PageEditor() {
                 </div>
 
                 {!isEditing && <div className="p-5">
+                <h1 className="text-white text-2xl font-bold text-red-600 mb-5"><i className="fa-solid fa-exclamation-triangle animate-pulse"></i> This hub is not for ARK: Survival Ascended only ARK: Survival Evolved!<br/> <p className="text-white text-sm">Users managed here will have access to the <strong>ARK: Survival Evolved</strong> hub only!</p></h1>
+            {/* Ark Asceneded Button */}
+            <div className="flex space-x-3"><Link href="https://bloody.gg/hub" className="block py-2 pr-4 pl-3 text-white bg-red-600 p-4 font-bold transition-colors w-[300px] rounded-md mb-10"><i className="fas fa-arrow-right mr-2"></i>Visit Bloody Hub Ascended</Link>
+            <Link href="https://bloody.gg/" className="block py-2 pr-4 pl-3 text-white bg-gray-800 p-4 font-bold transition-colors w-[300px] rounded-md mb-10"><i className="fas fa-arrow-right mr-2"></i>Go back to Website</Link>
+            </div>
                     <div className="mb-5">
                         <h1 className="text-white text-2xl font-bold flex-1">Bloody Hub Users</h1>
                         {/* This will only show the previously logged in users to Hub! */}
