@@ -1,6 +1,8 @@
 import Link from "next/link";
 import useSWR, { Key, Fetcher } from "swr";
 
+// Test
+
 export default function Footer() {
   const fetcher = (url: any) => fetch(url).then((r) => r.json());
   const { data, error } = useSWR("/api/highpop_servers", fetcher);
